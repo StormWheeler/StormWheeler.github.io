@@ -6,7 +6,6 @@ publishDir = "docs"
 
 mainSections = []
 
-
 [menu]
 
   [[menu.main]]
@@ -28,3 +27,4 @@ mainSections = []
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+

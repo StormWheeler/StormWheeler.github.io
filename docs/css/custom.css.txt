@@ -1,0 +1,40 @@
+/* =========================================
+   Accent colour system – intentional & minimal
+   ========================================= */
+
+:root {
+  --accent: #4A6A7A;
+}
+
+/* Main page headline */
+main h1 {
+  color: var(--accent);
+}
+
+/* Section headers */
+main h2,
+main h3 {
+  color: var(--accent);
+}
+
+/* Subtle divider styling */
+hr {
+  border: none;
+  border-top: 1px solid rgba(74, 106, 122, 0.35);
+  margin: 2.5rem 0;
+}
+
+/* Links – restrained, professional */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation hover only (do NOT recolour nav text) */
+nav a:hover {
+  color: var(--accent);
+}
