@@ -1,4 +1,6 @@
 baseURL = "https://stormwheeler.github.io/"
 languageCode = "en-us"
-title = "StormWheeler"
+title = "Storm Wheeler"
 theme = "ananke"
+publishDir = "docs"
+
