@@ -1,4 +1,12 @@
 ---
+title: "About"
+draft: false
+cascade:
+  - _build:
+      list: never
+---
+
+---
 
 title: "Work"
 

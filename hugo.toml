@@ -4,3 +4,27 @@ title = "Storm Wheeler"
 theme = "ananke"
 publishDir = "docs"
 
+mainSections = []
+
+
+[menu]
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 10
+
+  [[menu.main]]
+    name = "Work"
+    url = "/work/"
+    weight = 20
+
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 30
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
