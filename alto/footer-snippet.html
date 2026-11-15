@@ -1,0 +1,65 @@
+<!-- Voiceflow Chat Widget: Alto (dark Altiora theme) -->
+<script type="text/javascript">
+  (function (d, t) {
+    var LOGO = 'https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/69391c19aeab3723ec6fede3_Concept%20Altiora%20AI%20LOGO%20NEW%20Cropped.png';
+    var CSS = [
+      '.vfrc-chat{background:#0B1A13!important;color:#EEF0E8!important}',
+      '.vfrc-chat,.vfrc-chat-input,.vfrc-message,.vfrc-button,.vfrc-launcher{font-family:"Source Sans 3","Afacad Flux",system-ui,sans-serif!important}',
+      '.vfrc-chat__container{border:1px solid #24402F!important;box-shadow:0 24px 60px rgba(0,0,0,.55)!important}',
+      '.vfrc-header{background:#12261C!important;color:#EEF0E8!important;border-bottom:1px solid rgba(212,175,55,.22)!important}',
+      '.vfrc-header--title{color:#EEF0E8!important;font-family:Archivo,"Source Sans 3",sans-serif!important;letter-spacing:.08em!important}',
+      '.vfrc-header--button{color:#A9B8AF!important;background:transparent!important}',
+      '.vfrc-header--button:hover{color:#D4AF37!important;background:rgba(212,175,55,.08)!important}',
+      '.vfrc-avatar{background:#0B1A13!important;object-fit:contain!important}',
+      '.vfrc-assistant-info--avatar{padding:10px!important;box-sizing:border-box!important;box-shadow:0 0 0 1px rgba(212,175,55,.35),0 0 36px rgba(212,175,55,.12)!important}',
+      '.vfrc-assistant-info--title{color:#EEF0E8!important;font-family:Archivo,"Source Sans 3",sans-serif!important;letter-spacing:.08em!important}',
+      '.vfrc-assistant-info--description,.vfrc-timestamp{color:#A9B8AF!important}',
+      '.vfrc-system-response .vfrc-message{background:#12261C!important;color:#EEF0E8!important;border:1px solid #24402F!important}',
+      '.vfrc-system-response a,.vfrc-message a{color:#D4AF37!important}',
+      '.vfrc-user-response .vfrc-message,.vfrc-user-response>div{background:#D4AF37!important;color:#0B1A13!important}',
+      '.vfrc-typing-indicator{background:#12261C!important}',
+      '.vfrc-system-response .vfrc-button,.vfrc-card .vfrc-button{background:transparent!important;color:#D4AF37!important;border:1px solid rgba(212,175,55,.6)!important}',
+      '.vfrc-system-response .vfrc-button:hover,.vfrc-card .vfrc-button:hover{background:rgba(212,175,55,.1)!important}',
+      '.vfrc-card{background:#12261C!important;color:#EEF0E8!important;border:1px solid #24402F!important}',
+      '.vfrc-footer{background:#0B1A13!important}',
+      '.vfrc-footer__content{background:linear-gradient(rgba(11,26,19,0),#0B1A13 30%)!important}',
+      '.vfrc-file-drop-overlay{background:rgba(11,26,19,.88)!important;color:#EEF0E8!important}',
+      '.vfrc-input-container{background:#12261C!important;border-color:#24402F!important}',
+      '.vfrc-chat-focus-ring:focus-within{border-color:rgba(212,175,55,.7)!important}',
+      '.vfrc-chat-input{background:transparent!important;color:#EEF0E8!important}',
+      '.vfrc-chat-input::placeholder{color:#7E8F86!important}',
+      '.vfrc-chat-input__send{background:#D4AF37!important;color:#0B1A13!important}',
+      '.vfrc-chat-input__send:disabled{background:#24402F!important;color:#7E8F86!important}',
+      '.vfrc-chat-input__audio-input{color:#A9B8AF!important;background:transparent!important}',
+      '.vfrc-footer__links,.vfrc-footer__links a,.vfrc-footer__links span{color:#6F8077!important}',
+      '.vfrc-footer__content-scroll-to-bottom-button,.vfrc-footer__start-button{background:#12261C!important;color:#EEF0E8!important;border-color:#24402F!important}',
+      '.vfrc-prompt,.vfrc-more-menu,.vfrc-privacy{background:#12261C!important;color:#EEF0E8!important;border:1px solid #24402F!important}',
+      '.vfrc-launcher{background:#0B1A13!important;color:#D4AF37!important;border:1px solid rgba(212,175,55,.55)!important;box-shadow:0 10px 30px rgba(0,0,0,.45)!important}',
+      '.vfrc-launcher:hover{border-color:#D4AF37!important}',
+      '.vfrc-launcher__inner{width:36px!important;height:36px!important;display:flex!important;align-items:center!important;justify-content:center!important}',
+      '.vfrc-launcher--media-icon{width:36px!important;height:36px!important;max-width:none!important;object-fit:contain!important}'
+    ].join('');
+    var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    v.onload = function () {
+      window.voiceflow.chat.load({
+        verify: { projectID: '6842c9ccdc7df8feb5cb825e' },
+        url: 'https://general-runtime.voiceflow.com',
+        versionID: 'production',
+        voice: { url: 'https://runtime-api.voiceflow.com' },
+        assistant: {
+          side: 'right',
+          color: '#D4AF37',
+          fontFamily: '"Source Sans 3", system-ui, sans-serif',
+          header: { imageUrl: LOGO },
+          banner: { imageUrl: LOGO },
+          avatar: { imageUrl: LOGO },
+          launcher: { imageUrl: LOGO },
+          stylesheet: 'data:text/css;charset=utf-8,' + encodeURIComponent(CSS)
+        }
+      });
+    };
+    v.src = 'https://cdn.voiceflow.com/widget-next/bundle.mjs';
+    v.type = 'text/javascript';
+    s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
