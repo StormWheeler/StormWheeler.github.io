@@ -1,0 +1,28 @@
+<!-- Altiora language switch (early part): sets Arabic before the page paints -->
+<script>
+(function () {
+  var URL_AR = '__AR_JSON_URL__';
+  var l = 'en';
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    if (q === 'ar' || q === 'en') localStorage.setItem('altiora-lang', q);
+    l = localStorage.getItem('altiora-lang') === 'ar' ? 'ar' : 'en';
+  } catch (e) {}
+  window.__altioraLang = l;
+  if (l !== 'ar') return;
+  var d = document.documentElement;
+  d.setAttribute('lang', 'ar'); d.setAttribute('dir', 'rtl'); d.classList.add('i18n-ar', 'i18n-wait');
+  var st = document.createElement('style');
+  st.textContent = 'html.i18n-wait body{opacity:0!important}';
+  document.head.appendChild(st);
+  setTimeout(function () { d.classList.remove('i18n-wait'); }, 2500);
+  window.__i18nP = fetch(URL_AR).then(function (r) { return r.json(); });
+  /* Decoys so the Connect page typing animation types English somewhere hidden; Arabic is typed separately */
+  document.addEventListener('DOMContentLoaded', function () {
+    ['typewriter-text', 'typewriter-text2'].forEach(function (c) {
+      var x = document.createElement('span'); x.className = c; x.hidden = true; x.setAttribute('data-i18n-decoy', '');
+      document.body.insertBefore(x, document.body.firstChild);
+    });
+  });
+})();
+</script>
