@@ -1,0 +1,67 @@
+<div class="tsr" role="img" aria-label="Tessera: a phone unlocks a hotel room door">
+<svg viewBox="0 0 150 150" width="150" height="150" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="tsrGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D4AF37" stop-opacity=".35"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+  </defs>
+  <!-- door -->
+  <g class="tsr-door">
+    <rect x="88" y="22" width="50" height="106" rx="5" fill="#0D2E20" stroke="#A9B8AF" stroke-opacity=".55" stroke-width="1.5"/>
+    <rect x="95" y="30" width="36" height="38" rx="2.5" fill="none" stroke="#24402F" stroke-width="1.5"/>
+    <rect x="95" y="80" width="36" height="40" rx="2.5" fill="none" stroke="#24402F" stroke-width="1.5"/>
+    <rect class="tsr-ajar" x="135.5" y="24" width="2.5" height="102" rx="1.2" fill="#D4AF37"/>
+    <circle class="tsr-glow" cx="99" cy="70" r="16" fill="url(#tsrGlow)"/>
+    <circle class="tsr-led" cx="99" cy="62" r="3.2"/>
+    <g class="tsr-handle"><circle cx="99" cy="74" r="2.6" fill="#EEF0E8"/><rect x="99" y="72.6" width="13" height="2.8" rx="1.4" fill="#EEF0E8"/></g>
+  </g>
+  <!-- signal -->
+  <g fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round">
+    <path class="tsr-w tsr-w1" d="M64 66 a11 11 0 0 1 0 18"/>
+    <path class="tsr-w tsr-w2" d="M70 60 a19 19 0 0 1 0 30"/>
+    <path class="tsr-w tsr-w3" d="M76 54 a27 27 0 0 1 0 42"/>
+  </g>
+  <!-- phone -->
+  <g class="tsr-phone">
+    <rect x="12" y="34" width="44" height="82" rx="9" fill="#12261C" stroke="#EEF0E8" stroke-opacity=".85" stroke-width="2"/>
+    <rect x="28" y="39" width="12" height="2.4" rx="1.2" fill="#EEF0E8" fill-opacity=".5"/>
+    <g class="tsr-key" fill="none" stroke="#D4AF37" stroke-width="2.4" stroke-linecap="round">
+      <circle cx="34" cy="66" r="7"/>
+      <path d="M34 73 v17 M34 82 h5 M34 87 h4"/>
+    </g>
+    <rect x="26" y="106" width="16" height="2.4" rx="1.2" fill="#EEF0E8" fill-opacity=".35"/>
+  </g>
+  <!-- confirmation -->
+  <g class="tsr-ok">
+    <circle cx="128" cy="26" r="10" fill="#6FC497"/>
+    <path d="M123 26.5 l3.4 3.4 l6.4 -7" fill="none" stroke="#0B1A13" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
+<style>
+.tsr{width:150px;height:150px;display:block}
+.tsr svg{display:block;overflow:visible}
+.tsr .tsr-led{fill:#24402F;animation:tsrLed 4.8s infinite}
+.tsr .tsr-glow{opacity:0;animation:tsrGlow 4.8s infinite}
+.tsr .tsr-handle{transform-origin:99px 74px;transform-box:view-box;animation:tsrHandle 4.8s infinite}
+.tsr .tsr-ajar{opacity:0;animation:tsrAjar 4.8s infinite}
+.tsr .tsr-w{opacity:0}
+.tsr .tsr-w1{animation:tsrW1 4.8s infinite}
+.tsr .tsr-w2{animation:tsrW2 4.8s infinite}
+.tsr .tsr-w3{animation:tsrW3 4.8s infinite}
+.tsr .tsr-key{animation:tsrKey 4.8s infinite}
+.tsr .tsr-phone{transform-origin:34px 75px;transform-box:view-box;animation:tsrPhone 4.8s infinite}
+.tsr .tsr-ok{opacity:0;transform-origin:128px 26px;transform-box:view-box;animation:tsrOk 4.8s infinite}
+@keyframes tsrPhone{0%,8%{transform:translateX(0)}16%,92%{transform:translateX(3px)}100%{transform:translateX(0)}}
+@keyframes tsrKey{0%,12%{opacity:.45}18%,90%{opacity:1}100%{opacity:.45}}
+@keyframes tsrW1{0%,16%{opacity:0}20%,30%{opacity:1}38%,100%{opacity:0}}
+@keyframes tsrW2{0%,22%{opacity:0}27%,36%{opacity:1}44%,100%{opacity:0}}
+@keyframes tsrW3{0%,28%{opacity:0}33%,42%{opacity:1}50%,100%{opacity:0}}
+@keyframes tsrLed{0%,40%{fill:#24402F}46%,88%{fill:#6FC497}96%,100%{fill:#24402F}}
+@keyframes tsrGlow{0%,40%{opacity:0}48%{opacity:1}70%,100%{opacity:0}}
+@keyframes tsrHandle{0%,46%{transform:rotate(0)}54%,82%{transform:rotate(32deg)}92%,100%{transform:rotate(0)}}
+@keyframes tsrAjar{0%,52%{opacity:0}60%,84%{opacity:.9}94%,100%{opacity:0}}
+@keyframes tsrOk{0%,56%{opacity:0;transform:scale(.4)}62%{opacity:1;transform:scale(1.08)}66%,86%{opacity:1;transform:scale(1)}94%,100%{opacity:0;transform:scale(.6)}}
+@media (prefers-reduced-motion:reduce){
+  .tsr *{animation:none!important}
+  .tsr .tsr-led{fill:#6FC497}.tsr .tsr-w{opacity:.7}.tsr .tsr-ok{opacity:1}.tsr .tsr-key{opacity:1}.tsr .tsr-ajar{opacity:.9}
+}
+</style>
+</div>
