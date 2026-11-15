@@ -1,23 +1,26 @@
-<!-- Altiora language switch (early part): sets Arabic before the page paints -->
+<!-- Altiora language switch (early part): applies the chosen language before the page paints -->
 <script>
 (function () {
-  var URL_AR = 'https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/6af9d52fd970b44e6b73dc10_altiora-ar-v1.json';
+  var FILES = {"ar":"https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/6af9dc8bf546cfcd727ca1e4_altiora-ar-v2.json","ru":"https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/6af9dc8b3e8cbb52d8c0e316_altiora-ru-v2.json","zh":"https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/6af9dc8c684cf0166ba16dd9_altiora-zh-v2.json","hi":"https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/6af9dc8c684cf0166ba16def_altiora-hi-v2.json","fr":"https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/6af9dc8cd6f062bff495e7cc_altiora-fr-v2.json"};
   var l = 'en';
   try {
     var q = new URLSearchParams(location.search).get('lang');
-    if (q === 'ar' || q === 'en') localStorage.setItem('altiora-lang', q);
-    l = localStorage.getItem('altiora-lang') === 'ar' ? 'ar' : 'en';
+    if (q && (q === 'en' || FILES[q])) localStorage.setItem('altiora-lang', q);
+    var s = localStorage.getItem('altiora-lang');
+    if (s && FILES[s]) l = s;
   } catch (e) {}
   window.__altioraLang = l;
-  if (l !== 'ar') return;
+  if (l === 'en') return;
   var d = document.documentElement;
-  d.setAttribute('lang', 'ar'); d.setAttribute('dir', 'rtl'); d.classList.add('i18n-ar', 'i18n-wait');
+  d.setAttribute('lang', l === 'zh' ? 'zh-CN' : l);
+  d.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+  d.classList.add('i18n-x', 'i18n-' + l, 'i18n-wait');
   var st = document.createElement('style');
   st.textContent = 'html.i18n-wait body{opacity:0!important}';
   document.head.appendChild(st);
   setTimeout(function () { d.classList.remove('i18n-wait'); }, 2500);
-  window.__i18nP = fetch(URL_AR).then(function (r) { return r.json(); });
-  /* Decoys so the Connect page typing animation types English somewhere hidden; Arabic is typed separately */
+  window.__i18nP = fetch(FILES[l]).then(function (r) { return r.json(); });
+  /* Decoys so the Connect page typing animation types English somewhere hidden; the translation is typed separately */
   document.addEventListener('DOMContentLoaded', function () {
     ['typewriter-text', 'typewriter-text2'].forEach(function (c) {
       var x = document.createElement('span'); x.className = c; x.hidden = true; x.setAttribute('data-i18n-decoy', '');
