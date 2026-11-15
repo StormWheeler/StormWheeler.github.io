@@ -1,0 +1,338 @@
+<!-- Auto-close mobile nav menu script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navMenu = document.querySelector('.w-nav-menu');
+    const navButton = document.querySelector('.w-nav-button');
+    let manuallyOpened = false;
+
+    if (navButton) {
+      navButton.addEventListener('click', () => {
+        manuallyOpened = !manuallyOpened;
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      if (!manuallyOpened && navMenu && navMenu.classList.contains('w--open')) {
+        navButton.click();
+      }
+    });
+  });
+</script>
+
+<!-- Alto: Altiora AI website assistant (self-hosted, no third parties) -->
+<script>
+/* Alto: Altiora AI's website assistant.
+   One job: answer questions about Altiora AI on altioraai.com and hand over to a person.
+   Runs entirely in the visitor's browser. Nothing typed here is sent anywhere or stored. */
+(function () {
+  if (window.__alto) return; window.__alto = 1;
+
+  var LOGO = 'https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/69391c19aeab3723ec6fede3_Concept%20Altiora%20AI%20LOGO%20NEW%20Cropped.png';
+  var EMAIL = 'hello@altioraai.com';
+
+  /* ---------- Content ---------- */
+  var T = {
+    en: {
+      title: 'Alto', sub: 'Automated assistant', open: 'Ask Alto', close: 'Close', lang: 'عربي', langLabel: 'Switch to Arabic',
+      placeholder: 'Ask about Altiora AI…', send: 'Send', restart: 'Start again',
+      note: 'Automated answers, written by the Altiora team. Not advice. Nothing you type here is stored.',
+      hello: 'Hello. I’m Alto, Altiora AI’s automated assistant. I can tell you what Altiora AI is building and point you to the right page. Whenever you’d rather talk to a person, just say so.',
+      pick: 'What would you like to know?',
+      fallback: 'I can only answer questions about Altiora AI, so I don’t have a good answer to that. Try one of these, or ask for a person.',
+      topics: {
+        what: { chip: 'What is Altiora AI?', a: ['Altiora AI is an AI operations studio for hospitality, events and venues in the UAE.', 'It designs and runs the quiet systems behind the guest experience: guest messages answered in Arabic and English, bookings kept in sync, crews briefed on time, with a person approving what matters.'], next: ['lines', 'how', 'status'] },
+        lines: { chip: 'What will you build?', a: ['Three lines of work, a narrow focus on purpose:', ['Guest & client messaging: WhatsApp booking, enquiry and concierge flows in Arabic and English that hand over to your team when it matters.', 'Operations automation: crew dispatch, RFP to quote, post-event reports, and bookings that flow into your CRM and invoices without retyping.', 'Altiora Labs: products we build and own. First up is Tessera, a mobile room key, now in development.']], links: [['See them on the home page', '/#solutions']], next: ['how', 'labs', 'status'] },
+        how: { chip: 'How do you work?', a: ['Technology choices come last. System integrity comes first.', ['Map the operation and find the handovers that break.', 'Design one system per job, with a named owner and safeguards.', 'Keep people in control: a person approves money, contracts and personal details.', 'Connect what you already use, in accounts you own.', 'Test before guests see it, including the questions it should refuse.', 'Systems care: quiet, ongoing upkeep. No lock-in.']], next: ['compare', 'data', 'who'] },
+        who: { chip: 'Who is it for?', a: ['Hotels, holiday homes, venues and event teams across the UAE: businesses where the guest experience is the product.', 'Altiora AI stays out of regulated fields such as health, finance and security.'], next: ['lines', 'status'] },
+        status: { chip: 'Can I hire Altiora AI now?', a: ['Altiora AI isn’t taking on work yet. It is a planned business of Storm Wheeler in the United Arab Emirates and is not yet licensed or trading, so no services are offered or sold and there are no prices to share.', 'You’re welcome to get in touch if you’d like to hear when that changes.'], next: ['human', 'what'] },
+        labs: { chip: 'What is Tessera?', a: ['Tessera is the first product from Altiora Labs: a mobile room key for hotels and holiday homes.', 'It is in development, so it isn’t available yet.'], next: ['lines', 'human'] },
+        compare: { chip: 'Show me an example', a: ['The AI compared page follows one illustrative late-night guest enquiry through a UAE hotel, first without a system and then with one, including where a person approves.'], links: [['Open AI compared', '/ai-solutions-compared']], next: ['how', 'data'] },
+        data: { chip: 'What about data and privacy?', a: ['Systems are built in accounts you own. Your data stays yours, and there is no lock-in. A person approves anything involving money, contracts or a guest’s personal details.', 'This chat runs in your browser. What you type here is not sent to Altiora AI or stored.'], links: [['Privacy notice', '/privacy-policy'], ['AI use and disclaimer', '/disclaimer']], next: ['how', 'human'] },
+        arabic: { chip: 'Do you work in Arabic?', a: ['Yes. Every assistant Altiora AI builds works in Arabic and English, and I do too: tap عربي at the top to switch.'], next: ['lines', 'human'] },
+        alto: { chip: 'Who are you?', a: ['I’m Alto, an automated assistant with one job: answering questions about Altiora AI on this website.', 'My answers are written in advance by the Altiora team rather than generated on the spot, and I’ll pass you to a person whenever you ask.'], next: ['what', 'human'] },
+        who_behind: { chip: 'Who is behind it?', a: ['Altiora AI is being set up by Storm Wheeler in the United Arab Emirates. Altiora is Latin for “higher”.'], links: [['About Altiora AI', '/about']], next: ['what', 'human'] },
+        human: { chip: 'Talk to a person', a: ['Of course. A person reads every message and replies within two working days.'], links: [['Email ' + EMAIL, 'mailto:' + EMAIL], ['Use the contact form', '/contact']], next: ['what', 'status'] },
+        thanks: { a: ['You’re welcome. Anything else?'], next: ['what', 'human'] },
+        greet: { a: ['Hello. What would you like to know about Altiora AI?'], next: ['what', 'lines', 'status', 'human'] }
+      },
+      start: ['what', 'lines', 'status', 'how', 'data', 'human']
+    },
+    ar: {
+      title: 'ألتو', sub: 'مساعد آلي', open: 'اسأل ألتو', close: 'إغلاق', lang: 'English', langLabel: 'التبديل إلى الإنجليزية',
+      placeholder: 'اسأل عن ألتيورا…', send: 'إرسال', restart: 'البدء من جديد',
+      note: 'إجابات آلية كتبها فريق ألتيورا. ليست استشارة. لا يُحفظ شيء مما تكتبه هنا.',
+      hello: 'مرحبًا، أنا ألتو، المساعد الآلي لشركة ألتيورا للذكاء الاصطناعي. أستطيع أن أخبرك بما تعمل عليه ألتيورا وأن أرشدك إلى الصفحة المناسبة. وإن رغبت في التحدث إلى شخص في أي وقت، فقط أخبرني.',
+      pick: 'ماذا تود أن تعرف؟',
+      fallback: 'أستطيع الإجابة فقط عن الأسئلة المتعلقة بألتيورا، لذلك ليست لدي إجابة جيدة عن هذا. جرّب أحد هذه الخيارات، أو اطلب التحدث إلى شخص.',
+      topics: {
+        what: { chip: 'ما هي ألتيورا؟', a: ['ألتيورا للذكاء الاصطناعي استوديو لتشغيل أنظمة الذكاء الاصطناعي لقطاع الضيافة والفعاليات والمنشآت في الإمارات.', 'تصمم وتدير الأنظمة الهادئة التي تقف خلف تجربة الضيف: رسائل الضيوف يُرد عليها بالعربية والإنجليزية، والحجوزات متزامنة، وفرق العمل تصلها التعليمات في وقتها، مع شخص يوافق على كل ما يهم.'], next: ['lines', 'how', 'status'] },
+        lines: { chip: 'ماذا ستبنون؟', a: ['ثلاثة مجالات عمل، بتركيز محدد عن قصد:', ['رسائل الضيوف والعملاء: مسارات حجز واستفسار وكونسيرج عبر واتساب بالعربية والإنجليزية، تحوّل المحادثة إلى فريقك حين يلزم.', 'أتمتة العمليات: توزيع فرق العمل، وتحويل طلبات العروض إلى عروض أسعار، وتقارير ما بعد الفعاليات، وحجوزات تنتقل إلى نظام إدارة العملاء والفواتير دون إعادة إدخال.', 'ألتيورا لابز: منتجات نبنيها ونملكها، وأولها تيسيرا، مفتاح غرفة عبر الهاتف، وهو قيد التطوير.']], links: [['شاهدها في الصفحة الرئيسية', '/#solutions']], next: ['how', 'labs', 'status'] },
+        how: { chip: 'كيف تعملون؟', a: ['اختيار التقنية يأتي أخيرًا، وسلامة النظام تأتي أولًا.', ['نرسم خريطة العمل ونحدد نقاط التسليم التي تتعطل.', 'نصمم نظامًا واحدًا لكل مهمة، بمسؤول محدد وضمانات واضحة.', 'نُبقي القرار بيد الناس: شخص يوافق على كل ما يتعلق بالمال والعقود والبيانات الشخصية.', 'نربط الأدوات التي تستخدمها أصلًا، في حسابات تملكها.', 'نختبر قبل أن يراه الضيوف، بما في ذلك الأسئلة التي يجب أن يرفضها.', 'رعاية مستمرة وهادئة للأنظمة، دون أي ارتباط ملزم.']], next: ['compare', 'data', 'who'] },
+        who: { chip: 'لمن هذه الخدمات؟', a: ['الفنادق وبيوت العطلات والمنشآت وفرق الفعاليات في أنحاء الإمارات: أعمال تكون فيها تجربة الضيف هي المنتج.', 'لا تعمل ألتيورا في المجالات الخاضعة لتنظيم خاص مثل الصحة والمال والأمن.'], next: ['lines', 'status'] },
+        status: { chip: 'هل يمكنني التعاقد الآن؟', a: ['لا تستقبل ألتيورا للذكاء الاصطناعي أي أعمال بعد. فهي مشروع تجاري مخطط له من قِبل ستورم ويلر في دولة الإمارات العربية المتحدة، ولم تحصل على ترخيص ولا تمارس نشاطًا تجاريًا بعد، لذلك لا تُعرض أو تُباع أي خدمات ولا توجد أسعار.', 'يسعدنا تواصلك إن أردت أن تعرف متى يتغير ذلك.'], next: ['human', 'what'] },
+        labs: { chip: 'ما هو تيسيرا؟', a: ['تيسيرا أول منتج من ألتيورا لابز: مفتاح غرفة عبر الهاتف للفنادق وبيوت العطلات.', 'وهو قيد التطوير، لذلك ليس متاحًا بعد.'], next: ['lines', 'human'] },
+        compare: { chip: 'أرني مثالًا', a: ['تتتبع صفحة المقارنة استفسارًا توضيحيًا من ضيف في وقت متأخر من الليل في فندق بالإمارات، أولًا دون نظام ثم مع نظام، بما في ذلك المواضع التي يوافق فيها شخص. الصفحة باللغة الإنجليزية.'], links: [['افتح صفحة المقارنة', '/ai-solutions-compared']], next: ['how', 'data'] },
+        data: { chip: 'ماذا عن البيانات والخصوصية؟', a: ['تُبنى الأنظمة في حسابات تملكها أنت. بياناتك تبقى لك، ودون أي ارتباط ملزم. ويوافق شخص على كل ما يتعلق بالمال أو العقود أو البيانات الشخصية للضيوف.', 'تعمل هذه المحادثة داخل متصفحك، ولا يُرسل ما تكتبه هنا إلى ألتيورا ولا يُحفظ.'], links: [['إشعار الخصوصية (بالإنجليزية)', '/privacy-policy'], ['استخدام الذكاء الاصطناعي وإخلاء المسؤولية (بالإنجليزية)', '/disclaimer']], next: ['how', 'human'] },
+        arabic: { chip: 'هل تعملون بالعربية؟', a: ['نعم. كل مساعد تبنيه ألتيورا يعمل بالعربية والإنجليزية، وأنا كذلك.'], next: ['lines', 'human'] },
+        alto: { chip: 'من أنت؟', a: ['أنا ألتو، مساعد آلي له مهمة واحدة: الإجابة عن الأسئلة المتعلقة بألتيورا على هذا الموقع.', 'إجاباتي كتبها فريق ألتيورا مسبقًا ولا تُولَّد لحظيًا، وسأحوّلك إلى شخص متى طلبت ذلك.'], next: ['what', 'human'] },
+        who_behind: { chip: 'من يقف خلفها؟', a: ['يعمل ستورم ويلر على تأسيس ألتيورا للذكاء الاصطناعي في دولة الإمارات العربية المتحدة. وكلمة «ألتيورا» لاتينية تعني «أعلى».'], links: [['عن ألتيورا (بالإنجليزية)', '/about']], next: ['what', 'human'] },
+        human: { chip: 'التحدث إلى شخص', a: ['بالتأكيد. يقرأ شخص كل رسالة ويرد خلال يومي عمل.'], links: [['راسلنا على ' + EMAIL, 'mailto:' + EMAIL], ['نموذج التواصل', '/contact']], next: ['what', 'status'] },
+        thanks: { a: ['على الرحب والسعة. هل من شيء آخر؟'], next: ['what', 'human'] },
+        greet: { a: ['أهلًا بك. ماذا تود أن تعرف عن ألتيورا؟'], next: ['what', 'lines', 'status', 'human'] }
+      },
+      start: ['what', 'lines', 'status', 'how', 'data', 'human']
+    }
+  };
+
+  /* Keyword routing (English and Arabic). Order matters for ties: earlier wins. */
+  var KEYS = [
+    ['human', ['human', 'person', 'agent', 'someone', 'real', 'contact', 'email', 'call', 'phone', 'speak to', 'talk', 'reach', 'whatsapp me', 'whatsapp number', 'number', 'شخص', 'موظف', 'انسان', 'إنسان', 'تواصل', 'اتصال', 'ايميل', 'بريد', 'هاتف', 'رقم', 'كلم', 'تحدث']],
+    ['status', ['how much', 'how many', 'price', 'pricing', 'cost', 'fee', 'fees', 'quote', 'rate', 'hire', 'buy', 'book a', 'sign up', 'available', 'open', 'licen', 'trading', 'when', 'start', 'launch', 'january', 'سعر', 'اسعار', 'أسعار', 'تكلفة', 'رسوم', 'تعاقد', 'ترخيص', 'متى', 'متاح']],
+    ['labs', ['tessera', 'labs', 'room key', 'key', 'product', 'تيسيرا', 'مفتاح', 'لابز', 'منتج']],
+    ['compare', ['compare', 'compared', 'example', 'demo', 'show me', 'scenario', 'with and without', 'مثال', 'مقارنة', 'تجربة', 'عرض توضيحي']],
+    ['data', ['data', 'privacy', 'private', 'gdpr', 'pdpl', 'secure', 'security', 'own', 'lock', 'store', 'cookie', 'بيانات', 'خصوصية', 'أمان', 'امان', 'تخزين', 'ملكية']],
+    ['arabic', ['arabic', 'speak arabic', 'in arabic', 'english', 'language', 'عربي', 'العربية', 'لغة', 'انجليزي', 'الإنجليزية']],
+    ['alto', ['who are you', 'are you ai', 'are you a bot', 'bot', 'robot', 'chatgpt', 'are you real', 'alto', 'من انت', 'من أنت', 'روبوت', 'ألتو', 'التو']],
+    ['who_behind', ['founder', 'founded', 'owner', 'storm', 'behind', 'team', 'who runs', 'who owns', 'company name', 'altiora mean', 'name mean', 'مؤسس', 'صاحب', 'ستورم', 'فريق', 'يقف خلف']],
+    ['who', ['who is it for', 'hotel', 'hotels', 'holiday', 'venue', 'event', 'events', 'restaurant', 'industry', 'client', 'customers', 'فندق', 'فنادق', 'عطلات', 'فعاليات', 'منشآت', 'مطعم', 'عملاء']],
+    ['how', ['how', 'process', 'method', 'approach', 'steps', 'work with', 'integrity', 'كيف', 'طريقة', 'منهج', 'خطوات']],
+    ['lines', ['build', 'service', 'services', 'offer', 'solution', 'solutions', 'messaging', 'automation', 'dispatch', 'crew', 'rfp', 'report', 'crm', 'invoice', 'booking', 'whatsapp', 'تبنون', 'خدمات', 'حلول', 'رسائل', 'أتمتة', 'اتمتة', 'حجز', 'واتساب', 'فواتير']],
+    ['what', ['what do you do', 'what does', 'altiora', 'about you', 'about the company', 'company', 'who are', 'ما هي', 'ماذا', 'ألتيورا', 'التيورا', 'شركة']],
+    ['thanks', ['thank', 'thanks', 'cheers', 'great', 'perfect', 'شكرا', 'شكرًا', 'مشكور']],
+    ['greet', ['hello', 'hi', 'hey', 'salam', 'good morning', 'good evening', 'مرحبا', 'مرحبًا', 'السلام', 'اهلا', 'أهلا', 'هلا']]
+  ];
+
+  function route(text) {
+    var s = ' ' + text.toLowerCase().replace(/[^\w؀-ۿ\s']/g, ' ').replace(/\s+/g, ' ') + ' ';
+    var best = null, bestScore = 0;
+    for (var i = 0; i < KEYS.length; i++) {
+      var score = 0, list = KEYS[i][1];
+      for (var j = 0; j < list.length; j++) {
+        var k = list[j];
+        if (/^[a-z ]+$/.test(k) ? s.indexOf(' ' + k) > -1 : s.indexOf(k) > -1) score += k.length > 4 ? 2 : 1;
+      }
+      if (score > bestScore) { bestScore = score; best = KEYS[i][0]; }
+    }
+    return best;
+  }
+
+  /* ---------- Styles ---------- */
+  var CSS = ''
+    + ':host{all:initial}'
+    + '*{box-sizing:border-box}'
+    + '.w{--g:#0B1A13;--s:#12261C;--l:#24402F;--t:#EEF0E8;--m:#A9B8AF;--au:#D4AF37;--gr:#6FC497;font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--t);-webkit-font-smoothing:antialiased}'
+    + '.w[dir=rtl]{font-family:"Noto Sans Arabic","Segoe UI","Geeza Pro",Tahoma,system-ui,sans-serif}'
+    + '.lb{position:fixed;right:20px;bottom:20px;z-index:2147483000;display:flex;align-items:center;gap:10px;flex-direction:row-reverse}'
+    + '.lbtn{width:60px;height:60px;border-radius:50%;background:var(--g);border:1px solid rgba(212,175,55,.6);box-shadow:0 10px 30px rgba(0,0,0,.4),0 0 0 4px rgba(212,175,55,.06);display:grid;place-items:center;cursor:pointer;padding:0;transition:transform .2s ease,border-color .2s ease}'
+    + '.lbtn:hover{transform:translateY(-2px);border-color:var(--au)}'
+    + '.lbtn:focus-visible,.c:focus-visible,.x:focus-visible,.lg:focus-visible,.sd:focus-visible,.lk:focus-visible,.rs:focus-visible{outline:2px solid var(--au);outline-offset:2px}'
+    + '.lbtn img{width:40px;height:40px;object-fit:contain}'
+    + '.tag{background:var(--g);color:var(--t);border:1px solid var(--l);border-radius:999px;padding:8px 14px;font-size:14px;letter-spacing:.01em;box-shadow:0 8px 24px rgba(0,0,0,.3);cursor:pointer;white-space:nowrap}'
+    + '.tag b{color:var(--au);font-weight:600}'
+    + '@media (max-width:767px){.tag{display:none}}.w.open .tag{display:none}'
+    + '.p{position:fixed;right:20px;bottom:92px;z-index:2147483001;width:380px;height:min(620px,calc(100vh - 120px));background:var(--g);border:1px solid var(--l);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.55);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(12px) scale(.98);transform-origin:bottom right;pointer-events:none;visibility:hidden;transition:opacity .22s ease,transform .22s ease,visibility 0s .22s}'
+    + '.p.on{opacity:1;transform:none;pointer-events:auto;visibility:visible;transition:opacity .22s ease,transform .22s ease}'
+    + '.hd{display:flex;align-items:center;gap:12px;padding:14px 14px 14px 16px;background:var(--s);border-bottom:1px solid rgba(212,175,55,.22)}'
+    + '.av{width:40px;height:40px;border-radius:50%;background:var(--g);border:1px solid rgba(212,175,55,.4);display:grid;place-items:center;flex:none}'
+    + '.av img{width:28px;height:28px;object-fit:contain}'
+    + '.ht{flex:1;min-width:0}'
+    + '.hn{font-family:Archivo,"Source Sans 3",system-ui,sans-serif;font-weight:600;font-size:17px;letter-spacing:.06em;line-height:1.2}'
+    + '.w[dir=rtl] .hn{letter-spacing:0}'
+    + '.hs{font-size:12.5px;color:var(--m);line-height:1.3;margin-top:2px;display:flex;align-items:center;gap:6px}'
+    + '.hs i{width:7px;height:7px;border-radius:50%;background:var(--gr);display:inline-block;flex:none}'
+    + '.lg,.x,.rs{background:transparent;border:1px solid var(--l);color:var(--t);border-radius:999px;cursor:pointer;font:inherit}'
+    + '.lg{font-size:13px;padding:5px 11px;line-height:1.2}'
+    + '.lg:hover,.rs:hover{border-color:var(--au);color:var(--au)}'
+    + '.x,.rs{width:34px;height:34px;display:grid;place-items:center;padding:0}'
+    + '.x:hover{border-color:var(--au);color:var(--au)}'
+    + '.x svg,.rs svg{width:16px;height:16px}'
+    + '.b{position:relative;flex:1;overflow-y:auto;padding:18px 16px 8px;scroll-behavior:smooth;overscroll-behavior:contain}'
+    + '.b::-webkit-scrollbar{width:6px}.b::-webkit-scrollbar-thumb{background:var(--l);border-radius:3px}'
+    + '.r{display:flex;gap:8px;margin:0 0 10px;align-items:flex-end}'
+    + '.r.u{justify-content:flex-end}'
+    + '.r .mi{width:26px;height:26px;border-radius:50%;background:var(--s);border:1px solid var(--l);display:grid;place-items:center;flex:none}'
+    + '.r .mi img{width:18px;height:18px;object-fit:contain}'
+    + '.m{max-width:82%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}'
+    + '.r.a .m{background:var(--s);border:1px solid var(--l);border-bottom-left-radius:5px}'
+    + '.w[dir=rtl] .r.a .m{border-bottom-left-radius:16px;border-bottom-right-radius:5px}'
+    + '.r.u .m{background:var(--au);color:var(--g);border-bottom-right-radius:5px;font-weight:500}'
+    + '.w[dir=rtl] .r.u .m{border-bottom-right-radius:16px;border-bottom-left-radius:5px}'
+    + '.m ul{margin:6px 0 0;padding:0 0 0 18px;white-space:normal}.w[dir=rtl] .m ul{padding:0 18px 0 0}'
+    + '.m li{margin:0 0 5px}.m li::marker{color:var(--au)}'
+    + '.ls{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px 34px}.w[dir=rtl] .ls{margin:2px 34px 12px 0}'
+    + '.lk{display:inline-flex;align-items:center;gap:6px;color:var(--au);text-decoration:none;font-size:14px;border:1px solid rgba(212,175,55,.45);border-radius:999px;padding:7px 13px;line-height:1.2}'
+    + '.lk:hover{background:rgba(212,175,55,.1)}'
+    + '.lk svg{width:12px;height:12px;flex:none}.w[dir=rtl] .lk svg{transform:scaleX(-1)}'
+    + '.cs{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 14px 34px}.w[dir=rtl] .cs{margin:4px 34px 14px 0}'
+    + '.c{background:transparent;color:var(--t);border:1px solid var(--l);border-radius:999px;padding:8px 13px;font:inherit;font-size:14px;line-height:1.2;cursor:pointer;text-align:start;transition:border-color .15s ease,color .15s ease,background .15s ease}'
+    + '.c:hover{border-color:var(--au);color:var(--au);background:rgba(212,175,55,.06)}'
+    + '.c[disabled]{opacity:.45;cursor:default;border-color:var(--l);color:var(--m);background:transparent}'
+    + '.ty{display:inline-flex;gap:5px;padding:14px 16px}'
+    + '.ty i{width:7px;height:7px;border-radius:50%;background:var(--au);opacity:.35;animation:d 1.1s infinite ease-in-out}'
+    + '.ty i:nth-child(2){animation-delay:.15s}.ty i:nth-child(3){animation-delay:.3s}'
+    + '@keyframes d{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}'
+    + '.f{padding:10px 12px 12px;border-top:1px solid var(--l);background:var(--g)}'
+    + '.ib{display:flex;align-items:center;gap:8px;background:var(--s);border:1px solid var(--l);border-radius:999px;padding:5px 5px 5px 16px;transition:border-color .15s ease}'
+    + '.w[dir=rtl] .ib{padding:5px 16px 5px 5px}'
+    + '.ib:focus-within{border-color:rgba(212,175,55,.7)}'
+    + '.in{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--t);font:inherit;font-size:16px;line-height:1.3;padding:7px 0}'
+    + '.in::placeholder{color:#7E8F86}'
+    + '.sd{width:38px;height:38px;border-radius:50%;border:0;background:var(--au);color:var(--g);display:grid;place-items:center;cursor:pointer;flex:none;transition:opacity .15s ease}'
+    + '.sd[disabled]{background:var(--l);color:#7E8F86;cursor:default}'
+    + '.sd svg{width:16px;height:16px}.w[dir=rtl] .sd svg{transform:scaleX(-1)}'
+    + '.nt{font-size:11.5px;color:#7E8F86;line-height:1.4;margin:8px 4px 0;text-align:center}'
+    + '@media (max-width:480px){.p{right:0;left:0;bottom:0;top:0;width:auto;height:100%;height:100dvh;border-radius:0;border:0;padding-bottom:env(safe-area-inset-bottom)}.p.on~.lb,.lb.hide{display:none}.hd{padding-top:max(14px,env(safe-area-inset-top))}.lb{right:16px;bottom:max(16px,env(safe-area-inset-bottom))}}'
+    + '@media (prefers-reduced-motion:reduce){.p,.lbtn,.c{transition:none}.ty i{animation:none;opacity:.7}.b{scroll-behavior:auto}}';
+
+  var ICON = {
+    x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>',
+    restart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v5h5"/></svg>'
+  };
+
+  /* ---------- Build ---------- */
+  var host = document.createElement('div');
+  host.id = 'alto-assistant';
+  var root = host.attachShadow ? host.attachShadow({ mode: 'open' }) : host;
+  var lang = (document.documentElement.lang || '').toLowerCase().indexOf('ar') === 0 ? 'ar' : 'en';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var started = false, busy = false, lastFocus = null;
+
+  root.innerHTML = '<style>' + CSS + '</style>'
+    + '<div class="w">'
+    + '<div class="p" role="dialog" aria-modal="false" aria-labelledby="alto-n">'
+    + '<div class="hd"><div class="av"><img alt="" src="' + LOGO + '"></div>'
+    + '<div class="ht"><div class="hn" id="alto-n"></div><div class="hs"><i aria-hidden="true"></i><span class="hsub"></span></div></div>'
+    + '<button class="lg" type="button"></button>'
+    + '<button class="rs" type="button">' + ICON.restart + '</button>'
+    + '<button class="x" type="button">' + ICON.x + '</button></div>'
+    + '<div class="b" role="log" aria-live="polite" aria-relevant="additions"></div>'
+    + '<form class="f" autocomplete="off"><div class="ib"><input class="in" type="text" maxlength="300" enterkeyhint="send">'
+    + '<button class="sd" type="submit" disabled>' + ICON.send + '</button></div><p class="nt"></p></form>'
+    + '</div>'
+    + '<div class="lb"><button class="lbtn" type="button" aria-expanded="false"><img alt="" src="' + LOGO + '"></button><span class="tag" aria-hidden="true"></span></div>'
+    + '</div>';
+
+  function $(s) { return root.querySelector(s); }
+  var W = $('.w'), P = $('.p'), B = $('.b'), F = $('.f'), IN = $('.in'), SD = $('.sd'), LB = $('.lb'), LBTN = $('.lbtn');
+
+  function paint() {
+    var t = T[lang];
+    W.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    W.setAttribute('lang', lang);
+    $('.hn').textContent = t.title;
+    $('.hsub').textContent = t.sub;
+    $('.lg').textContent = t.lang; $('.lg').setAttribute('aria-label', t.langLabel);
+    $('.rs').setAttribute('aria-label', t.restart); $('.rs').title = t.restart;
+    $('.x').setAttribute('aria-label', t.close);
+    IN.placeholder = t.placeholder; IN.setAttribute('aria-label', t.placeholder);
+    SD.setAttribute('aria-label', t.send);
+    $('.nt').textContent = t.note;
+    LBTN.setAttribute('aria-label', t.open);
+    $('.tag').innerHTML = lang === 'ar' ? 'اسأل <b>ألتو</b>' : 'Ask <b>Alto</b>';
+  }
+
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function scroll() { B.scrollTop = B.scrollHeight; }
+
+  function botRow(content) {
+    var r = el('div', 'r a'), mi = el('div', 'mi'), img = el('img'); img.alt = ''; img.src = LOGO; mi.appendChild(img);
+    var m = el('div', 'm');
+    if (typeof content === 'string') m.textContent = content;
+    else { var ul = el('ul'); content.forEach(function (li) { ul.appendChild(el('li', null, li)); }); m.appendChild(ul); }
+    r.appendChild(mi); r.appendChild(m); B.appendChild(r); return r;
+  }
+  function userRow(text) { var r = el('div', 'r u'); r.appendChild(el('div', 'm', text)); B.appendChild(r); scroll(); }
+
+  function typing() {
+    var r = el('div', 'r a'), mi = el('div', 'mi'), img = el('img'); img.alt = ''; img.src = LOGO; mi.appendChild(img);
+    var m = el('div', 'm ty'); m.setAttribute('aria-hidden', 'true'); m.innerHTML = '<i></i><i></i><i></i>';
+    r.appendChild(mi); r.appendChild(m); B.appendChild(r); scroll(); return r;
+  }
+
+  function disableOldChips() { var cs = B.querySelectorAll('.c'); for (var i = 0; i < cs.length; i++) cs[i].disabled = true; }
+
+  function chips(keys) {
+    var t = T[lang], wrap = el('div', 'cs');
+    keys.forEach(function (k) {
+      var tp = t.topics[k]; if (!tp || !tp.chip) return;
+      var c = el('button', 'c', tp.chip); c.type = 'button';
+      c.addEventListener('click', function () { if (busy) return; ask(k, tp.chip); });
+      wrap.appendChild(c);
+    });
+    B.appendChild(wrap);
+  }
+
+  function links(list) {
+    var wrap = el('div', 'ls');
+    list.forEach(function (l) {
+      var a = el('a', 'lk'); a.href = l[1]; a.innerHTML = ICON.arrow; a.insertBefore(document.createTextNode(l[0]), a.firstChild);
+      if (l[1].charAt(0) === '/' && l[1].indexOf('#') > -1 && location.pathname === '/') a.addEventListener('click', function () { if (window.innerWidth <= 480) close(); });
+      wrap.appendChild(a);
+    });
+    B.appendChild(wrap);
+  }
+
+  function settle(anchor) {
+    if (!anchor) { scroll(); return; }
+    B.scrollTop = Math.min(B.scrollHeight, Math.max(0, anchor.offsetTop - 10));
+  }
+
+  function say(parts, after, anchor) {
+    busy = true;
+    var i = 0;
+    (function next() {
+      if (i >= parts.length) { busy = false; if (after) after(); settle(anchor); return; }
+      var tr = typing(), delay = reduce ? 150 : Math.min(1100, 380 + (typeof parts[i] === 'string' ? parts[i].length * 6 : 600));
+      setTimeout(function () { tr.remove(); botRow(parts[i]); scroll(); i++; next(); }, delay);
+    })();
+  }
+
+  function answer(key) {
+    var t = T[lang], tp = t.topics[key];
+    var anchor = B.lastElementChild;
+    if (!tp) { say([t.fallback], function () { chips(t.start); }, anchor); return; }
+    say(tp.a, function () { if (tp.links) links(tp.links); chips(tp.next || t.start); }, anchor);
+  }
+
+  function ask(key, label) { disableOldChips(); userRow(label); answer(key); }
+
+  function welcome() {
+    var t = T[lang]; B.innerHTML = ''; started = true;
+    say([t.hello, t.pick], function () { chips(t.start); }, { offsetTop: 0 });
+  }
+
+  function open() {
+    lastFocus = document.activeElement;
+    P.classList.add('on'); W.classList.add('open'); LBTN.setAttribute('aria-expanded', 'true');
+    if (window.innerWidth <= 480) LB.classList.add('hide');
+    if (!started) welcome();
+    setTimeout(function () { if (window.innerWidth > 480) IN.focus({ preventScroll: true }); else $('.x').focus({ preventScroll: true }); }, reduce ? 0 : 240);
+  }
+  function close() {
+    P.classList.remove('on'); W.classList.remove('open'); LBTN.setAttribute('aria-expanded', 'false'); LB.classList.remove('hide');
+    LBTN.focus({ preventScroll: true });
+  }
+
+  LBTN.addEventListener('click', function () { P.classList.contains('on') ? close() : open(); });
+  $('.tag').addEventListener('click', open);
+  $('.x').addEventListener('click', close);
+  $('.rs').addEventListener('click', function () { if (!busy) welcome(); });
+  $('.lg').addEventListener('click', function () { if (busy) return; lang = lang === 'en' ? 'ar' : 'en'; paint(); welcome(); });
+  W.addEventListener('keydown', function (e) { if (e.key === 'Escape' && P.classList.contains('on')) { e.stopPropagation(); close(); } });
+  IN.addEventListener('input', function () { SD.disabled = !IN.value.trim(); });
+  F.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = IN.value.trim(); if (!v || busy) return;
+    IN.value = ''; SD.disabled = true;
+    disableOldChips(); userRow(v); answer(route(v));
+  });
+
+  /* Public hooks so any button on the site can open Alto, e.g. onclick="altoOpen()" */
+  window.altoOpen = open; window.altoClose = close;
+
+  paint();
+  (document.body || document.documentElement).appendChild(host);
+})();
+</script>
