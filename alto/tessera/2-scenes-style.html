@@ -33,9 +33,10 @@
 .tx .stg.on .room .lampg{animation:txGlow 1s ease forwards .9s}
 .tx .stg.on .room .tvon{animation:txGlow .8s ease forwards 2.9s}
 .tx .stg.on .room .sunr{animation:txGlow 1.4s ease forwards 1.9s}
-.tx .room .cl,.tx .room .cr{transition:transform 1.4s cubic-bezier(.4,.1,.2,1) 1.8s}
-.tx .stg.on .room .cl{transform:translateX(-62px)}
-.tx .stg.on .room .cr{transform:translateX(62px)}
+.tx .room .cl,.tx .room .cr{transform-box:fill-box;transition:transform 1.5s cubic-bezier(.4,.1,.2,1) 1.8s}
+.tx .room .cl{transform-origin:left center}
+.tx .room .cr{transform-origin:right center}
+.tx .stg.on .room .cl,.tx .stg.on .room .cr{transform:scaleX(.24)}
 .tx .room .air path{opacity:0}
 .tx .stg.on .room .air path{animation:txFlow 1.6s ease-in-out infinite;animation-delay:var(--d,1.3s)}
 .tx .tight .row{padding:4px 0;font-size:12px}
@@ -98,4 +99,9 @@
 .tx .db .sw.flip .b{display:inline-block}
 .tx .db .ft{display:flex;gap:8px;margin-top:8px}
 .tx .db .ft span{border:1px solid var(--l);border-radius:99px;padding:5px 10px;font-size:11px;color:var(--m)}
+
+/* present mode: keep every stage at 4:3 inside the available width and height */
+.tx-pm .pm-slide .stg{height:auto;max-height:none;width:min(100%,calc(72vh * 4 / 3));aspect-ratio:4/3;justify-self:center}
+@media (max-width:991px){.tx-pm .pm-slide .stg{width:100%}}
+@media (max-height:520px) and (orientation:landscape){.tx-pm .pm-slide .stg{width:min(100%,calc((100vh - 120px) * 4 / 3));width:min(100%,calc((100dvh - 120px) * 4 / 3))}}
 </style>
