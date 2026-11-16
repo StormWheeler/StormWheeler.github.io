@@ -1,0 +1,78 @@
+<script>
+(function(){
+if(window.__txInit)return;window.__txInit=1;
+var R=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+var tpl=document.getElementById('tx-room');
+
+/* fill room scenes from the template */
+function fillRooms(root){$$('[data-scene=room]',root).forEach(function(st){if(!st.querySelector('.cv')&&tpl)st.appendChild(tpl.content.cloneNode(true))})}
+fillRooms(document);
+
+/* scale each 560x420 canvas to its stage */
+function fit(st){var cv=st.querySelector('.cv');if(!cv)return;var s=st.clientWidth/560;cv.style.transform='scale('+s+')'}
+var ro=window.ResizeObserver?new ResizeObserver(function(es){es.forEach(function(e){fit(e.target)})}):null;
+function watchFit(root){$$('.stg',root).forEach(function(st){fit(st);if(ro)ro.observe(st)})}
+watchFit(document);window.addEventListener('resize',function(){$$('.stg').forEach(fit)});
+
+/* scene behaviours */
+var P5=[{p:.024,t:'15:30',a:'In the room',b:'Comfort · 22° · lights on',c:'#6FC497',n:'22° · On'},{p:.19,t:'19:00',a:'Out for dinner',b:'Eco · 26° · lights off',c:'#A9B8AF',n:'26° · Eco'},{p:.318,t:'21:40',a:'On the way back',b:'Restoring · cooling to 22°',c:'#D4AF37',n:'24° · Restoring'},{p:.405,t:'23:30',a:'Asleep',b:'Night mode · 23° · quiet',c:'#A98BCB',n:'23° · Night'},{p:.845,t:'08:45',a:'Out for the day',b:'Eco · 26° · lights off',c:'#A9B8AF',n:'26° · Eco'}];
+function later(st,fn,ms){st.__t=st.__t||[];st.__t.push(setTimeout(fn,R?0:ms))}
+function clear(st){(st.__t||[]).forEach(clearTimeout);st.__t=[];if(st.__i){clearInterval(st.__i);st.__i=null}}
+function behave(st){
+ var tv=st.querySelector('.tmp .tv');
+ if(tv){tv.textContent='31';if(R){tv.textContent='22'}else later(st,function(){var v=31;st.__i=setInterval(function(){v--;tv.textContent=v;if(v<=22){clearInterval(st.__i);st.__i=null}},290)},1300)}
+ if(st.getAttribute('data-scene')==='presence'){
+  var box=st.querySelector('.st5'),hd=st.querySelector('[data-p5h]'),now=st.querySelector('[data-p5t]'),k=0;
+  function show(i){var s=P5[i];hd.style.left=(28+s.p*504)+'px';box.querySelector('.t0').textContent=s.t;box.querySelector('.t1').textContent=s.a;box.querySelector('.t2').textContent=s.b;var ic=box.querySelector('.ic');ic.style.background=s.c+'26';ic.style.color=s.c;box.style.borderColor=s.c+'66';now.textContent=s.n}
+  show(0);if(!R){var step=function(){k=(k+1)%P5.length;show(k);later(st,step,2200)};later(st,step,2200)}
+ }
+ $$('[data-sw]',st).forEach(function(sw){sw.classList.remove('flip');later(st,function(){sw.classList.add('flip')},+sw.getAttribute('data-sw'))});
+ if(st.getAttribute('data-scene')==='team'){
+  var a=st.querySelector('[data-kpi]'),b=st.querySelector('[data-kpi2]'),c=st.querySelector('[data-kpi3]');
+  if(a){a.textContent='11';b.textContent='11';c.textContent='2';later(st,function(){a.textContent='12';b.textContent='12';c.textContent='1'},2600)}
+ }
+}
+function play(st){clear(st);st.classList.remove('on');void st.offsetWidth;st.classList.add('on');behave(st);var lp=+st.getAttribute('data-loop');if(lp&&!R)later(st,function(){play(st)},lp)}
+function stop(st){clear(st);st.classList.remove('on')}
+
+/* reveal + play on scroll */
+if(!('IntersectionObserver' in window)){$$('.tx .rv').forEach(function(e){e.classList.add('in')});$$('.tx .stg').forEach(play)}
+else{
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+ $$('.tx .rv').forEach(function(e){io.observe(e)});
+ var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.intersectionRatio>=.45){if(!e.target.classList.contains('on'))play(e.target)}else if(e.intersectionRatio<.05){stop(e.target)}})},{threshold:[0,.05,.45]});
+ $$('.tx .stg').forEach(function(st){io2.observe(st)});
+}
+
+/* present mode */
+var pm=null,cur=0,slides=[];
+function mkSlide(copy,stage,solo){var s=document.createElement('div');s.className='pm-slide'+(solo?' solo':'');if(copy){var c=copy.cloneNode(true);c.classList.remove('rv');c.classList.add('copy');$$('.rv',c).forEach(function(x){x.classList.remove('rv')});$$('[data-present],.ctas',c).forEach(function(x){x.remove()});s.appendChild(c)}if(stage){var g=stage.cloneNode(true);g.classList.remove('on');g.removeAttribute('data-loop');s.appendChild(g)}return s}
+function build(){
+ slides=[];
+ var hero=document.querySelector('#tx-top .hero .hgrid');
+ if(hero)slides.push(mkSlide(hero.children[0],hero.querySelector('.stg')));
+ $$('.tx [data-step]').forEach(function(a){slides.push(mkSlide(a.querySelector('.copy'),a.querySelector('.stg')))});
+ var end=document.createElement('div');end.innerHTML='<p class="eb" style="font-family:Geist Mono,monospace;letter-spacing:.16em;text-transform:uppercase;color:#D4AF37;font-size:13px">Tessera · Altiora Labs</p><h2 style="font-family:Archivo,sans-serif;font-weight:600;margin:12px auto 0">The room is ready before you reach the door.</h2><p style="color:#A9B8AF;font-size:clamp(1rem,1.5vw,1.3rem);margin-top:18px">hello@altioraai.com</p><p style="color:#7E8F86;font-size:13px;margin-top:28px;max-width:70ch;margin-left:auto;margin-right:auto;line-height:1.6">Confidential. Concept in development; not offered for sale. Screens and names are illustrative.</p>';
+ slides.push(mkSlide(end,null,true));
+}
+function go(i){if(!pm)return;cur=Math.max(0,Math.min(slides.length-1,i));var body=pm.querySelector('.pm-body');body.innerHTML='';var wrap=document.createElement('div');wrap.className='tx';wrap.style.cssText='width:100%;background:transparent';wrap.appendChild(slides[cur]);body.appendChild(wrap);var st=slides[cur].querySelector('.stg');if(st){fit(st);if(ro)ro.observe(st);requestAnimationFrame(function(){fit(st);play(st)})}
+ pm.querySelector('[data-prev]').disabled=cur===0;pm.querySelector('[data-next]').disabled=cur===slides.length-1;
+ $$('.dots i',pm).forEach(function(d,k){d.className=k===cur?'on':''});pm.querySelector('.pm-c').textContent=(cur+1)+' / '+slides.length}
+function key(e){if(!pm)return;if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(cur+1)}else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(cur-1)}else if(e.key==='Escape'){closePM()}}
+function openPM(){
+ build();pm=document.createElement('div');pm.className='tx-pm';pm.dir='ltr';pm.lang='en';pm.setAttribute('data-i18n-skip','');pm.setAttribute('role','dialog');pm.setAttribute('aria-modal','true');pm.setAttribute('aria-label','Tessera presentation');
+ pm.innerHTML='<div class="pm-top"><div><b>Tessera</b> <span>· Altiora Labs · Confidential</span></div><div style="display:flex;align-items:center;gap:14px"><span class="pm-c"></span><button type="button" class="pm-x">Exit</button></div></div><div class="pm-body"></div><div class="pm-nav"><button type="button" class="ar" data-prev aria-label="Previous">&#8592;</button><div class="dots">'+slides.map(function(){return '<i></i>'}).join('')+'</div><button type="button" class="ar" data-next aria-label="Next">&#8594;</button></div>';
+ document.body.appendChild(pm);document.documentElement.style.overflow='hidden';
+ pm.querySelector('.pm-x').onclick=closePM;pm.querySelector('[data-prev]').onclick=function(){go(cur-1)};pm.querySelector('[data-next]').onclick=function(){go(cur+1)};
+ var sx=null;pm.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});pm.addEventListener('touchend',function(e){if(sx==null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(cur+(dx<0?1:-1));sx=null});
+ document.addEventListener('keydown',key);
+ try{if(pm.requestFullscreen)pm.requestFullscreen().catch(function(){})}catch(e){}
+ go(0);pm.querySelector('[data-next]').focus();
+}
+function closePM(){if(!pm)return;try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}document.removeEventListener('keydown',key);pm.remove();pm=null;document.documentElement.style.overflow=''}
+document.addEventListener('fullscreenchange',function(){if(pm&&!document.fullscreenElement){/* stay open; user can exit with the button */}});
+$$('[data-present]').forEach(function(b){b.addEventListener('click',openPM)});
+window.txPresent=openPM;
+})();
+</script>

@@ -1,0 +1,101 @@
+<style>
+@keyframes txIn{to{opacity:1;transform:none}}
+@keyframes txPop{0%{transform:scale(0)}70%{transform:scale(1.18)}100%{transform:scale(1)}}
+@keyframes txFade{to{opacity:1}}
+@keyframes txOut{to{opacity:0}}
+@keyframes txWave{0%{opacity:0;transform:scale(.6)}30%{opacity:1}100%{opacity:0;transform:scale(1.6)}}
+@keyframes txScan{0%{top:6px}50%{top:calc(100% - 8px)}100%{top:6px}}
+@keyframes txFlow{0%{opacity:0;transform:translateY(-4px)}40%{opacity:.9}100%{opacity:0;transform:translateY(16px)}}
+@keyframes txGlow{to{opacity:1}}
+@keyframes txStamp{0%{opacity:0;transform:rotate(-12deg) scale(1.8)}60%{opacity:1;transform:rotate(-12deg) scale(.92)}100%{opacity:1;transform:rotate(-12deg) scale(1)}}
+@keyframes txPress{0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
+@keyframes txDim{to{opacity:.4;filter:grayscale(1)}}
+@keyframes txPulse{0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,.5)}50%{box-shadow:0 0 0 8px rgba(212,175,55,0)}}
+.tx .stg [data-t]{opacity:0;transform:translateY(8px)}
+.tx .stg.on [data-t]{animation:txIn .45s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+.tx .stg .tick{transform:scale(0)}
+.tx .stg.on .tick{animation:txPop .35s ease forwards;animation-delay:var(--d,0s)}
+.tx .stg.on .bub{animation:txIn .4s ease forwards;animation-delay:var(--d,0s)}
+
+/* S2 id scan */
+.tx .idc{position:relative;margin:4px 0 2px;height:62px;border-radius:8px;background:linear-gradient(135deg,#1B3326,#24402F);border:1px solid rgba(238,240,232,.15);overflow:hidden}
+.tx .idc:before{content:"";position:absolute;left:10px;top:10px;width:30px;height:38px;border-radius:5px;background:rgba(238,240,232,.25)}
+.tx .idc:after{content:"";position:absolute;left:50px;top:14px;width:80px;height:6px;border-radius:3px;background:rgba(238,240,232,.25);box-shadow:0 12px 0 rgba(238,240,232,.18),0 24px 0 -1px rgba(238,240,232,.14)}
+.tx .idc i{position:absolute;left:0;right:0;height:2px;background:var(--au);box-shadow:0 0 12px var(--au);top:6px;opacity:0}
+.tx .stg.on .idc i{opacity:1;animation:txScan 1.4s ease-in-out 2 .6s,txOut .2s forwards 3.4s}
+.tx .stamp{position:absolute;opacity:0;font-family:Archivo,sans-serif;font-weight:700;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:var(--gr);border:3px solid var(--gr);border-radius:10px;padding:4px 14px}
+.tx .stg.on .stamp{animation:txStamp .5s ease forwards;animation-delay:var(--d,0s)}
+
+/* S3 room */
+.tx .room .dark{opacity:.82}
+.tx .stg.on .room .dark{animation:txOut 1.2s ease forwards .7s}
+.tx .room .lampg,.tx .room .tvon,.tx .room .sunr{opacity:0}
+.tx .stg.on .room .lampg{animation:txGlow 1s ease forwards .9s}
+.tx .stg.on .room .tvon{animation:txGlow .8s ease forwards 2.9s}
+.tx .stg.on .room .sunr{animation:txGlow 1.4s ease forwards 1.9s}
+.tx .room .cl,.tx .room .cr{transition:transform 1.4s cubic-bezier(.4,.1,.2,1) 1.8s}
+.tx .stg.on .room .cl{transform:translateX(-62px)}
+.tx .stg.on .room .cr{transform:translateX(62px)}
+.tx .room .air path{opacity:0}
+.tx .stg.on .room .air path{animation:txFlow 1.6s ease-in-out infinite;animation-delay:var(--d,1.3s)}
+.tx .tight .row{padding:4px 0;font-size:12px}
+.tx .tmp{font-family:Archivo,sans-serif;font-weight:600;font-size:40px;line-height:1;letter-spacing:-.03em}
+.tx .tmp small{font-size:13px;color:var(--m);font-family:"Source Sans 3",sans-serif;letter-spacing:0;font-weight:400;margin-left:6px}
+.tx .trig{animation:none}
+.tx .stg.on .trig .dot{animation:txPulse 1.4s ease infinite}
+.tx .trig .dot{width:8px;height:8px;border-radius:50%;background:var(--au);display:inline-block}
+
+/* S4 key */
+.tx .kc{margin:16px 12px 0;border-radius:14px;padding:14px;background:linear-gradient(140deg,#1B5C3D,#0D2E20);border:1px solid rgba(212,175,55,.45);color:var(--t);box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
+.tx .kc .kh{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--au);font-family:"Geist Mono",monospace}
+.tx .kc .kr{font-family:Archivo,sans-serif;font-size:26px;font-weight:600;margin-top:18px}
+.tx .kc .kv{font-size:11px;color:var(--m);margin-top:4px}
+.tx .cp{display:flex;align-items:center;gap:12px}
+.tx .cp .rd{position:relative;width:40px;height:40px;border-radius:12px;background:#12261C;border:1px solid var(--l);display:grid;place-items:center;flex:none}
+.tx .cp .rd svg{width:20px;height:20px;color:var(--m)}
+.tx .cp .rd .wv{position:absolute;inset:-6px;border-radius:16px;border:2px solid var(--au);opacity:0}
+.tx .stg.on .cp .rd .wv{animation:txWave 1s ease-out 2;animation-delay:var(--d,0s)}
+.tx .cp .tx2 b{display:block;font-size:14px}
+.tx .cp .tx2 span{font-size:12px;color:var(--m)}
+.tx .cp .tick{margin-left:auto}
+
+/* S5 presence */
+.tx .tl{position:absolute;left:28px;right:28px;bottom:58px;height:16px;border-radius:99px;overflow:hidden;display:flex;background:#0B1A13;border:1px solid var(--l)}
+.tx .tl span{height:100%}
+.tx .tlx{position:absolute;left:28px;right:28px;bottom:34px;display:flex;justify-content:space-between;font-family:"Geist Mono",monospace;font-size:10px;color:var(--m)}
+.tx .ph5{position:absolute;bottom:50px;width:3px;height:32px;margin-left:-1px;background:var(--t);border-radius:2px;box-shadow:0 0 10px rgba(238,240,232,.6);left:28px;transition:left .9s cubic-bezier(.4,.1,.2,1)}
+.tx .st5{position:absolute;left:28px;top:28px;width:300px;height:210px;border-radius:18px;background:#0B1A13;border:1px solid var(--l);padding:20px;transition:border-color .5s}
+.tx .st5 .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;transition:background .5s}
+.tx .st5 .ic svg{width:24px;height:24px}
+.tx .st5 .t1{font-family:Archivo,sans-serif;font-size:24px;font-weight:600;margin-top:16px;transition:opacity .3s}
+.tx .st5 .t2{color:var(--m);font-size:14px;margin-top:6px}
+.tx .st5 .t0{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.12em;color:var(--m);position:absolute;right:20px;top:24px}
+
+/* S7 checkout */
+.tx .s7 .done{opacity:0}
+.tx .stg.on .s7 .btn7{animation:txPress .35s ease 1.4s}
+.tx .stg.on .s7 .pre{animation:txOut .3s ease forwards 1.9s}
+.tx .stg.on .s7 .done{animation:txFade .4s ease forwards 2.1s}
+.tx .btn7{display:block;margin:14px 12px 0;padding:12px;border-radius:12px;background:var(--au);color:#0B1A13;font-weight:700;text-align:center;font-size:14px}
+.tx .stg.on .s7 .key7{animation:txIn .45s forwards 2.4s,txDim .6s forwards 3.2s}
+
+/* S8 team */
+.tx .db{position:absolute;inset:14px;border-radius:16px;background:#0B1A13;border:1px solid var(--l);padding:13px 14px;font-size:12px}
+.tx .db .dbh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tx .db .dbh b{font-family:Archivo,sans-serif;font-size:15px}
+.tx .db .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:8px}
+.tx .db .kp>div{background:#12261C;border:1px solid var(--l);border-radius:10px;padding:7px 10px}
+.tx .db .kp b{display:block;font-family:Archivo,sans-serif;font-size:18px}
+.tx .db .kp span{font-size:10.5px;color:var(--m)}
+.tx .db .tr{display:grid;grid-template-columns:44px 1fr 108px;align-items:center;gap:8px;padding:5px 4px;border-top:1px solid rgba(238,240,232,.06)}
+.tx .db .tr b{font-family:"Geist Mono",monospace;font-size:12px}
+.tx .db .tr .who{color:var(--t)}
+.tx .db .tr .who small{display:block;color:var(--m);font-size:10.5px}
+.tx .db .tr .pill{justify-self:end}
+.tx .db .sw .a,.tx .db .sw .b{transition:opacity .4s}
+.tx .db .sw .b{display:none}
+.tx .db .sw.flip .a{display:none}
+.tx .db .sw.flip .b{display:inline-block}
+.tx .db .ft{display:flex;gap:8px;margin-top:8px}
+.tx .db .ft span{border:1px solid var(--l);border-radius:99px;padding:5px 10px;font-size:11px;color:var(--m)}
+</style>

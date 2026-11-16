@@ -1,0 +1,96 @@
+<style>
+.lb{--g:#0B1A13;--s:#12261C;--f:#0D2E20;--t:#EEF0E8;--m:#A9B8AF;--l:#24402F;--au:#D4AF37;font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--t);background:var(--g);box-sizing:border-box;line-height:1.5}
+.lb *,.lb *:before,.lb *:after{box-sizing:border-box}
+.lb .w{max-width:1200px;margin:0 auto;padding:0 5vw}
+.lb .sec{padding:clamp(56px,8vw,110px) 0}
+.lb .eb{font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--au);margin:0 0 14px}
+.lb h1,.lb h2,.lb h3{font-family:Archivo,system-ui,sans-serif;font-weight:600;letter-spacing:-.02em;margin:0;color:var(--t)}
+.lb h1{font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.035em;max-width:16ch}
+.lb h2{font-size:clamp(1.8rem,3.4vw,2.6rem);line-height:1.1}
+.lb h3{font-size:1.25rem;line-height:1.25}
+.lb p{margin:0}
+.lb .lead{color:var(--m);font-size:clamp(1.05rem,1.2vw,1.2rem);line-height:1.65;max-width:60ch;margin-top:18px}
+.lb .hero{background:radial-gradient(ellipse 55% 60% at 85% 20%,rgba(212,175,55,.10),transparent 70%),radial-gradient(ellipse 50% 60% at 0% 100%,rgba(27,92,61,.35),transparent 70%),var(--g)}
+.lb .chip{display:inline-flex;align-items:center;gap:7px;font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:99px;border:1px solid var(--l);color:var(--m)}
+.lb .chip.au{border-color:rgba(212,175,55,.5);color:var(--au)}
+.lb .chip i{width:7px;height:7px;border-radius:50%;background:var(--au);display:inline-block;animation:lbBlink 2.4s ease-in-out infinite}
+@keyframes lbBlink{50%{opacity:.35}}
+.lb .chips{display:flex;flex-wrap:wrap;gap:8px}
+.lb .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:99px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .25s ease,box-shadow .25s ease,border-color .2s}
+.lb .btn.pri{background:var(--au);color:#0B1A13}
+.lb .btn.pri:hover{transform:translateY(-2px);box-shadow:0 12px 30px -12px rgba(212,175,55,.75)}
+.lb .btn.sec2{color:var(--t);border-color:rgba(238,240,232,.25)}
+.lb .btn.sec2:hover{border-color:var(--au)}
+.lb .btn svg{width:16px;height:16px;flex:none}
+.lb .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.lb .proj{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--l);border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#12261C,#0D2E20)}
+.lb .proj .pc{padding:clamp(26px,4vw,48px)}
+.lb .proj h2{font-size:clamp(2.2rem,4.4vw,3.4rem);margin-top:18px}
+.lb .proj .tag{font-family:Archivo,system-ui,sans-serif;font-size:clamp(1.15rem,1.8vw,1.45rem);line-height:1.3;margin-top:10px;color:var(--au)}
+.lb .proj .lead{font-size:1.05rem}
+.lb .proj ul{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px}
+.lb .proj li{position:relative;padding-inline-start:24px;color:var(--t)}
+.lb .proj li:before{content:"";position:absolute;inset-inline-start:0;top:.5em;width:10px;height:10px;border-radius:50%;border:2px solid var(--au)}
+.lb .proj .note{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:14px;color:var(--m)}
+.lb .proj .note svg{width:15px;height:15px;color:var(--au);flex:none}
+.lb .proj .art{position:relative;display:grid;place-items:center;min-height:320px;background:radial-gradient(circle at 50% 45%,rgba(212,175,55,.14),transparent 60%),#0B1A13;border-left:1px solid var(--l)}
+.lb .proj .art .tsr{transform:scale(1.7)}
+.lb .proj .art .lk{position:absolute;left:18px;top:18px}
+.lb .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(28px,4vw,44px)}
+.lb .st{border:1px solid var(--l);border-radius:18px;padding:24px;background:#0F2119}
+.lb .st .n{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--au)}
+.lb .st h3{margin-top:12px}
+.lb .st p{color:var(--m);margin-top:8px;line-height:1.6}
+.lb .more{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;border:1px dashed rgba(212,175,55,.35);border-radius:22px;padding:clamp(24px,4vw,40px)}
+.lb .more .lead{margin-top:10px}
+.lb .legal{color:#7E8F86;font-size:13px;line-height:1.6;max-width:90ch;margin-top:34px}
+.lb .rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.lb .rv.in{opacity:1;transform:none}
+@media (max-width:991px){.lb .proj{grid-template-columns:1fr}.lb .proj .art{border-left:0;border-top:1px solid var(--l);min-height:300px;order:-1}.lb .proj .art .tsr{transform:scale(1.4)}.lb .grid3{grid-template-columns:1fr}.lb .more{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.lb .rv{opacity:1;transform:none;transition:none}.lb .chip i{animation:none}}
+</style>
+<div class="lb">
+<section class="sec hero"><div class="w">
+<p class="eb rv">Altiora Labs</p>
+<h1 class="rv">Products we build and own.</h1>
+<p class="lead rv">Alongside the systems we set up for clients, Altiora Labs develops our own products for hospitality in the UAE. Each one starts with a real problem we have seen in hotels, venues and events.</p>
+
+<article class="proj rv" aria-labelledby="lb-tessera">
+<div class="pc">
+<div class="chips"><span class="chip au"><i></i>In development</span><span class="chip">Hotels</span></div>
+<h2 id="lb-tessera">Tessera</h2>
+<p class="tag">The room is ready before you reach the door.</p>
+<p class="lead">A new guest experience for hotels. Guests check in from their phone, the room is ready when they arrive, and the rest of the stay runs without queues or plastic cards.</p>
+<ul><li>Check in from the phone, approved by the hotel team</li><li>A room that is cool, lit and ready on arrival</li><li>Built for UAE hotels, in Arabic and English</li></ul>
+<div class="ctas"><a class="btn pri" href="/tessera"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>View private preview</span></a><a class="btn sec2" href="/contact"><span>Request access</span></a></div>
+<p class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>The preview is shared privately with hotels. A password is required.</span></p>
+</div>
+<div class="art">
+<span class="chip lk">Private preview</span>
+<!--TSR-->
+</div>
+</article>
+</div></section>
+
+<section class="sec" style="background:#0D2E20"><div class="w">
+<p class="eb rv">How Labs works</p>
+<h2 class="rv">From a real problem to a working product.</h2>
+<div class="grid3">
+<div class="st rv"><p class="n">01</p><h3>Start with a real problem</h3><p>Every product begins with something we have seen slow down a hotel, venue or event team.</p></div>
+<div class="st rv"><p class="n">02</p><h3>Shape it with operators</h3><p>We design it alongside the people who will use it, before anything reaches a guest.</p></div>
+<div class="st rv"><p class="n">03</p><h3>Pilot, then launch</h3><p>A small pilot with a partner first. A product launches only when it works in real operations.</p></div>
+</div>
+</div></section>
+
+<section class="sec"><div class="w">
+<div class="more rv">
+<div><p class="eb">More in the lab</p><h2>Other ideas are being tested quietly.</h2><p class="lead">New products appear here when they are ready to show. If your team has a problem you would like solved, tell us about it.</p></div>
+<a class="btn pri" href="/contact"><span>Start a conversation</span></a>
+</div>
+<p class="legal rv">Products shown on this page are in development and are not offered for sale. Altiora AI is a planned business that is not yet licensed or trading.</p>
+</div></section>
+</div>
+<script>
+(function(){var els=document.querySelectorAll('.lb .rv');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)})})();
+</script>

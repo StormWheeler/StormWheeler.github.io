@@ -149,7 +149,8 @@
     if (el.nodeType !== 1) return;
     var tag = el.tagName;
     if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || el.id === 'alto-assistant' || el.hasAttribute('data-i18n-decoy')
-      || el.classList.contains('i18n-switch') || el.classList.contains('i18n-foot') || el.classList.contains('i18n-ov')) return;
+      || el.classList.contains('i18n-switch') || el.classList.contains('i18n-foot') || el.classList.contains('i18n-ov')
+      || el.hasAttribute('data-i18n-skip')) return;
     for (var i = 0; i < ATTRS.length; i++) { var a = el.getAttribute(ATTRS[i]); if (a) { var t = tr(a); if (t != null) el.setAttribute(ATTRS[i], t); } }
     if (tag === 'INPUT' && (el.type === 'submit' || el.type === 'button') && el.value) { var tv = tr(el.value); if (tv != null) el.value = tv; }
     var c = el.firstChild;
