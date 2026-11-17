@@ -146,3 +146,11 @@ Every change made to the website, oldest first. Times are Dubai time (GST, UTC+4
   - Tessera stays in the Altiora palette until it has its own brand.
   - Allowed the project's cloud environment to read Recall's web app (altiora-recall.expo.app) so the real icon and colours could be used. You approved this.
 - **19:20: logs and decisions written to Google Drive** (this folder).
+- **19:30–20:10: Tessera got its own icon.**
+  - Five icon directions were drafted and compared at real sizes (16 px to app icon), on dark and light backgrounds and on the Labs card.
+  - You chose the hospitality token, based on the Roman *tessera hospitalis*: host and guest each kept half of a token, and matching halves proved the welcome.
+  - The first version had a jagged, toothed seam and felt too sharp, so five calmer versions followed. You chose **1B, the single tab**: a straight seam with one rounded tab, like a key in a lock.
+  - The final version has an even gap all the way round the seam, including around the tab, in the Altiora forest colours only (deep green, gold, green).
+  - The icon now sits beside the Tessera heading on the Labs page, the same way Recall's does. When the card appears, the two halves slide together once and settle.
+  - Icon files (SVG and PNG, with and without background) are in the repository under `alto/brand/`.
+  - Published and checked against the live site. The Tessera page still asks for a password.

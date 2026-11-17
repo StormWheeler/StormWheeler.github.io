@@ -35,6 +35,14 @@ Where everything lives, so the site can be maintained by anyone. No passwords or
   - footer: `alto/footer-code.html` plus `alto/i18n.js`
   - Alto on its own: `alto/alto.js`
 
+## Brand files
+
+- **Tessera icon:** `alto/brand/` in the repository.
+  - `tessera-icon.svg`: rounded app icon. PNGs at 1024, 512, 180 and 32 px.
+  - `tessera-icon-square.svg`: square version for app stores and phones that round the corners themselves. PNG at 1024 px.
+  - `tessera-mark.svg`: the token alone, with no background. PNG at 512 px.
+  - Colours: deep green #0F2219, gold #E3B65E, green #3C9A6C. No other colour versions.
+
 ## Language switch
 
 - **Languages:** English (as built in Webflow), Arabic, Russian, Chinese (Simplified), Hindi, French.
@@ -67,7 +75,7 @@ Where everything lives, so the site can be maintained by anyone. No passwords or
 ## Animations
 
 - **Home, Altiora Labs card:** lab flask (`alto/labs-home-embed.html`).
-- **Labs page, Tessera card:** phone unlocking a door (`alto/labs-tessera-embed.html`).
+- **Labs page, Tessera card:** phone unlocking a door (`alto/labs-tessera-embed.html`), and the Tessera icon beside the heading, whose halves slide together once.
 - **Labs page, Recall card:** Recall's rising tile path, in Recall's colours (inside `alto/labs/labs-page.html`).
 - **Tessera page:** six code blocks in `alto/tessera/` (styles, scenes, hero, steps, team, script).
 

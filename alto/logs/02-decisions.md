@@ -34,3 +34,6 @@ Every decision that shapes the website: what was decided, who decided it, and wh
 | 28 | 17 Nov | Each product can carry its own look inside its card, without disrupting the rest of the site | Owner | Products have their own identity; the site stays consistent |
 | 29 | 17 Nov | Recall's card uses Recall's real icon and colours (navy, blue, gold); Tessera stays in the Altiora palette until it has its own logo | Owner and Claude | Recall already has a brand; Tessera's is not decided yet |
 | 30 | 17 Nov | Keep a full log of changes and decisions on Google Drive under 06 Platform & Stack / Website – altioraai.com | Owner | A permanent, organised record |
+| 31 | 17 Nov | Tessera gets its own icon; Altiora AI stays the parent brand ("Tessera, by Altiora AI") | Owner | Each product has its own identity, as Recall does |
+| 32 | 17 Nov | Tessera's icon is the hospitality token, version 1B (single rounded tab, even seam) | Owner | Tells the story behind the name; the first, toothed version looked too aggressive and not professional enough |
+| 33 | 17 Nov | Tessera's icon uses the Altiora forest colours only: deep green #0F2219, gold #E3B65E, green #3C9A6C. No other colour versions | Owner | Keeps Tessera close to the parent brand |
