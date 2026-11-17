@@ -36,6 +36,11 @@
 .lb .proj .art{position:relative;display:grid;place-items:center;min-height:320px;background:radial-gradient(circle at 50% 45%,rgba(212,175,55,.14),transparent 60%),#0B1A13;border-left:1px solid var(--l)}
 .lb .proj .art .tsr{transform:scale(1.7)}
 .lb .proj .art .lk{position:absolute;left:18px;top:18px}
+.lb .proj+.proj{margin-top:24px}
+.lb .rcl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:190px;aspect-ratio:1}
+.lb .rcl i{display:block;border-radius:11px;border:1px solid #24402F;background:#12261C}
+.lb .rcl i.s{animation:rclOn 7.2s infinite;animation-delay:var(--d)}
+@keyframes rclOn{0%,7%{background:#D4AF37;border-color:#D4AF37}9%,50%{background:#12261C;border-color:#24402F}51%,56%{background:#6FC497;border-color:#6FC497}59%,100%{background:#12261C;border-color:#24402F}}
 .lb .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:clamp(28px,4vw,44px)}
 .lb .st{border:1px solid var(--l);border-radius:18px;padding:24px;background:#0F2119}
 .lb .st .n{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--au)}
@@ -47,13 +52,13 @@
 .lb .rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .lb .rv.in{opacity:1;transform:none}
 @media (max-width:991px){.lb .proj{grid-template-columns:1fr}.lb .proj .art{border-left:0;border-top:1px solid var(--l);min-height:300px;order:-1}.lb .proj .art .tsr{transform:scale(1.4)}.lb .grid3{grid-template-columns:1fr}.lb .more{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.lb .rv{opacity:1;transform:none;transition:none}.lb .chip i{animation:none}}
+@media (prefers-reduced-motion:reduce){.lb .rv{opacity:1;transform:none;transition:none}.lb .chip i{animation:none}.lb .rcl i.s{animation:none;background:#D4AF37;border-color:#D4AF37}}
 </style>
 <div class="lb">
 <section class="sec hero"><div class="w">
 <p class="eb rv">Altiora Labs</p>
 <h1 class="rv">Products we build and own.</h1>
-<p class="lead rv">Alongside the systems we set up for clients, Altiora Labs develops our own products for hospitality in the UAE. Each one starts with a real problem we have seen in hotels, venues and events.</p>
+<p class="lead rv">Alongside the systems we set up for clients, Altiora Labs builds our own products, from hotel guest experiences to everyday tools. Each one starts with a real problem worth solving well.</p>
 
 <article class="proj rv" aria-labelledby="lb-tessera">
 <div class="pc">
@@ -70,15 +75,31 @@
 <!--TSR-->
 </div>
 </article>
+
+<article class="proj rv" aria-labelledby="lb-recall">
+<div class="pc">
+<div class="chips"><span class="chip au"><i></i>Free beta soon</span><span class="chip">Web and Android</span></div>
+<h2 id="lb-recall">Recall</h2>
+<p class="tag">One focused session a day. Then put it down.</p>
+<p class="lead">Short daily exercises for memory and focus. About six minutes, with no feed, no streak alarms and no endless levels.</p>
+<ul><li>Sequence, N-back and Hold, with more in the phone app</li><li>Each exercise adjusts to your level every day</li><li>Your progress is yours to download or delete at any time</li></ul>
+<div class="ctas"><a class="btn pri" href="mailto:hello@altioraai.com?subject=Recall%20beta"><span>Join the free beta</span></a></div>
+<p class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>100 free places in the first beta. A training app, not a medical product.</span></p>
+</div>
+<div class="art">
+<span class="chip lk">About 6 minutes a day</span>
+<div class="rcl" role="img" aria-label="Recall: tiles light up in a sequence, then are repeated in the same order"><i></i><i class="s" style="--d:.9s"></i><i></i><i class="s" style="--d:2.7s"></i><i></i><i></i><i class="s" style="--d:0s"></i><i></i><i class="s" style="--d:1.8s"></i></div>
+</div>
+</article>
 </div></section>
 
 <section class="sec" style="background:#0D2E20"><div class="w">
 <p class="eb rv">How Labs works</p>
 <h2 class="rv">From a real problem to a working product.</h2>
 <div class="grid3">
-<div class="st rv"><p class="n">01</p><h3>Start with a real problem</h3><p>Every product begins with something we have seen slow down a hotel, venue or event team.</p></div>
-<div class="st rv"><p class="n">02</p><h3>Shape it with operators</h3><p>We design it alongside the people who will use it, before anything reaches a guest.</p></div>
-<div class="st rv"><p class="n">03</p><h3>Pilot, then launch</h3><p>A small pilot with a partner first. A product launches only when it works in real operations.</p></div>
+<div class="st rv"><p class="n">01</p><h3>Start with a real problem</h3><p>Every product begins with a real problem we have seen people struggle with.</p></div>
+<div class="st rv"><p class="n">02</p><h3>Shape it with real users</h3><p>We design it alongside the people who will use it, before it reaches the public.</p></div>
+<div class="st rv"><p class="n">03</p><h3>Pilot, then launch</h3><p>A small pilot or beta comes first. A product launches only when it works in real life.</p></div>
 </div>
 </div></section>
 
