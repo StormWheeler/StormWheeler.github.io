@@ -1,0 +1,62 @@
+<div class="alb" role="img" aria-label="Altiora Labs: ideas grow inside a lab flask and rise out as new products">
+<svg viewBox="0 0 150 150" width="150" height="150" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="albClip"><path d="M64 34 V62 L34 112 Q28 126 42 128 H108 Q122 126 116 112 L86 62 V34 Z"/></clipPath>
+    <radialGradient id="albGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D4AF37" stop-opacity=".45"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+  </defs>
+  <!-- glow behind the flask -->
+  <circle class="alb-glow" cx="75" cy="104" r="40" fill="url(#albGlow)"/>
+  <!-- flask body -->
+  <path d="M64 34 V62 L34 112 Q28 126 42 128 H108 Q122 126 116 112 L86 62 V34 Z" fill="#0D2E20"/>
+  <g clip-path="url(#albClip)">
+    <!-- liquid -->
+    <path class="alb-liq" d="M20 98 Q47 92 75 98 T130 98 V140 H20 Z" fill="#1B5C3D"/>
+    <!-- circuit tree growing in the liquid (the Altiora mark) -->
+    <g fill="none" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path class="alb-tree" d="M75 126 V100 M75 114 L58 106 V100 M75 110 L92 102 V96 M75 104 L66 98"/>
+    </g>
+    <g fill="#D4AF37">
+      <circle class="alb-n alb-n1" cx="75" cy="100" r="3.2"/>
+      <circle class="alb-n alb-n2" cx="58" cy="100" r="2.8"/>
+      <circle class="alb-n alb-n3" cx="92" cy="96" r="2.8"/>
+      <circle class="alb-n alb-n4" cx="66" cy="98" r="2.4"/>
+    </g>
+    <!-- bubbles -->
+    <circle class="alb-b alb-b1" cx="70" cy="96" r="2.6" fill="#EEF0E8"/>
+    <circle class="alb-b alb-b2" cx="80" cy="94" r="2" fill="#EEF0E8"/>
+    <circle class="alb-b alb-b3" cx="75" cy="98" r="1.6" fill="#EEF0E8"/>
+  </g>
+  <!-- flask outline, neck rim -->
+  <path d="M64 34 V62 L34 112 Q28 126 42 128 H108 Q122 126 116 112 L86 62 V34" fill="none" stroke="#A9B8AF" stroke-opacity=".7" stroke-width="2" stroke-linejoin="round"/>
+  <rect x="59" y="29" width="32" height="6" rx="3" fill="none" stroke="#A9B8AF" stroke-opacity=".7" stroke-width="2"/>
+  <!-- products rising out of the flask -->
+  <g class="alb-p alb-p1"><rect x="50" y="6" width="18" height="18" rx="5" fill="#D4AF37"/><rect x="55" y="11" width="8" height="8" rx="2" fill="#0B1A13" opacity=".35"/></g>
+  <g class="alb-p alb-p2"><rect x="82" y="6" width="18" height="18" rx="5" fill="#6FC497"/><path d="M86.5 15.2 l3 3 l6 -6.4" fill="none" stroke="#0B1A13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></g>
+  <circle class="alb-spark" cx="75" cy="22" r="2.4" fill="#D4AF37"/>
+</svg>
+<style>
+.alb{width:150px;height:150px;display:block}
+.alb svg{display:block;overflow:visible}
+.alb .alb-tree{stroke-dasharray:90;stroke-dashoffset:90;animation:albTree 6.4s infinite}
+.alb .alb-n{opacity:0;transform-box:fill-box;transform-origin:center;animation:albNode 6.4s infinite}
+.alb .alb-n2{animation-delay:.25s}.alb .alb-n3{animation-delay:.45s}.alb .alb-n4{animation-delay:.6s}
+.alb .alb-b{opacity:0;animation:albBub 6.4s infinite}
+.alb .alb-b2{animation-delay:.35s}.alb .alb-b3{animation-delay:.7s}
+.alb .alb-p{opacity:0;transform-box:fill-box;transform-origin:center bottom;animation:albProd 6.4s infinite}
+.alb .alb-p2{animation-delay:.55s}
+.alb .alb-spark{opacity:0;animation:albSpark 6.4s infinite}
+.alb .alb-glow{opacity:.35;animation:albGlow 6.4s infinite}
+.alb .alb-liq{animation:albLiq 3.2s ease-in-out infinite}
+@keyframes albTree{0%,6%{stroke-dashoffset:90}30%,86%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:90}}
+@keyframes albNode{0%,20%{opacity:0;transform:scale(.3)}26%{opacity:1;transform:scale(1.25)}30%,86%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(.3)}}
+@keyframes albBub{0%,34%{opacity:0;transform:translateY(0)}40%{opacity:.85}62%{opacity:.6;transform:translateY(-58px)}66%,100%{opacity:0;transform:translateY(-66px)}}
+@keyframes albSpark{0%,58%{opacity:0;transform:scale(.4)}62%{opacity:1;transform:scale(1.6)}68%,100%{opacity:0;transform:scale(.4)}}
+@keyframes albProd{0%,60%{opacity:0;transform:translateY(10px) scale(.6)}66%{opacity:1;transform:translateY(-1px) scale(1.06)}70%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes albGlow{0%,20%{opacity:.25}40%,80%{opacity:.75}100%{opacity:.25}}
+@keyframes albLiq{0%,100%{transform:translateX(0)}50%{transform:translateX(-8px)}}
+@media (prefers-reduced-motion:reduce){
+  .alb *{animation:none!important}
+  .alb .alb-tree{stroke-dashoffset:0}.alb .alb-n{opacity:1}.alb .alb-p{opacity:1}.alb .alb-glow{opacity:.6}
+}
+</style>
+</div>
