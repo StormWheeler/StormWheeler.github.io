@@ -37,3 +37,4 @@ Every decision that shapes the website: what was decided, who decided it, and wh
 | 31 | 17 Nov | Tessera gets its own icon; Altiora AI stays the parent brand ("Tessera, by Altiora AI") | Owner | Each product has its own identity, as Recall does |
 | 32 | 17 Nov | Tessera's icon is the hospitality token, version 1B (single rounded tab, even seam) | Owner | Tells the story behind the name; the first, toothed version looked too aggressive and not professional enough |
 | 33 | 17 Nov | Tessera's icon uses the Altiora forest colours only: deep green #0F2219, gold #E3B65E, green #3C9A6C. No other colour versions | Owner | Keeps Tessera close to the parent brand |
+| 34 | 17 Nov | Every change to the website ends with a full site check (all pages, phone, tablet, desktop and Arabic) before it is reported as done | Owner | Fixing one thing had been breaking another |

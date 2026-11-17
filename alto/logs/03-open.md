@@ -25,7 +25,15 @@ Everything still waiting, who it is waiting on, and the next action. Last update
 |---|---|
 | Translations for two new screen-reader descriptions (the Labs flask animation and the Recall animation) | Add them in the next translation update |
 
+## Waiting on you (look and feel)
+
+| Item | Next action | Notes |
+|---|---|---|
+| Lavender buttons | Decide whether to switch them to the gold outline used elsewhere | "About Altiora AI" (home), "Send message" (Contact) and "Go to the home page" (404) use a leftover lavender colour from the original template |
+| Password page Submit button | Same decision | It is pale grey, Webflow's default |
+
 ## Optional
 
 - Allow this Claude session to message the Recall session directly. It would ask you to confirm on a card in the Claude app, and it permanently limits this session to your trusted devices.
+- The 404 and password pages stay in English when another language is chosen.
 - Point recall.altioraai.com at the Recall app (Recall's checklist, Medium priority).

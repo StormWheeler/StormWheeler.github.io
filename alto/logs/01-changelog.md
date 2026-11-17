@@ -154,3 +154,21 @@ Every change made to the website, oldest first. Times are Dubai time (GST, UTC+4
   - The icon now sits beside the Tessera heading on the Labs page, the same way Recall's does. When the card appears, the two halves slide together once and settle.
   - Icon files (SVG and PNG, with and without background) are in the repository under `alto/brand/`.
   - Published and checked against the live site. The Tessera page still asks for a password.
+
+## 17 November 2026 (evening): full site review and a standing site check
+
+**Why:** you spotted the "Start a conversation" button looking off on a phone, and asked for a full review plus a check after every change, because fixing one thing had been breaking another.
+
+- **New site check** (`alto/qa/site-check.js`, guide in `alto/qa/README.md`).
+  - Visits every page at phone, small phone, tablet and desktop sizes, plus Arabic on phone: 58 page views and 72 links per run.
+  - Checks for broken layouts, off-centre buttons, overlapping or unreadable text, crowded menus, broken links and images, and that the live code matches the saved copies.
+  - Each new test was proven by recreating the bug it targets and confirming the test caught it.
+- **Fixed, published and checked:**
+  1. Labs page buttons: text was left-aligned in full-width buttons on phones and tablets. Now centred.
+  2. Password page (/tessera) and 404 page on phones: the menu links were drawn over the page content. They now sit in a neat row under the logo.
+  3. Connect page on phones: the "Phone Us" button text was almost invisible (dark on dark). It is gold again.
+  4. Labs page in Arabic: the Recall animation was mirrored, with the gold tile on the wrong side. It now matches Recall's real icon.
+  5. AI compared and Labs pages on tablets: the full menu was squeezed into one row. They now use the menu button like every other page.
+- **Final run:** 58 page views, 72 links, 0 issues.
+- Allowed the cloud environment to load the site's fonts and the Calendly widget, so the check sees the pages exactly as visitors do. You approved this.
+

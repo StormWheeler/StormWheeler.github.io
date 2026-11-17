@@ -90,7 +90,12 @@ Where everything lives, so the site can be maintained by anyone. No passwords or
 - **Setup steps:** `alto/enquiries/SETUP.md` (also in 03 Briefs and Handovers).
 - **Sheet:** "Altiora AI – Clientele" in the business account. Columns: Received (Dubai), Form, Name, Email, Phone, Message, Consent, Page, Status, Last contact, Notes, Submission ID.
 
+## Site check (run after every change)
+
+- **Script:** `alto/qa/site-check.js`; how to run it and what it covers are in `alto/qa/README.md`.
+- **Head code** also holds two small style fixes: the password and 404 page menus on phones, and the AI compared and Labs menus on tablets.
+
 ## Cloud environment for Claude
 
 - **Environment:** "Altiora AI website" (personal).
-- **Allowed sites:** altioraai.com, www, Webflow's file servers, the Voiceflow hosts (no longer used) and altiora-recall.expo.app.
+- **Allowed sites:** altioraai.com, www, Webflow's file servers, the Voiceflow hosts (no longer used), altiora-recall.expo.app, the site's font host (webflow-files-prod.global.ssl.fastly.net) and assets.calendly.com.

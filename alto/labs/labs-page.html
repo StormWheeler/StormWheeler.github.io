@@ -16,7 +16,7 @@
 .lb .chip i{width:7px;height:7px;border-radius:50%;background:var(--au);display:inline-block;animation:lbBlink 2.4s ease-in-out infinite}
 @keyframes lbBlink{50%{opacity:.35}}
 .lb .chips{display:flex;flex-wrap:wrap;gap:8px}
-.lb .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:99px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .25s ease,box-shadow .25s ease,border-color .2s}
+.lb .btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:10px;padding:14px 22px;border-radius:99px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;transition:transform .25s ease,box-shadow .25s ease,border-color .2s}
 .lb .btn.pri{background:var(--au);color:#0B1A13}
 .lb .btn.pri:hover{transform:translateY(-2px);box-shadow:0 12px 30px -12px rgba(212,175,55,.75)}
 .lb .btn.sec2{color:var(--t);border-color:rgba(238,240,232,.25)}
@@ -54,7 +54,7 @@
 .lb .proj.rc .btn.pri:hover{box-shadow:0 12px 30px -12px rgba(134,182,214,.75)}
 .lb .rcl-ic{width:46px;height:46px;flex:none;display:block;border-radius:12px;box-shadow:0 0 0 1px #27333E}
 /* Recall animation: the icon's rising path lights up, bottom to top */
-.lb .rcl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:190px;aspect-ratio:1}
+.lb .rcl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:190px;aspect-ratio:1;direction:ltr}
 .lb .rcl i{display:block;border-radius:20%;background:#1E2A35}
 .lb .rcl i.p1{animation:rcl1 6s infinite}
 .lb .rcl i.p2{animation:rcl2 6s infinite}
