@@ -1,0 +1,66 @@
+<div class="agu" role="img" aria-label="For your guests: a guest asks, the reply arrives in seconds, the booking is confirmed and your team is told">
+<svg viewBox="0 0 150 150" width="150" height="150" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="aguGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D4AF37" stop-opacity=".4"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle class="agu-glow" cx="80" cy="82" r="60" fill="url(#aguGlow)"/>
+  <!-- guest message -->
+  <g class="agu-q">
+    <path d="M32 12 H80 Q90 12 90 22 V36 Q90 46 80 46 H34 L22 54 V22 Q22 12 32 12 Z" fill="#0D2E20" stroke="#EEF0E8" stroke-opacity=".75" stroke-width="1.8" stroke-linejoin="round"/>
+    <rect x="32" y="22" width="46" height="4" rx="2" fill="#EEF0E8" fill-opacity=".6"/>
+    <rect x="32" y="32" width="30" height="4" rx="2" fill="#EEF0E8" fill-opacity=".6"/>
+  </g>
+  <!-- reply, written in seconds -->
+  <g class="agu-r">
+    <path d="M70 58 H128 Q138 58 138 68 V102 L126 94 H70 Q60 94 60 84 V68 Q60 58 70 58 Z" fill="#1B5C3D" stroke="#D4AF37" stroke-opacity=".7" stroke-width="1.8" stroke-linejoin="round"/>
+    <g class="agu-dots" fill="#EEF0E8"><circle class="agu-d agu-d1" cx="86" cy="76" r="3"/><circle class="agu-d agu-d2" cx="98" cy="76" r="3"/><circle class="agu-d agu-d3" cx="110" cy="76" r="3"/></g>
+    <rect class="agu-l agu-l1" x="72" y="68" width="54" height="4" rx="2" fill="#D4AF37"/>
+    <rect class="agu-l agu-l2" x="72" y="78" width="40" height="4" rx="2" fill="#EEF0E8" fill-opacity=".8"/>
+  </g>
+  <!-- booking confirmed -->
+  <g class="agu-b">
+    <rect x="14" y="102" width="76" height="40" rx="8" fill="#0D2E20" stroke="#A9B8AF" stroke-opacity=".55" stroke-width="1.6"/>
+    <rect x="22" y="108" width="24" height="3.5" rx="1.75" fill="#A9B8AF" fill-opacity=".6"/>
+    <g fill="#24402F">
+      <rect x="22" y="117" width="9" height="8" rx="2"/><rect x="35" y="117" width="9" height="8" rx="2"/><rect x="61" y="117" width="9" height="8" rx="2"/><rect x="74" y="117" width="9" height="8" rx="2"/>
+      <rect x="22" y="129" width="9" height="8" rx="2"/><rect x="35" y="129" width="9" height="8" rx="2"/><rect x="48" y="129" width="9" height="8" rx="2"/><rect x="61" y="129" width="9" height="8" rx="2"/><rect x="74" y="129" width="9" height="8" rx="2"/>
+    </g>
+    <rect class="agu-day" x="48" y="117" width="9" height="8" rx="2" fill="#24402F"/>
+  </g>
+  <g class="agu-ok"><circle cx="90" cy="102" r="9" fill="#6FC497"/><path d="M85.6 102.4 l3 3 l5.6 -6.2" fill="none" stroke="#0B1A13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <!-- your team, told and in control -->
+  <circle class="agu-ring" cx="122" cy="126" r="16" fill="none" stroke="#6FC497" stroke-width="1.8"/>
+  <g fill="none" stroke="#EEF0E8" stroke-opacity=".85" stroke-width="1.8" stroke-linecap="round">
+    <circle cx="122" cy="121" r="5"/>
+    <path d="M112.5 135 Q122 124 131.5 135"/>
+  </g>
+</svg>
+<style>
+.agu{width:150px;height:150px;display:block}
+.agu svg{display:block;overflow:visible}
+.agu .agu-glow{opacity:.3;animation:aguGlow 6.4s infinite}
+.agu .agu-q{opacity:0;animation:aguQ 6.4s infinite}
+.agu .agu-r{opacity:0;animation:aguR 6.4s infinite}
+.agu .agu-d{animation:aguDot 6.4s infinite}
+.agu .agu-d2{animation-delay:.15s}.agu .agu-d3{animation-delay:.3s}
+.agu .agu-l{opacity:0;transform-box:fill-box;transform-origin:left center;animation:aguLine 6.4s infinite}
+.agu .agu-l2{animation-delay:.2s}
+.agu .agu-b{opacity:0;animation:aguB 6.4s infinite}
+.agu .agu-day{animation:aguDay 6.4s infinite}
+.agu .agu-ok{opacity:0;transform-box:fill-box;transform-origin:center;animation:aguOk 6.4s infinite}
+.agu .agu-ring{opacity:0;transform-box:fill-box;transform-origin:center;animation:aguRing 6.4s infinite}
+@keyframes aguGlow{0%,20%{opacity:.25}45%,85%{opacity:.7}100%{opacity:.25}}
+@keyframes aguQ{0%{opacity:0;transform:translateY(8px)}8%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes aguR{0%,12%{opacity:0;transform:translateY(8px)}18%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes aguDot{0%,16%{opacity:0}20%{opacity:1;transform:translateY(-2px)}24%{opacity:.5;transform:none}28%{opacity:1;transform:translateY(-2px)}31%{opacity:0;transform:none}100%{opacity:0}}
+@keyframes aguLine{0%,32%{opacity:0;transform:scaleX(0)}38%,88%{opacity:1;transform:scaleX(1)}96%,100%{opacity:0;transform:scaleX(1)}}
+@keyframes aguB{0%,42%{opacity:0;transform:translateY(8px)}48%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes aguDay{0%,52%{fill:#24402F}56%,90%{fill:#D4AF37}100%{fill:#24402F}}
+@keyframes aguOk{0%,57%{opacity:0;transform:scale(.4)}62%{opacity:1;transform:scale(1.15)}65%,88%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(.6)}}
+@keyframes aguRing{0%,66%{opacity:0;transform:scale(.6)}72%{opacity:1;transform:scale(1.08)}76%,88%{opacity:.9;transform:scale(1)}96%,100%{opacity:0;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){
+  .agu *{animation:none!important}
+  .agu .agu-q,.agu .agu-r,.agu .agu-b,.agu .agu-ok,.agu .agu-l{opacity:1}.agu .agu-d{opacity:0}.agu .agu-day{fill:#D4AF37}.agu .agu-ring{opacity:.9}.agu .agu-glow{opacity:.6}
+}
+</style>
+</div>

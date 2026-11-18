@@ -1,0 +1,64 @@
+<div class="atm" role="img" aria-label="For your team: a request comes in, the crew is told one by one, and the report fills itself in">
+<svg viewBox="0 0 150 150" width="150" height="150" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="atmGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#D4AF37" stop-opacity=".4"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle class="atm-glow" cx="75" cy="78" r="60" fill="url(#atmGlow)"/>
+  <!-- circuit links (the Altiora tree) -->
+  <g fill="none" stroke="#24402F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M54 24 H75 V46"/>
+    <path d="M112 96 H124 V112"/>
+  </g>
+  <g fill="none" stroke="#D4AF37" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path class="atm-p atm-p1" d="M54 24 H75 V46"/>
+    <path class="atm-p atm-p2" d="M112 96 H124 V112"/>
+  </g>
+  <!-- a request comes in -->
+  <g class="atm-in">
+    <rect x="8" y="10" width="46" height="28" rx="9" fill="#0D2E20" stroke="#EEF0E8" stroke-opacity=".75" stroke-width="1.8"/>
+    <g fill="#EEF0E8"><circle cx="20" cy="24" r="2.6"/><circle cx="31" cy="24" r="2.6"/><circle cx="42" cy="24" r="2.6"/></g>
+  </g>
+  <!-- the crew, told one by one -->
+  <rect x="38" y="46" width="74" height="60" rx="10" fill="#0D2E20" stroke="#A9B8AF" stroke-opacity=".55" stroke-width="1.6"/>
+  <g>
+    <circle cx="52" cy="60" r="5" fill="#1B5C3D" stroke="#A9B8AF" stroke-opacity=".6" stroke-width="1.2"/><rect x="62" y="58" width="26" height="4" rx="2" fill="#EEF0E8" fill-opacity=".55"/>
+    <circle cx="52" cy="76" r="5" fill="#1B5C3D" stroke="#A9B8AF" stroke-opacity=".6" stroke-width="1.2"/><rect x="62" y="74" width="20" height="4" rx="2" fill="#EEF0E8" fill-opacity=".55"/>
+    <circle cx="52" cy="92" r="5" fill="#1B5C3D" stroke="#A9B8AF" stroke-opacity=".6" stroke-width="1.2"/><rect x="62" y="90" width="24" height="4" rx="2" fill="#EEF0E8" fill-opacity=".55"/>
+  </g>
+  <g class="atm-t atm-t1"><circle cx="100" cy="60" r="5.5" fill="#6FC497"/><path d="M97.3 60.2 l1.9 1.9 l3.6 -4" fill="none" stroke="#0B1A13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g class="atm-t atm-t2"><circle cx="100" cy="76" r="5.5" fill="#6FC497"/><path d="M97.3 76.2 l1.9 1.9 l3.6 -4" fill="none" stroke="#0B1A13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g class="atm-t atm-t3"><circle cx="100" cy="92" r="5.5" fill="#6FC497"/><path d="M97.3 92.2 l1.9 1.9 l3.6 -4" fill="none" stroke="#0B1A13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <!-- the report fills itself in -->
+  <rect x="102" y="112" width="42" height="32" rx="7" fill="#0D2E20" stroke="#A9B8AF" stroke-opacity=".55" stroke-width="1.6"/>
+  <rect class="atm-bar atm-b1" x="110" y="128" width="6" height="10" rx="1.5" fill="#D4AF37"/>
+  <rect class="atm-bar atm-b2" x="120" y="122" width="6" height="16" rx="1.5" fill="#6FC497"/>
+  <rect class="atm-bar atm-b3" x="130" y="117" width="6" height="21" rx="1.5" fill="#D4AF37"/>
+  <!-- a person signs it off -->
+  <g class="atm-ok"><circle cx="144" cy="112" r="7" fill="#D4AF37"/><path d="M140.6 112.2 l2.3 2.3 l4.4 -4.8" fill="none" stroke="#0B1A13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>
+<style>
+.atm{width:150px;height:150px;display:block}
+.atm svg{display:block;overflow:visible}
+.atm .atm-glow{opacity:.3;animation:atmGlow 6.4s infinite}
+.atm .atm-in{opacity:0;animation:atmIn 6.4s infinite}
+.atm .atm-p{stroke-dasharray:14 80;stroke-dashoffset:14;opacity:0}
+.atm .atm-p1{animation:atmP1 6.4s infinite}
+.atm .atm-p2{animation:atmP2 6.4s infinite}
+.atm .atm-t{opacity:0;transform-box:fill-box;transform-origin:center;animation:atmT 6.4s infinite}
+.atm .atm-t2{animation-delay:.35s}.atm .atm-t3{animation-delay:.7s}
+.atm .atm-bar{transform-box:fill-box;transform-origin:center bottom;transform:scaleY(.12);animation:atmBar 6.4s infinite}
+.atm .atm-b2{animation-delay:.15s}.atm .atm-b3{animation-delay:.3s}
+.atm .atm-ok{opacity:0;transform-box:fill-box;transform-origin:center;animation:atmOk 6.4s infinite}
+@keyframes atmGlow{0%,20%{opacity:.25}45%,85%{opacity:.7}100%{opacity:.25}}
+@keyframes atmIn{0%{opacity:0;transform:translateX(-8px)}8%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+@keyframes atmP1{0%,10%{opacity:0;stroke-dashoffset:14}12%{opacity:1}24%{opacity:1;stroke-dashoffset:-43}26%,100%{opacity:0;stroke-dashoffset:-43}}
+@keyframes atmT{0%,26%{opacity:0;transform:scale(.4)}31%{opacity:1;transform:scale(1.2)}34%,88%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(.6)}}
+@keyframes atmP2{0%,46%{opacity:0;stroke-dashoffset:14}48%{opacity:1}58%{opacity:1;stroke-dashoffset:-32}60%,100%{opacity:0;stroke-dashoffset:-32}}
+@keyframes atmBar{0%,58%{transform:scaleY(.12)}68%,88%{transform:scaleY(1)}96%,100%{transform:scaleY(.12)}}
+@keyframes atmOk{0%,72%{opacity:0;transform:scale(.4)}77%{opacity:1;transform:scale(1.2)}80%,88%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(.6)}}
+@media (prefers-reduced-motion:reduce){
+  .atm *{animation:none!important}
+  .atm .atm-in,.atm .atm-t,.atm .atm-ok{opacity:1}.atm .atm-bar{transform:none}.atm .atm-glow{opacity:.6}
+}
+</style>
+</div>
