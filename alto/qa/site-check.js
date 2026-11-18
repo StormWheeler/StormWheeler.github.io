@@ -191,7 +191,7 @@ async function scrollThrough(p) {
   const home = liveHtml('/'), labs = liveHtml('/labs');
   const footer = rd('footer-code.html') + '\n\n<!-- Altiora language switch -->\n<script>\n' + rd('i18n.js').trimEnd() + '\n</script>';
   [['site head code', home, rd('head-code.html')], ['site footer code', home, footer],
-   ['home Labs card', home, rd('labs-home-embed.html')], ['Labs page', labs, rd('labs/labs-embed.html')]]
+   ['home guest animation', home, rd('home/guest-embed.html')], ['home team animation', home, rd('home/team-embed.html')], ['home Labs band', home, rd('home/labs-band-embed.html')], ['Labs page', labs, rd('labs/labs-embed.html')]]
     .forEach(([name, live, local]) => { if (!live.includes(local.trim())) bad.push(`${name}: live site differs from the repository copy`); });
   const expected = { '/tessera': 401, '/this-page-does-not-exist': 404 };
   let n = 0;

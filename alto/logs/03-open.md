@@ -23,7 +23,6 @@ Everything still waiting, who it is waiting on, and the next action. Last update
 
 | Item | Next action |
 |---|---|
-| Translations for two new screen-reader descriptions (the Labs flask animation and the Recall animation) | Add them in the next translation update |
 
 ## Waiting on you (look and feel)
 

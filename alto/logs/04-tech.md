@@ -46,7 +46,7 @@ Where everything lives, so the site can be maintained by anyone. No passwords or
 ## Language switch
 
 - **Languages:** English (as built in Webflow), Arabic, Russian, Chinese (Simplified), Hindi, French.
-- **Translation files:** one per language, stored as Webflow assets and listed in the site head code. The current version is v5.
+- **Translation files:** one per language, stored as Webflow assets and listed in the site head code. The current version is v6.
 - **Repository copies:** `alto/ar.json`, `ru.json`, `zh.json`, `hi.json`, `fr.json`.
 - **Updating text:**
   1. Add the English text and its translations to the five files.
@@ -74,7 +74,9 @@ Where everything lives, so the site can be maintained by anyone. No passwords or
 
 ## Animations
 
-- **Home, Altiora Labs card:** lab flask (`alto/labs-home-embed.html`).
+- **Home, What we build:** for your guests (`alto/home/guest-embed.html`) and for your team (`alto/home/team-embed.html`).
+- **Home, Altiora Labs band:** lab flask with link to /labs (`alto/home/labs-band-embed.html`; the flask on its own is `alto/labs-home-embed.html`).
+- **Home, Who we work with icons:** `alto/home/icons/`.
 - **Labs page, Tessera card:** phone unlocking a door (`alto/labs-tessera-embed.html`), and the Tessera icon beside the heading, whose halves slide together once.
 - **Labs page, Recall card:** Recall's rising tile path, in Recall's colours (inside `alto/labs/labs-page.html`).
 - **Tessera page:** six code blocks in `alto/tessera/` (styles, scenes, hero, steps, team, script).

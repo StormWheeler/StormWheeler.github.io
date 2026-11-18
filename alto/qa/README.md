@@ -25,7 +25,7 @@ It takes about four minutes. It writes `report.txt`, `report.json`, and a full-p
   - no broken images
 - **Whole site:**
   - every internal link works
-  - the live head code, footer code, home Labs card and Labs page match the copies in this repository
+  - the live head code, footer code, home page animations and Labs band, and Labs page match the copies in this repository
 
 ## After the automated check
 

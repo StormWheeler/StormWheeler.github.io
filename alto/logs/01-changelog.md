@@ -172,3 +172,20 @@ Every change made to the website, oldest first. Times are Dubai time (GST, UTC+4
 - **Final run:** 58 page views, 72 links, 0 issues.
 - Allowed the cloud environment to load the site's fonts and the Calendly widget, so the check sees the pages exactly as visitors do. You approved this.
 
+---
+
+## 18 November 2026: "What we build" and "Who we work with" reworked
+
+**Why:** you felt the home page section wasn't sticking. "Three lines of work" counted Altiora Labs as a service, the two pictures were swapped (a calendar on messaging, a chat bubble on operations), bookings were claimed twice, and "Who we work with" repeated "What we build" in six job cards.
+
+- **Preview first:** the new sections were shown on a private preview page, and you approved them ("Looks good, go").
+- **What we build** is now "For your guests, and for your team."
+  - **For your guests:** a new animation in the Labs flask's colours. A guest asks, a reply is typed, the booking day lights gold with a tick, and the team is told. Bookings now live only here.
+  - **For your team:** a request travels along a gold line to a crew list, each person is ticked off, then a report fills itself in and gets a gold sign-off.
+  - The two old grey Lottie animations were removed.
+- **Altiora Labs** moved out of the cards into its own slim band underneath: the flask animation, "We also build products of our own", Recall and Tessera, and a "See Altiora Labs" link.
+- **Who we work with** now shows who: Hotels, Holiday homes, Venues and Event teams. Each card has a new gold line icon and one sentence. The six job cards were folded into the two cards above, so nothing is said twice.
+- **Alto's** "What will you build?" answer was updated to match, in English and Arabic.
+- **Translations:** version 6 of the language files (413 strings each). This adds the new text plus the screen-reader descriptions for the Labs flask and Recall animations that were still pending.
+- **Checks:** full site check, 58 page views and 72 links, 0 issues. A visual review on phone, tablet, desktop and Arabic caught one small misalignment between the two cards' text on phones, which was fixed and published.
+
