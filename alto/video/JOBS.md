@@ -43,3 +43,12 @@ Guest reference: 6e860d34-608b-4dc7-92c5-b1ac0ea043e4 (same guest as the brand f
 | 7 Pillows at the door | 07adc035-6d7f-4524-9691-6b977f2bfc07 | Good (recast) |
 | 8 Check-out to car | aeedf750-6698-48ad-b1b8-d5b5d95d50bf | Good |
 | 9 End card | reuse brand film 6a1b34ed | |
+
+## Recall demo account (for screen recordings)
+
+Set up 19 Nov 2026 with the owner's go-ahead, for recording real Recall sessions for the films.
+
+- The old "Recall Test" account in the Recall beta database was renamed **Karim** (the name shown in the app). Its earlier practice history was kept, so the Progress screen shows real use.
+- It signs in through a demo email address that cannot receive mail (on example.com), linked to Karim. The sign-in details are kept out of this repository.
+- Recordings are made in a phone-sized browser on the live app, with a script playing the exercises. Nothing is staged or edited inside the app.
+- It counts as one of the 105 beta places. To retire it: remove the demo sign-in user in Supabase Auth and delete the Karim row.
