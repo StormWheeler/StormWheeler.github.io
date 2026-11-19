@@ -1,6 +1,6 @@
 # 03 Open items and next steps: altioraai.com
 
-Everything still waiting, who it is waiting on, and the next action. Last updated 17 Nov 2026.
+Everything still waiting, who it is waiting on, and the next action. Last updated 19 Nov 2026.
 
 ## Waiting on you (the owner)
 
@@ -18,6 +18,9 @@ Everything still waiting, who it is waiting on, and the next action. Last update
 | Item | Who | Next action |
 |---|---|---|
 | Public beta status check in Recall's database, and a "Request to join" button in the app when full | Recall app session | Follow the brief, then report back |
+| Lane scoring and Watch reaction times look wrong; Karim demo account added | Recall app session | Read "Recall – handover: promo film and Karim demo account (19 Nov 2026)" in 03 Briefs & Handovers, check both on a real phone, report back |
+
+| Recall film: voiceover script and music | Approve or change the proposed lines (handover, section 4) | About 5 credits; then about 240 for 1080p versions, before 26 Nov |
 
 ## Waiting on Claude (small)
 
