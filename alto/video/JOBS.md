@@ -22,7 +22,8 @@ Lead reference portrait: 8f4ad9ec-2d5c-45a2-b13d-eb91cd9e266a
 | Shot | Still | Draft clip | Status |
 |---|---|---|---|
 | 1 Morning coffee, phone face-down | b5bc827f-0538-48c1-aa8e-3ea894c03702 | 4fad7e1a-ac36-42e7-ae02-810d971dc4b5 | Draft looks good |
-| 2 Turns phone over | b8336466-0af0-4105-bedf-4d2fc7a62e90 | b7b5299c-e746-4d76-b4a1-43d3d976b50e | Draft looks good |
+| 2 Turns phone over | b8336466-0af0-4105-bedf-4d2fc7a62e90 | b7b5299c-e746-4d76-b4a1-43d3d976b50e | Replaced by 1+2 below (face changed between shots) |
+| 1+2 One take: coffee, picks phone up (10 s) | b5bc827f-0538-48c1-aa8e-3ea894c03702 | 8f561b80-cf37-402e-a577-7711a4bc40e9 | Draft in use (30 credits) |
 | 3 Eyes, tiles reflected | 5f4978fe-d150-4345-834f-6c119831573f | c80dedbf-cc23-4f04-ab47-ca7ac02b48ff | Draft looks good |
 | 4 Tiles light up, gold finish | af7c4664-6564-4051-983b-ad441e472f0d | 56af1be9-f479-46ba-86d3-e49b07fca9a0 | Draft looks good |
 | 5 Phone down, walks into the day | c291ac46-2d0f-43e8-8987-6c89df898563 | 218a7ecd-1ac0-42d7-8155-74fd9cbd9a32 | Draft looks good |
