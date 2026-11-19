@@ -11,6 +11,7 @@ Everything still waiting, who it is waiting on, and the next action. Last update
 | Three Recall decisions | Decide: (1) which link "Join" opens (altiora-recall.expo.app now, or recall.altioraai.com later); (2) whether to show "places left"; (3) confirm that "altiora-recall-test" is the live beta database | Needed before the switch goes live |
 | Is the Recall beta already open? | Confirm | Recall's own sharing image says "Free beta · Web and Android". If it is open, the card changes from "Free beta soon" to open, with a direct link |
 | Recall beta limit | Decide whether to stay at 105 or change it | One number in Recall's settings; the app and website follow it automatically once connected |
+| Recall film: voiceover script and music | Approve or change the proposed lines (handover, section 4) | About 5 credits; then about 240 for 1080p versions, before 26 Nov |
 | Tessera password practice | Share the password per meeting and change it every so often; consider an NDA for serious talks | A password stops casual access but not photos |
 
 ## Waiting on others
@@ -20,7 +21,6 @@ Everything still waiting, who it is waiting on, and the next action. Last update
 | Public beta status check in Recall's database, and a "Request to join" button in the app when full | Recall app session | Follow the brief, then report back |
 | Lane scoring and Watch reaction times look wrong; Karim demo account added | Recall app session | Read "Recall – handover: promo film and Karim demo account (19 Nov 2026)" in 03 Briefs & Handovers, check both on a real phone, report back |
 
-| Recall film: voiceover script and music | Approve or change the proposed lines (handover, section 4) | About 5 credits; then about 240 for 1080p versions, before 26 Nov |
 
 ## Waiting on Claude (small)
 
