@@ -62,3 +62,16 @@ Set up 19 Nov 2026 with the owner's go-ahead, for recording real Recall sessions
 | Tessera teaser: room wakes, curtains open to the sea | 1a66f3da-5666-4efc-b205-0ae52d573b4e | 267e4b23-5504-4ea2-8dc2-2da7481c4193 | In preview (30 credits) |
 
 Drafts can be upgraded to 1080p until 30 Nov 2026 (about 160 credits each for 10 s).
+
+### Finals and fixes (23 Nov 2026, Ultra plan)
+
+| Item | Job | Credits |
+|---|---|---|
+| Home scroll film, 1080p | e2850bdb-aafb-42d6-a796-fedaca8cecfb | 160 |
+| Tessera film v1, 1080p (replaced: the wall under the window changed height) | 1d821ab8-bcf3-4ff3-afc4-aecd3197067d | 160 |
+| Tessera "before" frame (curtains closed, made from v1's last frame) | bb3195bd-2b68-46dd-8240-0081d7dabbef | ~1.5 |
+| Tessera film v2 draft, locked camera between matched frames | 1e197a55-3383-498d-99d4-6f7d8cc1e366 | 30 |
+| Tessera film v2, 1080p (in use) | 8117c289-84b0-4757-8648-e503dbe0ad45 | 160 |
+| Recall ad opening, 1080p | 7f75ed32-a641-40f0-a46b-54bc370891af | 160 |
+| Recall ad walk-out, 1080p | 368a3263-abb4-4304-b0bd-b293c5e58bf3 | 80 |
+| Recall ad voiceover (voices A and B, 5 lines each) and music (2 tracks) | see session log | ~9 |
