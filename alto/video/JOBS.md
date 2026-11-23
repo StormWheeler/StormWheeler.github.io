@@ -53,3 +53,12 @@ Set up 19 Nov 2026 with the owner's go-ahead, for recording real Recall sessions
 - It signs in through a demo email address that cannot receive mail (on example.com), linked to Karim. The sign-in details are kept out of this repository.
 - Recordings are made in a phone-sized browser on the live app, with a script playing the exercises. Nothing is staged or edited inside the app.
 - It counts as one of the 105 beta places. To retire it: remove the demo sign-in user in Supabase Auth and delete the Karim row.
+
+## Website redo (23 Nov 2026)
+
+| Film | Start still | Draft clip (10 s, 16:9, 480p) | Status |
+|---|---|---|---|
+| Home scroll film: waterfront hotel, lights come on | 8609ac6e-260c-4fee-b296-e9d5e18815df | 37e406de-5b5e-4826-bed9-a3f509cd9609 | In preview (30 credits) |
+| Tessera teaser: room wakes, curtains open to the sea | 1a66f3da-5666-4efc-b205-0ae52d573b4e | 267e4b23-5504-4ea2-8dc2-2da7481c4193 | In preview (30 credits) |
+
+Drafts can be upgraded to 1080p until 30 Nov 2026 (about 160 credits each for 10 s).
