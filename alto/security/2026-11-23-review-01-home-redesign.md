@@ -34,3 +34,19 @@ H1: the public repo exposes the Tessera page and internal handovers. This is the
 **APPROVED WITH FIXES.** The chip "Live now · Free beta" and the app link (`target=_blank rel=noopener`) are fine, and the "training app, not a medical product" line and the not-for-sale footer stay.
 - **(Medium) Place count.** "100 free places in the first beta" doesn't match the actual cap of 105. And once the beta is full, a direct link breaks decisions 23 and 25 (nobody should be sent to a sign-up that turns them away). Fix: "Free places in the first beta are limited. A training app, not a medical product." Until the open/full beta check exists, the owner keeps an eye on numbers and switches the button back to the mailto when the beta is full.
 - **(Medium) Alto still out of date** (fix 6 above). The EN and AR Recall answers say "getting ready for a free beta… 100 places", list the old exercises (Sequence, N-back, Hold) and link "Ask to join the beta" by mailto. Update them to: live free beta on web and Android; Settle, Lane, Watch, Words; link "Join the free beta" to https://altiora-recall.expo.app/; keep "a training app, not a medical product".
+
+## Re-check after fixes (commit 80bf3a4, staging), 23 Nov 2026
+**APPROVED to publish to altioraai.com**, with one small change in the same publish.
+
+Confirmed on staging:
+- Fix 1: the new hero lede is in place.
+- Fix 2: the illustrative note is there. "In seconds" is fine with the note.
+- Fix 3: Tessera says "in private preview."
+- Fix 4: Cookie notice v1.1 has the `altiora-path`/`altiora-lang` paragraph.
+- Fix 5: no Calendly. The only scripts come from the Webflow CDN, Webflow's jQuery and Google's webfont loader.
+- Fix 6: Labs says "Live now", with no place count and no "soon".
+- L5: the AI-imagery line is in place.
+
+**Include in this publish (Medium):** the home page **meta description, Open Graph description and Twitter description** still say "Altiora AI designs and runs quiet AI systems…". These are what Google results and link previews show. Change them to "Altiora AI is preparing to design and run quiet AI systems for UAE hotels, holiday homes, venues and event teams…" (Page settings → SEO and Open Graph). The old hidden hero (`.hero-description`) still holds the same sentence in the HTML. Update it the same way or delete the hidden block.
+
+**Next pass (Medium):** About statement "Altiora AI designs and runs AI systems…" → "is preparing to design and run…"; "every client interaction" → "every interaction". Then the remaining Low items: Google Fonts/Cloudflare in the Privacy notice, frame-bust, Code.gs `safe()`, spam filter, GDPR line.
