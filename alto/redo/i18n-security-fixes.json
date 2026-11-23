@@ -61,5 +61,19 @@
     "zh": "首轮测试版的免费名额有限。这是一款训练应用，不是医疗产品。",
     "hi": "पहले बीटा में मुफ़्त जगहें सीमित हैं। यह एक अभ्यास ऐप है, कोई चिकित्सा उत्पाद नहीं।",
     "fr": "Les places gratuites de la première bêta sont limitées. Une application d’entraînement, pas un produit médical."
+  },
+  "Altiora AI is preparing to design and run quiet AI systems for UAE hotels, holiday homes, venues and event teams: guest messaging in Arabic and English, bookings, crew dispatch and reports, with a person approving what matters.": {
+    "ar": "تستعد ألتيورا للذكاء الاصطناعي لتصميم وتشغيل أنظمة ذكاء اصطناعي هادئة للفنادق وبيوت العطلات والمنشآت وفرق الفعاليات في الإمارات: رسائل الضيوف بالعربية والإنجليزية، والحجوزات، وتوزيع فرق العمل، والتقارير، مع شخص يوافق على كل ما يهم.",
+    "ru": "Altiora AI готовится проектировать и сопровождать незаметные ИИ-системы для отелей, апартаментов для краткосрочной аренды, площадок и команд мероприятий в ОАЭ: переписка с гостями на арабском и английском, бронирования, распределение персонала и отчёты, а важные решения утверждает человек.",
+    "zh": "Altiora AI 正在筹备为阿联酋的酒店、度假屋、场馆和活动团队设计并运行低调可靠的 AI 系统：以阿拉伯语和英语处理宾客消息、预订、工作人员调度和报告，关键事项由专人审批。",
+    "hi": "Altiora AI, UAE के होटलों, हॉलिडे होम्स, वेन्यू और इवेंट टीमों के लिए शांत AI सिस्टम डिज़ाइन और संचालित करने की तैयारी कर रहा है: अरबी और अंग्रेज़ी में मेहमानों से संवाद, बुकिंग, क्रू डिस्पैच और रिपोर्ट, और जो महत्वपूर्ण है उसे एक व्यक्ति स्वीकृत करता है।",
+    "fr": "Altiora AI se prépare à concevoir et exploiter des systèmes d’IA discrets pour les hôtels, résidences de vacances, lieux de réception et équipes événementielles aux Émirats arabes unis : messagerie clients en arabe et en anglais, réservations, affectation des équipes et rapports, avec une personne qui valide ce qui compte."
+  },
+  "Altiora AI is preparing to design and run AI systems for UAE hotels, holiday homes, venues and event teams. Guest messages answered in Arabic and English, bookings kept in sync, crews briefed on time, with a person approving what matters.": {
+    "ar": "تستعد ألتيورا للذكاء الاصطناعي لتصميم وتشغيل أنظمة ذكاء اصطناعي للفنادق وبيوت العطلات والمنشآت وفرق الفعاليات في الإمارات. رسائل الضيوف يُرد عليها بالعربية والإنجليزية، والحجوزات متزامنة، وفرق العمل تصلها التعليمات في وقتها، مع شخص يوافق على كل ما يهم.",
+    "ru": "Altiora AI готовится проектировать и сопровождать ИИ-системы для отелей, апартаментов для краткосрочной аренды, площадок и команд мероприятий в ОАЭ. Ответы гостям на арабском и английском, синхронизированные бронирования, своевременный инструктаж персонала, а важные решения утверждает человек.",
+    "zh": "Altiora AI 正在筹备为阿联酋的酒店、度假屋、场馆和活动团队设计并运行 AI 系统。以阿拉伯语和英语回复宾客消息，预订信息保持同步，工作人员按时获知安排，关键事项由专人审批。",
+    "hi": "Altiora AI, UAE के होटलों, हॉलिडे होम्स, वेन्यू और इवेंट टीमों के लिए AI सिस्टम डिज़ाइन और संचालित करने की तैयारी कर रहा है। मेहमानों के संदेशों का उत्तर अरबी और अंग्रेज़ी में, बुकिंग हमेशा सिंक में, क्रू को समय पर जानकारी, और जो महत्वपूर्ण है उसे एक व्यक्ति स्वीकृत करता है।",
+    "fr": "Altiora AI se prépare à concevoir et exploiter des systèmes d’IA pour les hôtels, résidences de vacances, lieux de réception et équipes événementielles aux Émirats arabes unis. Des messages clients traités en arabe et en anglais, des réservations toujours synchronisées, des équipes informées à temps, avec une personne qui valide ce qui compte."
   }
 }
