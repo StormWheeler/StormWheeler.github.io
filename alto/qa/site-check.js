@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
 
-const BASE = 'https://altioraai.com';
+const BASE = process.env.SITE_BASE || 'https://altioraai.com'; // SITE_BASE=https://altiora-ai.webflow.io to check staging first
 const PAGES = ['/', '/about', '/ai-solutions-compared', '/labs', '/contact', '/connect',
   '/privacy-policy', '/terms-of-service', '/cookie-policy', '/disclaimer', '/tessera', '/this-page-does-not-exist'];
 const SIZES = [
@@ -132,7 +132,7 @@ async function inspect(p) {
       if (img.loading === 'lazy' && !img.complete) return;
       if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) issues.push({ type: 'broken-image', detail: img.getAttribute('src') });
     });
-    const links = [...document.querySelectorAll('a[href]')].map(a => a.href).filter(h => /^https:\/\/(www\.)?altioraai\.com/.test(h));
+    const links = [...document.querySelectorAll('a[href]')].map(a => a.href).filter(h => h.startsWith(location.origin) || /^https:\/\/(www\.)?altioraai\.com/.test(h));
     return { issues, links: [...new Set(links.map(h => h.split('#')[0]))] };
   });
 }
@@ -191,7 +191,7 @@ async function scrollThrough(p) {
   const home = liveHtml('/'), labs = liveHtml('/labs');
   const footer = rd('footer-code.html') + '\n\n<!-- Altiora language switch -->\n<script>\n' + rd('i18n.js').trimEnd() + '\n</script>';
   [['site head code', home, rd('head-code.html')], ['site footer code', home, footer],
-   ['home guest animation', home, rd('home/guest-embed.html')], ['home team animation', home, rd('home/team-embed.html')], ['home Labs band', home, rd('home/labs-band-embed.html')], ['Labs page', labs, rd('labs/labs-embed.html')]]
+   ['home guest animation', home, rd('home/guest-embed.html')], ['home redesign styles', home, rd('redo/dist/page-head.html')], ['home redesign script', home, '<script>' + rd('redo/dist/home-redo.min.js') + '</script>'], ['home scroll film', home, rd('redo/dist/hero-embed.html')], ['home Tessera teaser', home, rd('redo/dist/tessera-embed.html')], ['home Recall section', home, rd('redo/dist/recall-embed.html')], ['home team animation', home, rd('home/team-embed.html')], ['home Labs band', home, rd('home/labs-band-embed.html')], ['Labs page', labs, rd('labs/labs-embed.html')]]
     .forEach(([name, live, local]) => { if (!live.includes(local.trim())) bad.push(`${name}: live site differs from the repository copy`); });
   const expected = { '/tessera': 401, '/this-page-does-not-exist': 404 };
   let n = 0;
