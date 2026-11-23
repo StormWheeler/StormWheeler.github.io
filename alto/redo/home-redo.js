@@ -274,6 +274,10 @@
   var ribbon = document.createElement('div'); ribbon.className = 'rx rx-ribbon'; ribbon.id = 'rx-ribbon'; ribbon.hidden = true;
   ribbon.innerHTML = '<div class="rx-wrap"><span class="rx-tag" id="rx-rtag"></span><p id="rx-rtext"></p><button id="rx-rchange"></button></div>';
   homeEl.parentNode.insertBefore(ribbon, homeEl.nextSibling);
+
+  // AI imagery notice in the footer (same style as the footer identity line)
+  var foot = document.querySelector('footer.footer-pp');
+  if (foot && !$('rx-ainote')) { var an = document.createElement('p'); an.id = 'rx-ainote'; an.className = 'footer-identity'; an.textContent = 'Some images and films on this site are AI-generated; people shown are fictional.'; foot.appendChild(an); }
   var cards = [].slice.call(document.querySelectorAll('.section-forest .project-link-wrapper'));
   var whoCards = [].slice.call(document.querySelectorAll('.section-19 .press-logo-container'));
   function apply(key, scroll) {

@@ -1,0 +1,58 @@
+{
+  "Altiora AI is preparing to design and run AI systems for UAE hotels, holiday homes, venues and event teams. Keep scrolling: the lights come on as you go.": {
+    "ar": "تستعد Altiora AI لتصميم أنظمة ذكاء اصطناعي وتشغيلها لفنادق الإمارات وبيوت العطلات والقاعات وفرق الفعاليات. تابع التمرير: تُضاء الأنوار كلما تقدّمت.",
+    "ru": "Altiora AI готовится проектировать и сопровождать AI-системы для отелей, апартаментов для отдыха, площадок и команд мероприятий в ОАЭ. Прокручивайте дальше: свет загорается по мере движения.",
+    "zh": "Altiora AI 正在筹备为阿联酋的酒店、度假屋、场馆和活动团队设计并运营 AI 系统。继续向下滚动：灯光会随之亮起。",
+    "hi": "Altiora AI यूएई के होटलों, हॉलिडे होम, वेन्यू और इवेंट टीमों के लिए AI सिस्टम डिज़ाइन और संचालित करने की तैयारी कर रहा है। स्क्रॉल करते रहें: आगे बढ़ते ही रोशनी जल उठती है।",
+    "fr": "Altiora AI se prépare à concevoir et gérer des systèmes d’IA pour les hôtels, locations de vacances, lieux et équipes événementielles des Émirats. Continuez à défiler : les lumières s’allument à mesure que vous avancez."
+  },
+  "Illustrative examples of what our systems are designed to do. Not client results.": {
+    "ar": "أمثلة توضيحية لما صُممت أنظمتنا للقيام به. ليست نتائج لعملاء.",
+    "ru": "Иллюстративные примеры того, для чего предназначены наши системы. Это не результаты клиентов.",
+    "zh": "以上为说明性示例，展示我们的系统旨在完成的工作，并非客户成果。",
+    "hi": "ये उदाहरण केवल यह दिखाने के लिए हैं कि हमारे सिस्टम क्या करने के लिए बनाए गए हैं। ये ग्राहकों के परिणाम नहीं हैं।",
+    "fr": "Exemples illustratifs de ce que nos systèmes sont conçus pour faire. Il ne s’agit pas de résultats clients."
+  },
+  "A new guest experience for hotels, in private preview.": {
+    "ar": "تجربة ضيوف جديدة للفنادق، في معاينة خاصة.",
+    "ru": "Новый гостевой опыт для отелей — в закрытом предпросмотре.",
+    "zh": "面向酒店的全新宾客体验，目前处于私密预览阶段。",
+    "hi": "होटलों के लिए मेहमानों का नया अनुभव, निजी प्रीव्यू में।",
+    "fr": "Une nouvelle expérience client pour les hôtels, en avant-première privée."
+  },
+  "Some images and films on this site are AI-generated; people shown are fictional.": {
+    "ar": "بعض الصور والأفلام على هذا الموقع مولّدة بالذكاء الاصطناعي؛ والأشخاص الظاهرون فيها خياليون.",
+    "ru": "Некоторые изображения и видео на этом сайте созданы с помощью ИИ; изображённые люди вымышлены.",
+    "zh": "本网站部分图片和影片由 AI 生成；其中人物均为虚构。",
+    "hi": "इस साइट की कुछ तस्वीरें और फ़िल्में AI से बनाई गई हैं; इनमें दिखाए गए लोग काल्पनिक हैं।",
+    "fr": "Certaines images et vidéos de ce site sont générées par IA ; les personnes représentées sont fictives."
+  },
+  "If you answer ‘What brings you here?’ on the home page, your browser keeps that choice on your device (local storage, ‘altiora-path’) so the page stays arranged for you; the language choice is kept the same way (‘altiora-lang’). Neither is sent to us, and clearing your browser data removes them.": {
+    "ar": "إذا أجبت عن سؤال «ما الذي أتى بك إلى هنا؟» في الصفحة الرئيسية، يحتفظ متصفحك بهذا الاختيار على جهازك (التخزين المحلي، ‘altiora-path’) لتبقى الصفحة مرتّبة لك؛ ويُحفظ اختيار اللغة بالطريقة نفسها (‘altiora-lang’). لا يُرسل أيٌّ منهما إلينا، ويؤدي مسح بيانات المتصفح إلى حذفهما.",
+    "ru": "Если вы ответите на вопрос «Что привело вас сюда?» на главной странице, ваш браузер сохранит этот выбор на вашем устройстве (локальное хранилище, «altiora-path»), чтобы страница оставалась настроенной для вас; выбор языка сохраняется так же («altiora-lang»). Ни то, ни другое не передаётся нам, а очистка данных браузера удаляет их.",
+    "zh": "如果您在首页回答“是什么让你来到这里？”，您的浏览器会在您的设备上保存该选择（本地存储，“altiora-path”），让页面保持为您排列的样子；语言选择也以同样方式保存（“altiora-lang”）。两者都不会发送给我们，清除浏览器数据即可将其删除。",
+    "hi": "अगर आप होम पेज पर ‘आपको यहाँ क्या लाया?’ का जवाब देते हैं, तो आपका ब्राउज़र यह विकल्प आपके डिवाइस पर (लोकल स्टोरेज, ‘altiora-path’) रखता है ताकि पेज आपके लिए उसी क्रम में रहे; भाषा का विकल्प भी इसी तरह रखा जाता है (‘altiora-lang’)। इनमें से कुछ भी हमें नहीं भेजा जाता, और ब्राउज़र डेटा साफ़ करने पर ये हट जाते हैं।",
+    "fr": "Si vous répondez à « Qu’est-ce qui vous amène ? » sur la page d’accueil, votre navigateur conserve ce choix sur votre appareil (stockage local, « altiora-path ») afin que la page reste organisée pour vous ; le choix de langue est conservé de la même façon (« altiora-lang »). Aucun des deux ne nous est transmis, et effacer les données de votre navigateur les supprime."
+  },
+  "Version 1.1 · Effective 23 November 2026": {
+    "ar": "الإصدار 1.1 · ساري اعتبارًا من 23 نوفمبر 2026",
+    "ru": "Версия 1.1 · Вступает в силу 23 ноября 2026 г.",
+    "zh": "版本 1.1 · 自 2026 年 11 月 23 日起生效",
+    "hi": "संस्करण 1.1 · 23 नवंबर 2026 से प्रभावी",
+    "fr": "Version 1.1 · En vigueur à compter du 23 novembre 2026"
+  },
+  "Settle, Lane, Watch and Words: breathing, attention and memory": {
+    "ar": "Settle وLane وWatch وWords: تنفّس وانتباه وذاكرة",
+    "ru": "Settle, Lane, Watch и Words: дыхание, внимание и память",
+    "zh": "Settle、Lane、Watch 和 Words：呼吸、注意力与记忆",
+    "hi": "Settle, Lane, Watch और Words: साँस, ध्यान और याददाश्त",
+    "fr": "Settle, Lane, Watch et Words : respiration, attention et mémoire"
+  },
+  "Alongside the systems we plan to build for businesses, Altiora Labs builds our own products, from hotel guest experiences to everyday tools. Each one starts with a real problem worth solving well.": {
+    "ar": "إلى جانب الأنظمة التي نخطط لبنائها للشركات، تبني ألتيورا لابز منتجاتنا الخاصة، من تجارب ضيوف الفنادق إلى أدوات الحياة اليومية. يبدأ كل منتج بمشكلة حقيقية تستحق حلًا متقنًا.",
+    "ru": "Помимо систем, которые мы планируем создавать для бизнеса, Altiora Labs создаёт собственные продукты — от гостевого опыта в отелях до повседневных инструментов. Каждый начинается с реальной проблемы, которую стоит решить хорошо.",
+    "zh": "除了我们计划为企业搭建的系统，Altiora Labs 还打造自有产品，从酒店宾客体验到日常工具。每个产品都源于一个值得认真解决的真实问题。",
+    "hi": "व्यवसायों के लिए हम जो सिस्टम बनाने की योजना बना रहे हैं, उनके साथ-साथ, Altiora Labs हमारे अपने उत्पाद बनाता है, होटल में मेहमानों के अनुभव से लेकर रोज़मर्रा के टूल तक। हर उत्पाद एक असली समस्या से शुरू होता है जिसे अच्छी तरह हल करना ज़रूरी है।",
+    "fr": "En parallèle des systèmes que nous prévoyons de créer pour les entreprises, Altiora Labs conçoit ses propres produits, de l’expérience client à l’hôtel aux outils du quotidien. Chacun part d’un vrai problème qui mérite d’être bien résolu."
+  }
+}
