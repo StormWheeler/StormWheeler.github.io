@@ -1,0 +1,736 @@
+<title>Altiora Home Redesign</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: two scroll-driven film "stages" (home, Tessera) bracket a reorderable column of sections; the visitor's choice reorders that column. */
+:root{
+  --ink:#0B1A13;          /* page ground, the site's forest */
+  --forest:#0F2219;       /* raised forest */
+  --moss:#16301F;         /* card ground */
+  --line:#24412F;         /* hairlines */
+  --text:#EEF0E8;         /* off-white */
+  --muted:#A9B8AF;        /* secondary text */
+  --gold:#D4AF37;         /* Altiora gold */
+  --gold-soft:#E3B65E;    /* Tessera gold */
+  --green:#3C9A6C;        /* Tessera green */
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Arial,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--ink);color:var(--text)}
+body{font:400 17px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;letter-spacing:-.02em;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+.eyebrow{font:500 12.5px/1.2 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:30;padding-top:env(safe-area-inset-top,0px);
+  background:linear-gradient(var(--ink),rgba(11,26,19,0));transition:background .3s,box-shadow .3s}
+.nav.solid{background:rgba(11,26,19,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font:600 17px var(--f-display);text-decoration:none}
+.brand i{width:22px;height:22px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center}
+.brand i::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.nav nav{margin-left:auto;display:flex;gap:22px;align-items:center;font-size:15.5px;color:var(--muted)}
+.nav nav a{text-decoration:none}
+.nav nav a:hover{color:var(--text)}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 14px;background:rgba(15,34,25,.6);backdrop-filter:blur(8px);font-size:14px;color:var(--text)}
+.pill[hidden]{display:none!important}
+@media (max-width:760px){.nav nav a.hide-sm{display:none}}
+
+/* ---------- Film stages ---------- */
+.stage{position:relative}
+.stage .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage .shade{position:absolute;inset:0;pointer-events:none}
+#home{height:330vh}
+#home .shade{background:
+  linear-gradient(90deg,rgba(11,26,19,.88) 0%,rgba(11,26,19,.55) 38%,rgba(11,26,19,0) 66%),
+  linear-gradient(0deg,rgba(11,26,19,.95) 0%,rgba(11,26,19,0) 26%)}
+@media (max-width:760px){#home .shade{background:linear-gradient(0deg,rgba(11,26,19,.96) 0%,rgba(11,26,19,.72) 46%,rgba(11,26,19,.15) 78%)}}
+.glow{position:absolute;width:520px;height:520px;border-radius:50%;pointer-events:none;mix-blend-mode:screen;
+  background:radial-gradient(closest-side,rgba(212,175,55,.16),rgba(212,175,55,0));transform:translate(-50%,-50%);left:-999px;top:-999px;transition:opacity .4s}
+.beat{position:absolute;left:0;right:0;bottom:12vh;will-change:opacity,transform}
+.beat .wrap{display:grid;gap:18px}
+.beat .inner{max-width:640px;display:grid;gap:18px}
+.greet{font:500 22px/1.2 var(--f-display);color:var(--gold-soft)}
+.hero-h1{font-size:clamp(38px,6.2vw,76px);line-height:1.02}
+.lede{font-size:clamp(16px,1.6vw,19px);color:#C9D3CC;max-width:56ch}
+.scrollcue{display:flex;align-items:center;gap:10px;font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.scrollcue span{width:1px;height:28px;background:linear-gradient(var(--gold),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
+.ticks{display:grid;gap:10px;margin-top:6px}
+.tick{display:grid;grid-template-columns:64px 1fr;gap:14px;align-items:baseline;padding:12px 16px;border-left:2px solid var(--gold);
+  background:linear-gradient(90deg,rgba(15,34,25,.85),rgba(15,34,25,.2));max-width:520px}
+.tick b{font:500 14px var(--f-mono);color:var(--gold);font-variant-numeric:tabular-nums}
+.choose h2{font-size:clamp(30px,4.4vw,52px)}
+.paths{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:820px}
+.path{all:unset;cursor:pointer;display:grid;gap:6px;padding:18px 18px 20px;border:1px solid var(--line);border-radius:14px;
+  background:rgba(15,34,25,.78);backdrop-filter:blur(6px);transition:border-color .2s,transform .2s,background .2s}
+.path:hover{border-color:var(--gold);transform:translateY(-2px)}
+.path:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.path[aria-pressed="true"]{border-color:var(--gold);background:rgba(40,52,24,.85)}
+.path strong{font:600 18px var(--f-display)}
+.path span{font-size:14.5px;color:var(--muted)}
+.skip{all:unset;cursor:pointer;font-size:14px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;justify-self:start}
+@media (max-width:760px){.paths{grid-template-columns:1fr}.beat{bottom:7vh}}
+
+/* ---------- Personal ribbon ---------- */
+.ribbon{position:sticky;top:64px;z-index:20;margin-top:-1px}
+.ribbon .wrap{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding-block:12px}
+.ribbon .chip{font:500 12.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:5px 10px;border-radius:999px}
+.ribbon p{font-size:15px;color:var(--muted)}
+.ribbon button{all:unset;cursor:pointer;font-size:15px;color:var(--text);text-decoration:underline;text-underline-offset:3px}
+.ribbon{background:rgba(11,26,19,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+@media (max-width:760px){.ribbon p{display:none}.ribbon .wrap{padding-block:9px}}
+
+/* ---------- Sections ---------- */
+#flow{display:flex;flex-direction:column}
+.sec{padding-block:clamp(72px,10vw,120px)}
+.sec .head{display:grid;gap:14px;max-width:720px;margin-bottom:40px}
+.sec h2{font-size:clamp(30px,4vw,46px);line-height:1.08}
+.sec .sub{color:#C9D3CC;font-size:18px;max-width:60ch}
+.alt{background:var(--forest)}
+
+/* What we build */
+.build-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{position:relative;padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--moss);display:grid;gap:12px;align-content:start;transition:border-color .3s,box-shadow .3s}
+.card.lead{border-color:rgba(212,175,55,.6);box-shadow:0 0 0 1px rgba(212,175,55,.25),0 20px 60px -30px rgba(212,175,55,.35)}
+.card .tag{font:500 12px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card h3{font-size:24px}
+.card ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px;color:#C9D3CC}
+.card li{display:grid;grid-template-columns:14px 1fr;gap:10px}
+.card li::before{content:"";width:6px;height:6px;margin-top:10px;border-radius:50%;background:var(--gold)}
+.forlabel{position:absolute;top:-11px;right:20px;font:500 11.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--ink);padding:3px 9px;border-radius:999px}
+@media (max-width:760px){.build-grid{grid-template-columns:1fr}}
+
+/* Tessera stage */
+#tessera{height:290vh}
+#tessera .shade{background:linear-gradient(0deg,rgba(11,26,19,.92) 0%,rgba(11,26,19,0) 34%),linear-gradient(180deg,rgba(11,26,19,.7) 0%,rgba(11,26,19,0) 22%)}
+.t-scrim{position:absolute;inset:0 0 auto 0;height:58%;pointer-events:none;opacity:.2;background:linear-gradient(180deg,rgba(11,26,19,.92) 0%,rgba(11,26,19,.78) 38%,rgba(11,26,19,.35) 70%,rgba(11,26,19,0) 100%)}
+.t-title{text-shadow:0 2px 22px rgba(6,14,10,.55),0 1px 3px rgba(6,14,10,.5)}
+.t-top{position:absolute;top:128px;left:0;right:0}
+.t-top .wrap{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.t-title{display:grid;gap:10px;max-width:520px}
+.t-title h2{font-size:clamp(28px,3.6vw,44px)}
+.panel{display:grid;gap:10px;min-width:220px;padding:16px 18px;border:1px solid rgba(227,182,94,.35);border-radius:14px;background:rgba(11,26,19,.72);backdrop-filter:blur(8px)}
+.panel .row{display:flex;justify-content:space-between;gap:20px;font:500 13px var(--f-mono);letter-spacing:.06em;color:var(--muted)}
+.panel .row b{color:var(--text);font-weight:500}
+.temp{font:600 54px/1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--text)}
+.temp small{font-size:20px;color:var(--muted);margin-left:4px}
+.t-end{position:absolute;left:0;right:0;bottom:9vh}
+.t-end .wrap{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+.token{width:132px;height:132px;flex:none;filter:drop-shadow(0 18px 40px rgba(0,0,0,.45))}
+.token .half{transition:transform .2s linear}
+.t-copy{display:grid;gap:12px;max-width:560px}
+.t-copy h3{font-size:clamp(24px,3vw,34px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border-radius:999px;border:0;background:var(--gold);color:var(--ink);font-weight:600;text-decoration:none;font-size:16px}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn:hover{filter:brightness(1.06)}
+.row-btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.note{font-size:14px;color:var(--muted)}
+@media (max-width:760px){.t-top{top:118px}.token{width:64px!important;height:64px!important}.t-end .wrap{gap:14px}.temp{font-size:42px}.panel{min-width:0}.token{width:96px;height:96px}}
+
+/* Recall stage: the launched product gets its own scroll scene. A 3D phone turns to face you, plays a real session, then hands you a mini session. */
+#recall{height:470vh;background:var(--forest)}
+#recall .sticky{background:radial-gradient(900px 600px at 70% 45%,rgba(60,154,108,.2),rgba(15,34,25,0) 65%),radial-gradient(700px 500px at 20% 80%,rgba(212,175,55,.08),rgba(15,34,25,0) 60%),var(--forest)}
+.tiles{position:absolute;right:max(4vw,16px);top:50%;width:min(62vh,560px);aspect-ratio:1;transform:translateY(-50%) rotate(-8deg);display:grid;grid-template-columns:repeat(3,1fr);gap:4%;opacity:.5;filter:blur(1.5px);pointer-events:none}
+.tiles i{border-radius:18%;background:rgba(238,240,232,.04);border:1px solid rgba(238,240,232,.05);transition:background .5s,box-shadow .5s}
+.tiles i.lit-g{background:rgba(227,182,94,.55);box-shadow:0 0 60px rgba(227,182,94,.35)}
+.tiles i.lit-b{background:rgba(142,190,226,.45);box-shadow:0 0 60px rgba(142,190,226,.3)}
+.rc-beats{position:absolute;inset:0;pointer-events:none}
+.rc-beat{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);will-change:opacity,transform}
+.rc-beat .inner{max-width:min(520px,44vw);display:grid;gap:16px;pointer-events:auto}
+.rc-beat h2{font-size:clamp(34px,4.4vw,58px);line-height:1.02}
+.rc-beat h2 em{font-style:normal;color:var(--gold-soft)}
+.rc-beat h3{font-size:clamp(28px,3.4vw,44px);line-height:1.06}
+.rc-beat .k{font:500 12.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.rc-beat p.lede{max-width:46ch}
+.live{display:inline-flex;align-items:center;gap:10px;justify-self:start;padding:7px 14px 7px 12px;border-radius:999px;border:1px solid rgba(127,211,165,.45);background:rgba(60,154,108,.14);font:500 12.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#BFEBD3}
+.live i{width:8px;height:8px;border-radius:50%;background:#7FD3A5;animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(127,211,165,.6)}70%{box-shadow:0 0 0 10px rgba(127,211,165,0)}100%{box-shadow:0 0 0 0 rgba(127,211,165,0)}}
+.rc-facts{display:flex;flex-wrap:wrap;gap:8px}
+.rc-facts span{font-size:14.5px;padding:7px 12px;border-radius:999px;background:rgba(238,240,232,.06);border:1px solid var(--line);color:#DCE3DE}
+.c-arrive{color:#C3A6EA}.c-focus{color:#7FD3A5}.c-mem{color:#F0A28E}.c-gold{color:var(--gold-soft)}
+.rc-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.qr{display:flex;gap:12px;align-items:center;padding:10px 14px 10px 10px;border:1px solid var(--line);border-radius:14px;background:rgba(11,26,19,.5)}
+.qr svg{width:60px;height:60px;color:#0B1A13;background:#EEF0E8;padding:5px;border-radius:8px}
+.qr p{font-size:14px;color:var(--muted);max-width:140px;line-height:1.35}
+@media (pointer:coarse){.qr{display:none}}
+.dots{position:absolute;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;gap:18px;font:500 11.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.dots span{display:flex;align-items:center;gap:7px;opacity:.45;transition:opacity .3s,color .3s}
+.dots span::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.dots span.on{opacity:1;color:var(--text)}
+
+/* 3D phone */
+.p-zone{position:absolute;top:50%;right:clamp(16px,12vw,220px);width:var(--pw);height:calc(var(--pw) * 2.164);margin-top:calc(var(--pw) * -1.082);perspective:1600px;--pw:min(300px,34vh)}
+.p3d{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.face{position:absolute;inset:0;border-radius:calc(var(--pw) * .16);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.front{transform:translateZ(7px);padding:calc(var(--pw) * .035);background:linear-gradient(145deg,#26352c,#0a120d);box-shadow:0 0 0 1px rgba(227,182,94,.4)}
+.back{transform:rotateY(180deg) translateZ(7px);background:radial-gradient(circle at 50% 38%,#1f3a2b,#0b1610 70%);box-shadow:0 0 0 1px rgba(227,182,94,.35);display:grid;place-items:center}
+.back img{width:34%;border-radius:22%;box-shadow:0 0 80px rgba(142,190,226,.35),0 0 40px rgba(227,182,94,.25)}
+.back .cam{position:absolute;top:5%;left:7%;width:26%;aspect-ratio:1;border-radius:28%;background:#0a110d;box-shadow:inset 0 0 0 1px rgba(238,240,232,.08)}
+.edge{position:absolute;top:2.5%;bottom:2.5%;width:14px;background:linear-gradient(90deg,#0b120e,#2a3a30,#0b120e)}
+.edge.l{left:-7px;transform:rotateY(-90deg)}.edge.r{right:-7px;transform:rotateY(90deg)}
+.glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.16) 45%,rgba(255,255,255,0) 60%);background-size:250% 100%;mix-blend-mode:screen;z-index:4}
+.p-shadow{position:absolute;left:10%;right:10%;bottom:-9%;height:6%;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(18px)}
+.front::before{content:"";position:absolute;top:calc(var(--pw) * .055);left:50%;width:26%;height:calc(var(--pw) * .06);margin-left:-13%;border-radius:20px;background:#050906;z-index:3}
+.screen{position:relative;width:100%;height:100%;border-radius:calc(var(--pw) * .125);overflow:hidden;background:#ECEFF2}
+.screen > *{position:absolute;left:0;right:0;top:calc(var(--pw) * .1);width:100%;height:calc(100% - var(--pw) * .1);object-fit:cover;object-position:top;opacity:0;transition:opacity .4s ease}
+.screen > .on{opacity:1}
+/* the playable session, styled like the app */
+.game{background:#ECEFF2;color:#17212B;display:grid;grid-template-rows:auto auto 1fr auto;gap:12px;padding:16px 16px 20px;font-family:var(--f-body);font-size:15px}
+.gtop{display:flex;justify-content:space-between;font-size:12.5px;color:#4B5A68}
+.segs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.segs i{height:4px;border-radius:4px;background:#D3DAE1;overflow:hidden;position:relative}
+.segs i b{position:absolute;inset:0;width:0;background:#2C5D7C;transition:width .4s}
+.gbody{display:grid;place-items:center;align-content:center;text-align:center;gap:12px;min-height:0}
+.gbody h4{margin:0;font:600 22px/1.2 var(--f-display)}
+.small{font-size:13.5px;color:#4B5A68}
+.breath{width:62%;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;border:1px solid #D7DEE5}
+.breath i{width:40%;aspect-ratio:1;border-radius:50%;background:#C6D2DC;transition:width 4s ease-in-out}
+.wbox{all:unset;cursor:pointer;width:100%;aspect-ratio:1.1;display:grid;place-items:center;background:#F6F8FA;border:2px solid #D7DEE5;border-radius:18px;font:600 34px var(--f-mono);color:#17212B;font-variant-numeric:tabular-nums;-webkit-tap-highlight-color:transparent}
+.wbox.go{border-color:#E3A13A;color:#E3A13A}
+.word{width:100%;aspect-ratio:1.35;display:grid;place-items:center;background:#F6F8FA;border:1px solid #D7DEE5;border-radius:18px;font:600 28px var(--f-display)}
+.grid8{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.grid8 button{border:1px solid #CBD4DD;background:#F6F8FA;border-radius:999px;padding:7px 11px;font-size:14px;color:#17212B}
+.grid8 button[aria-pressed="true"]{background:#2C5D7C;border-color:#2C5D7C;color:#fff}
+.tbtn{border:0;border-radius:13px;padding:12px;background:#2C5D7C;color:#fff;font-weight:600;font-size:15px;width:100%}
+.tbtn.dark{background:#17212B}
+.tbtn[disabled]{opacity:.5;cursor:default}
+.res{width:100%;display:grid;gap:8px;text-align:left}
+.res div{display:flex;justify-content:space-between;padding:10px 12px;border-radius:12px;background:#F6F8FA;border:1px solid #D7DEE5;font-size:14px}
+.res b{font-variant-numeric:tabular-nums}
+.done-line{font:600 20px/1.25 var(--f-display);color:#17212B}
+
+.rc-mark{position:absolute;left:0;right:0;bottom:calc(9vh + env(safe-area-inset-bottom,0px));pointer-events:none}
+.rc-mark .wrap{display:flex;align-items:center;gap:18px}
+.rc-mark svg{width:96px;height:96px;flex:none;overflow:visible;filter:drop-shadow(0 18px 36px rgba(0,0,0,.45))}
+.rc-mark .tile{transition:none}
+.rc-mark b{display:block;font:600 22px var(--f-display)}
+.rc-mark span.s{display:block;font-size:14.5px;color:var(--muted)}
+@media (max-width:900px){.rc-mark{bottom:auto;top:76px}.rc-mark .wrap{justify-content:flex-end}.rc-mark svg{width:46px;height:46px}.rc-mark .lbl{display:none}}
+@media (max-width:900px){
+  .p-zone{--pw:min(168px,19vh);right:50%;margin-right:calc(var(--pw) * -.5);top:calc(30% + 10px)}
+  .rc-beat{top:auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));transform:none}
+  .rc-beat .inner{max-width:none;gap:10px}
+  .rc-beat h2{font-size:clamp(28px,8vw,38px)}.rc-beat h3{font-size:clamp(24px,7vw,32px)}
+  .rc-beat p.lede{font-size:15.5px}
+  .tiles{width:86vw;right:7vw;top:34%;opacity:.35}
+  .dots{gap:10px;font-size:10px}
+  #recall.playing .rc-beat{opacity:0!important;visibility:hidden!important}
+  #recall.playing .p-zone{--pw:min(300px,70vw,36vh);top:47%}
+}
+@media (max-width:760px) and (max-height:700px){.t-copy .lede{display:none}}
+@media (max-width:900px) and (max-height:720px){.rc-beat .note,.rc-facts{display:none}.rc-beat p.lede{font-size:14.5px}}
+@media (prefers-reduced-motion:reduce){#recall{height:auto}}
+
+.hero-chip{display:inline-flex;align-items:center;gap:10px;justify-self:start;text-decoration:none;padding:6px 14px 6px 8px;border-radius:999px;background:rgba(15,34,25,.75);border:1px solid rgba(127,211,165,.4);backdrop-filter:blur(6px);font-size:14.5px;color:var(--text)}
+.hero-chip b{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;background:#7FD3A5;color:var(--ink);padding:3px 8px;border-radius:999px}
+.hero-chip:hover{border-color:#7FD3A5}
+
+/* Who + contact */
+.who{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.who div{padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--moss);display:grid;gap:6px;transition:border-color .3s}
+.who div.lead{border-color:rgba(212,175,55,.6)}
+.who b{font:600 18px var(--f-display)}
+.who span{font-size:15px;color:var(--muted)}
+@media (max-width:900px){.who{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.talk{text-align:left;display:grid;gap:18px}
+.talk h2{font-size:clamp(44px,8vw,104px);color:var(--gold);letter-spacing:-.035em}
+.talk .mail{font:500 20px var(--f-mono);user-select:all}
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:13.5px}
+.preview-note{position:fixed;right:var(--gut-r);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:40;font:500 12px var(--f-mono);letter-spacing:.06em;
+  background:rgba(15,34,25,.9);border:1px solid var(--line);color:var(--muted);padding:7px 11px;border-radius:999px}
+
+@media (prefers-reduced-motion:reduce){
+  #home,#tessera{height:auto}
+  .stage .sticky{position:relative;height:auto;min-height:100svh}
+  .scrollcue span{animation:none}
+}
+</style>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top"><i></i>Altiora AI</a>
+  <nav>
+    <a class="hide-sm" href="#build">Solutions</a>
+    <a class="hide-sm" href="#tessera">Tessera</a>
+    <a class="hide-sm" href="#recall">Recall <span style="font:500 10.5px var(--f-mono);letter-spacing:.1em;color:#7FD3A5">LIVE</span></a>
+    <button class="pill" id="navPersonal" hidden>For you</button>
+    <a class="pill" href="#talk">Contact</a>
+  </nav>
+</div></header>
+
+<!-- ====== HOME FILM ====== -->
+<section class="stage" id="home" aria-label="Introduction">
+  <div class="sticky" id="top">
+    <canvas id="homeCanvas" aria-hidden="true"></canvas>
+    <div class="shade"></div>
+    <div class="glow" id="glow"></div>
+
+    <div class="beat" data-in="-1" data-out=".28">
+      <div class="wrap"><div class="inner">
+        <a class="hero-chip" href="#recall"><b>Live</b>Recall, our first app, is out now. Try it</a>
+        <p class="greet" id="greet">Good evening.</p>
+        <p class="eyebrow">AI systems for hospitality, events and venues · UAE</p>
+        <h1 class="hero-h1">The quiet systems behind unforgettable guest experiences</h1>
+        <p class="lede">Altiora AI designs and runs AI systems for UAE hotels, holiday homes, venues and event teams. Keep scrolling: the lights come on as you go.</p>
+        <p class="scrollcue"><span></span>Scroll</p>
+      </div></div>
+    </div>
+
+    <div class="beat" data-in=".28" data-out=".64">
+      <div class="wrap"><div class="inner">
+        <p class="eyebrow">What a quiet system does</p>
+        <h2 style="font-size:clamp(30px,4vw,48px)">Every light that comes on is a job handled, before anyone has to ask.</h2>
+        <div class="ticks">
+          <div class="tick"><b>23:47</b><span>A guest asks about late check-out. Answered in Arabic, in seconds.</span></div>
+          <div class="tick"><b>06:10</b><span>The crew list for tonight's event is confirmed and shared.</span></div>
+          <div class="tick"><b>09:30</b><span>A booking change reaches the calendar, the team and the guest.</span></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="beat choose" data-in=".64" data-out="2">
+      <div class="wrap"><div class="inner" style="max-width:820px">
+        <p class="eyebrow">Make this page yours</p>
+        <h2>What brings you here?</h2>
+        <div class="paths" role="group" aria-label="Choose what brings you here">
+          <button class="path" data-path="hotel" aria-pressed="false"><strong>I run a hotel or venue</strong><span>Guests answered day and night, the team out of the inbox.</span></button>
+          <button class="path" data-path="events" aria-pressed="false"><strong>I plan events</strong><span>Crew, timings and changes in one calm place.</span></button>
+          <button class="path" data-path="me" aria-pressed="false"><strong>Just me</strong><span>Something for your own day. Start with Recall.</span></button>
+        </div>
+        <button class="skip" data-path="all">Show me everything</button>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<div class="ribbon" id="ribbon" hidden><div class="wrap">
+  <span class="chip" id="ribbonChip">For you</span>
+  <p id="ribbonText"></p>
+  <button id="ribbonChange">Change</button>
+</div></div>
+
+<main id="flow">
+
+  <!-- What we build -->
+  <section class="sec" id="build" data-key="build"><div class="wrap">
+    <div class="head">
+      <p class="eyebrow">What we build</p>
+      <h2 id="buildTitle">For your guests, and for your team.</h2>
+      <p class="sub" id="buildSub">A narrow focus, on purpose. Each system does one job well, on the guest side of your business or on the team side.</p>
+    </div>
+    <div class="build-grid">
+      <article class="card" id="cardGuests">
+        <span class="forlabel" hidden>Start here</span>
+        <span class="tag">For your guests</span>
+        <h3>Answered, day and night</h3>
+        <ul>
+          <li>Enquiries, guest messages and bookings answered on WhatsApp and email</li>
+          <li>In Arabic and English, kept in sync with your calendar</li>
+          <li>Handed to your team when it matters</li>
+        </ul>
+      </article>
+      <article class="card" id="cardTeam">
+        <span class="forlabel" hidden>Start here</span>
+        <span class="tag">For your team</span>
+        <h3>Out of the inbox</h3>
+        <ul>
+          <li>Crew call times, post-event reports and routine admin</li>
+          <li>Details move between your tools instead of being retyped</li>
+          <li>A person approves anything that matters</li>
+        </ul>
+      </article>
+    </div>
+  </div></section>
+
+  <!-- Tessera film -->
+  <section class="stage" id="tessera" data-key="tessera" aria-label="Tessera private preview">
+    <div class="sticky">
+      <canvas id="tessCanvas" aria-hidden="true"></canvas>
+      <div class="shade"></div>
+      <div class="t-scrim" id="tScrim"></div>
+      <div class="t-top"><div class="wrap">
+        <div class="t-title">
+          <p class="eyebrow">Altiora Labs · Tessera</p>
+          <h2>The room is ready before you reach the door.</h2>
+        </div>
+        <div class="panel" aria-live="off">
+          <div class="row"><span>ROOM 1204</span><b id="tState">Waking</b></div>
+          <div class="temp"><span id="tTemp">31</span><small>°C</small></div>
+          <div class="row"><span>Lights</span><b id="tLights">Off</b></div>
+          <div class="row"><span>Curtains</span><b id="tCurt">Closed</b></div>
+        </div>
+      </div></div>
+      <div class="t-end" id="tEnd"><div class="wrap">
+        <svg class="token" viewBox="0 0 512 512" aria-hidden="true">
+          <defs><mask id="tm" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512"><rect width="512" height="512" fill="#fff"/><path d="M256 96V212A44 44 0 0 0 256 300V416" fill="none" stroke="#000" stroke-width="12" stroke-linejoin="round"/></mask></defs>
+          <g mask="url(#tm)">
+            <path class="half" id="halfGold" d="M256 106A150 150 0 0 0 256 406V300A44 44 0 0 1 256 212Z" fill="#E3B65E"/>
+            <path class="half" id="halfGreen" d="M256 106V212A44 44 0 0 0 256 300V406A150 150 0 0 0 256 106Z" fill="#3C9A6C"/>
+          </g>
+        </svg>
+        <div class="t-copy">
+          <h3>Tessera, by Altiora AI</h3>
+          <p class="lede">A new guest experience for hotels, in private preview with a small number of properties.</p>
+          <div class="row-btns"><a class="btn" href="#talk">Request access</a><span class="note">Private preview</span></div>
+        </div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- Recall stage -->
+  <section class="stage" id="recall" data-key="recall" aria-labelledby="rcTitle">
+    <div class="sticky">
+      <div class="tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <div class="p-zone" id="pZone">
+        <div class="p3d" id="p3d">
+          <div class="face back" aria-hidden="true"><span class="cam"></span><img src="recall-icon.png" alt=""></div>
+          <span class="edge l"></span><span class="edge r"></span>
+          <div class="face front">
+            <div class="screen" id="screen">
+              <img data-s="today" src="rc/today.jpg" alt="Recall's Today screen: today's session, 0 of 4 done" class="on">
+              <video data-s="settle" muted playsinline loop preload="none" poster="rc/settle.jpg" data-src="rc/settle.mp4"></video>
+              <video data-s="lane" muted playsinline loop preload="none" poster="rc/lane.jpg" data-src="rc/lane.mp4?v=2"></video>
+              <video data-s="watch" muted playsinline loop preload="none" poster="rc/watch.jpg" data-src="rc/watch.mp4?v=2"></video>
+              <video data-s="words" muted playsinline loop preload="none" poster="rc/words.jpg" data-src="rc/words.mp4?v=2"></video>
+              <img data-s="done" src="rc/done.jpg" alt="Today's session is done. Now put the phone down and get on with your day." loading="lazy">
+              <div data-s="game" class="game" id="game" aria-live="polite">
+                <div class="gtop"><span id="gLabel">Mini session</span><span id="gStep">About 1 minute</span></div>
+                <div class="segs" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
+                <div class="gbody" id="gBody"></div>
+                <div id="gFoot"></div>
+              </div>
+            </div>
+            <span class="glare" id="glare"></span>
+          </div>
+        </div>
+        <span class="p-shadow"></span>
+      </div>
+
+      <div class="rc-beats">
+        <div class="rc-beat" data-in="-1" data-out=".18"><div class="wrap"><div class="inner">
+          <span class="live"><i></i>Live now · Free beta</span>
+          <h2 id="rcTitle">Recall. Six focused minutes, <em>then your day back.</em></h2>
+          <p class="lede" id="recallSub">A daily app for memory and attention. A short session that adapts to you, then tells you to stop.</p>
+          <div class="rc-facts"><span>No feed</span><span>No ads</span><span>No streak alarms</span></div>
+        </div></div></div>
+        <div class="rc-beat" data-in=".18" data-out=".36"><div class="wrap"><div class="inner">
+          <span class="k c-arrive">Arrive · 1 minute</span>
+          <h3>Settle in with a few slow breaths.</h3>
+          <p class="lede">Follow the circle. There is no right or wrong, just a calm start.</p>
+        </div></div></div>
+        <div class="rc-beat" data-in=".36" data-out=".58"><div class="wrap"><div class="inner">
+          <span class="k c-focus">Focus · 2 short exercises</span>
+          <h3>Hold one rule. Catch the moment.</h3>
+          <p class="lede">Lane and Watch train attention, and each one adapts as you go, so it stays challenging but achievable.</p>
+        </div></div></div>
+        <div class="rc-beat" data-in=".58" data-out=".74"><div class="wrap"><div class="inner">
+          <span class="k c-mem">Memory · 1–2 minutes</span>
+          <h3>Remember a short list of words.</h3>
+          <p class="lede">Picture each word, or link them into a little story. Your results build up over the weeks.</p>
+        </div></div></div>
+        <div class="rc-beat" data-in=".74" data-out=".88"><div class="wrap"><div class="inner">
+          <span class="k c-gold">Done</span>
+          <h3>Then it tells you to stop.</h3>
+          <p class="lede">"Now put the phone down and get on with your day." One session, then back to your life.</p>
+        </div></div></div>
+        <div class="rc-beat" data-in=".88" data-out="2" id="rcLast"><div class="wrap"><div class="inner">
+          <span class="k c-gold">Your turn</span>
+          <h3>Try a one-minute session, right here.</h3>
+          <p class="lede">A breath, three quick taps and four words. No sign-up.</p>
+          <div class="rc-cta">
+            <button class="btn" id="rcPlay">Start the mini session</button>
+            <a class="btn ghost" href="https://altiora-recall.expo.app/" target="_blank" rel="noopener">Join the free beta</a>
+          </div>
+          <div class="qr" aria-hidden="true"><svg viewBox="0 0 29 29" shape-rendering="crispEdges"><path d="M0,0h1v1h-1zM1,0h1v1h-1zM2,0h1v1h-1zM3,0h1v1h-1zM4,0h1v1h-1zM5,0h1v1h-1zM6,0h1v1h-1zM9,0h1v1h-1zM12,0h1v1h-1zM15,0h1v1h-1zM16,0h1v1h-1zM18,0h1v1h-1zM20,0h1v1h-1zM22,0h1v1h-1zM23,0h1v1h-1zM24,0h1v1h-1zM25,0h1v1h-1zM26,0h1v1h-1zM27,0h1v1h-1zM28,0h1v1h-1zM0,1h1v1h-1zM6,1h1v1h-1zM8,1h1v1h-1zM9,1h1v1h-1zM11,1h1v1h-1zM12,1h1v1h-1zM13,1h1v1h-1zM14,1h1v1h-1zM16,1h1v1h-1zM17,1h1v1h-1zM22,1h1v1h-1zM28,1h1v1h-1zM0,2h1v1h-1zM2,2h1v1h-1zM3,2h1v1h-1zM4,2h1v1h-1zM6,2h1v1h-1zM8,2h1v1h-1zM10,2h1v1h-1zM13,2h1v1h-1zM15,2h1v1h-1zM18,2h1v1h-1zM20,2h1v1h-1zM22,2h1v1h-1zM24,2h1v1h-1zM25,2h1v1h-1zM26,2h1v1h-1zM28,2h1v1h-1zM0,3h1v1h-1zM2,3h1v1h-1zM3,3h1v1h-1zM4,3h1v1h-1zM6,3h1v1h-1zM8,3h1v1h-1zM9,3h1v1h-1zM10,3h1v1h-1zM11,3h1v1h-1zM16,3h1v1h-1zM17,3h1v1h-1zM19,3h1v1h-1zM20,3h1v1h-1zM22,3h1v1h-1zM24,3h1v1h-1zM25,3h1v1h-1zM26,3h1v1h-1zM28,3h1v1h-1zM0,4h1v1h-1zM2,4h1v1h-1zM3,4h1v1h-1zM4,4h1v1h-1zM6,4h1v1h-1zM9,4h1v1h-1zM15,4h1v1h-1zM16,4h1v1h-1zM18,4h1v1h-1zM19,4h1v1h-1zM20,4h1v1h-1zM22,4h1v1h-1zM24,4h1v1h-1zM25,4h1v1h-1zM26,4h1v1h-1zM28,4h1v1h-1zM0,5h1v1h-1zM6,5h1v1h-1zM15,5h1v1h-1zM22,5h1v1h-1zM28,5h1v1h-1zM0,6h1v1h-1zM1,6h1v1h-1zM2,6h1v1h-1zM3,6h1v1h-1zM4,6h1v1h-1zM5,6h1v1h-1zM6,6h1v1h-1zM8,6h1v1h-1zM10,6h1v1h-1zM12,6h1v1h-1zM14,6h1v1h-1zM16,6h1v1h-1zM18,6h1v1h-1zM20,6h1v1h-1zM22,6h1v1h-1zM23,6h1v1h-1zM24,6h1v1h-1zM25,6h1v1h-1zM26,6h1v1h-1zM27,6h1v1h-1zM28,6h1v1h-1zM8,7h1v1h-1zM14,7h1v1h-1zM15,7h1v1h-1zM16,7h1v1h-1zM20,7h1v1h-1zM0,8h1v1h-1zM6,8h1v1h-1zM8,8h1v1h-1zM9,8h1v1h-1zM11,8h1v1h-1zM12,8h1v1h-1zM16,8h1v1h-1zM17,8h1v1h-1zM19,8h1v1h-1zM21,8h1v1h-1zM22,8h1v1h-1zM25,8h1v1h-1zM26,8h1v1h-1zM27,8h1v1h-1zM1,9h1v1h-1zM2,9h1v1h-1zM3,9h1v1h-1zM7,9h1v1h-1zM8,9h1v1h-1zM9,9h1v1h-1zM10,9h1v1h-1zM11,9h1v1h-1zM12,9h1v1h-1zM13,9h1v1h-1zM16,9h1v1h-1zM17,9h1v1h-1zM19,9h1v1h-1zM23,9h1v1h-1zM24,9h1v1h-1zM26,9h1v1h-1zM27,9h1v1h-1zM0,10h1v1h-1zM2,10h1v1h-1zM3,10h1v1h-1zM4,10h1v1h-1zM6,10h1v1h-1zM8,10h1v1h-1zM10,10h1v1h-1zM12,10h1v1h-1zM13,10h1v1h-1zM14,10h1v1h-1zM15,10h1v1h-1zM16,10h1v1h-1zM18,10h1v1h-1zM20,10h1v1h-1zM22,10h1v1h-1zM23,10h1v1h-1zM24,10h1v1h-1zM0,11h1v1h-1zM1,11h1v1h-1zM2,11h1v1h-1zM4,11h1v1h-1zM7,11h1v1h-1zM9,11h1v1h-1zM10,11h1v1h-1zM12,11h1v1h-1zM13,11h1v1h-1zM18,11h1v1h-1zM21,11h1v1h-1zM22,11h1v1h-1zM25,11h1v1h-1zM2,12h1v1h-1zM5,12h1v1h-1zM6,12h1v1h-1zM7,12h1v1h-1zM9,12h1v1h-1zM13,12h1v1h-1zM15,12h1v1h-1zM16,12h1v1h-1zM19,12h1v1h-1zM20,12h1v1h-1zM22,12h1v1h-1zM23,12h1v1h-1zM28,12h1v1h-1zM1,13h1v1h-1zM7,13h1v1h-1zM8,13h1v1h-1zM9,13h1v1h-1zM11,13h1v1h-1zM16,13h1v1h-1zM19,13h1v1h-1zM20,13h1v1h-1zM21,13h1v1h-1zM22,13h1v1h-1zM23,13h1v1h-1zM24,13h1v1h-1zM27,13h1v1h-1zM28,13h1v1h-1zM0,14h1v1h-1zM1,14h1v1h-1zM2,14h1v1h-1zM4,14h1v1h-1zM5,14h1v1h-1zM6,14h1v1h-1zM8,14h1v1h-1zM9,14h1v1h-1zM10,14h1v1h-1zM12,14h1v1h-1zM18,14h1v1h-1zM20,14h1v1h-1zM21,14h1v1h-1zM24,14h1v1h-1zM25,14h1v1h-1zM26,14h1v1h-1zM0,15h1v1h-1zM7,15h1v1h-1zM8,15h1v1h-1zM12,15h1v1h-1zM15,15h1v1h-1zM18,15h1v1h-1zM19,15h1v1h-1zM20,15h1v1h-1zM23,15h1v1h-1zM24,15h1v1h-1zM26,15h1v1h-1zM28,15h1v1h-1zM1,16h1v1h-1zM6,16h1v1h-1zM7,16h1v1h-1zM8,16h1v1h-1zM9,16h1v1h-1zM10,16h1v1h-1zM17,16h1v1h-1zM23,16h1v1h-1zM25,16h1v1h-1zM26,16h1v1h-1zM0,17h1v1h-1zM1,17h1v1h-1zM7,17h1v1h-1zM8,17h1v1h-1zM9,17h1v1h-1zM10,17h1v1h-1zM12,17h1v1h-1zM13,17h1v1h-1zM14,17h1v1h-1zM17,17h1v1h-1zM18,17h1v1h-1zM19,17h1v1h-1zM20,17h1v1h-1zM22,17h1v1h-1zM23,17h1v1h-1zM24,17h1v1h-1zM26,17h1v1h-1zM27,17h1v1h-1zM28,17h1v1h-1zM0,18h1v1h-1zM1,18h1v1h-1zM2,18h1v1h-1zM4,18h1v1h-1zM5,18h1v1h-1zM6,18h1v1h-1zM7,18h1v1h-1zM9,18h1v1h-1zM15,18h1v1h-1zM19,18h1v1h-1zM21,18h1v1h-1zM22,18h1v1h-1zM23,18h1v1h-1zM24,18h1v1h-1zM25,18h1v1h-1zM28,18h1v1h-1zM0,19h1v1h-1zM2,19h1v1h-1zM3,19h1v1h-1zM4,19h1v1h-1zM5,19h1v1h-1zM11,19h1v1h-1zM13,19h1v1h-1zM15,19h1v1h-1zM16,19h1v1h-1zM20,19h1v1h-1zM21,19h1v1h-1zM23,19h1v1h-1zM0,20h1v1h-1zM3,20h1v1h-1zM6,20h1v1h-1zM7,20h1v1h-1zM9,20h1v1h-1zM10,20h1v1h-1zM12,20h1v1h-1zM14,20h1v1h-1zM17,20h1v1h-1zM18,20h1v1h-1zM20,20h1v1h-1zM21,20h1v1h-1zM22,20h1v1h-1zM23,20h1v1h-1zM24,20h1v1h-1zM26,20h1v1h-1zM27,20h1v1h-1zM28,20h1v1h-1zM8,21h1v1h-1zM12,21h1v1h-1zM14,21h1v1h-1zM15,21h1v1h-1zM16,21h1v1h-1zM17,21h1v1h-1zM18,21h1v1h-1zM20,21h1v1h-1zM24,21h1v1h-1zM25,21h1v1h-1zM0,22h1v1h-1zM1,22h1v1h-1zM2,22h1v1h-1zM3,22h1v1h-1zM4,22h1v1h-1zM5,22h1v1h-1zM6,22h1v1h-1zM11,22h1v1h-1zM15,22h1v1h-1zM17,22h1v1h-1zM19,22h1v1h-1zM20,22h1v1h-1zM22,22h1v1h-1zM24,22h1v1h-1zM25,22h1v1h-1zM26,22h1v1h-1zM0,23h1v1h-1zM6,23h1v1h-1zM9,23h1v1h-1zM10,23h1v1h-1zM11,23h1v1h-1zM12,23h1v1h-1zM14,23h1v1h-1zM18,23h1v1h-1zM19,23h1v1h-1zM20,23h1v1h-1zM24,23h1v1h-1zM0,24h1v1h-1zM2,24h1v1h-1zM3,24h1v1h-1zM4,24h1v1h-1zM6,24h1v1h-1zM10,24h1v1h-1zM13,24h1v1h-1zM14,24h1v1h-1zM15,24h1v1h-1zM19,24h1v1h-1zM20,24h1v1h-1zM21,24h1v1h-1zM22,24h1v1h-1zM23,24h1v1h-1zM24,24h1v1h-1zM25,24h1v1h-1zM27,24h1v1h-1zM28,24h1v1h-1zM0,25h1v1h-1zM2,25h1v1h-1zM3,25h1v1h-1zM4,25h1v1h-1zM6,25h1v1h-1zM9,25h1v1h-1zM10,25h1v1h-1zM14,25h1v1h-1zM15,25h1v1h-1zM16,25h1v1h-1zM18,25h1v1h-1zM20,25h1v1h-1zM25,25h1v1h-1zM26,25h1v1h-1zM28,25h1v1h-1zM0,26h1v1h-1zM2,26h1v1h-1zM3,26h1v1h-1zM4,26h1v1h-1zM6,26h1v1h-1zM9,26h1v1h-1zM10,26h1v1h-1zM14,26h1v1h-1zM15,26h1v1h-1zM18,26h1v1h-1zM21,26h1v1h-1zM22,26h1v1h-1zM23,26h1v1h-1zM24,26h1v1h-1zM25,26h1v1h-1zM26,26h1v1h-1zM27,26h1v1h-1zM0,27h1v1h-1zM6,27h1v1h-1zM9,27h1v1h-1zM10,27h1v1h-1zM11,27h1v1h-1zM13,27h1v1h-1zM16,27h1v1h-1zM19,27h1v1h-1zM21,27h1v1h-1zM23,27h1v1h-1zM24,27h1v1h-1zM25,27h1v1h-1zM26,27h1v1h-1zM28,27h1v1h-1zM0,28h1v1h-1zM1,28h1v1h-1zM2,28h1v1h-1zM3,28h1v1h-1zM4,28h1v1h-1zM5,28h1v1h-1zM6,28h1v1h-1zM8,28h1v1h-1zM9,28h1v1h-1zM10,28h1v1h-1zM11,28h1v1h-1zM12,28h1v1h-1zM15,28h1v1h-1zM16,28h1v1h-1zM17,28h1v1h-1zM19,28h1v1h-1zM24,28h1v1h-1zM26,28h1v1h-1z" fill="currentColor"/></svg><p>Scan to open Recall on your phone</p></div>
+          <p class="note">Web and Android. A training app, not a medical product.</p>
+        </div></div></div>
+      </div>
+
+      <div class="rc-mark" id="rcMark"><div class="wrap"><svg viewBox="0 0 100 100" aria-hidden="true"><rect id="rmBg" width="100" height="100" rx="22" fill="#0F151B"/><rect class="tile" x="19" y="19" width="19" height="19" rx="4.5" fill="#1E2A35"/><rect class="tile" x="40.5" y="19" width="19" height="19" rx="4.5" fill="#1E2A35"/><rect class="tile" x="62" y="19" width="19" height="19" rx="4.5" fill="#F0B85A"/><rect class="tile" x="19" y="40.5" width="19" height="19" rx="4.5" fill="#1E2A35"/><rect class="tile" x="40.5" y="40.5" width="19" height="19" rx="4.5" fill="#86B6D6"/><rect class="tile" x="62" y="40.5" width="19" height="19" rx="4.5" fill="#1E2A35"/><rect class="tile" x="19" y="62" width="19" height="19" rx="4.5" fill="#86B6D6"/><rect class="tile" x="40.5" y="62" width="19" height="19" rx="4.5" fill="#1E2A35"/><rect class="tile" x="62" y="62" width="19" height="19" rx="4.5" fill="#1E2A35"/></svg><div class="lbl"><b>Altiora Recall</b><span class="s">Live now · Free beta</span></div></div></div>
+      <div class="dots" aria-hidden="true"><span data-d="0">Settle</span><span data-d="1">Focus</span><span data-d="2">Memory</span><span data-d="3">Done</span><span data-d="4">You</span></div>
+    </div>
+  </section>
+
+  <!-- Who -->
+  <section class="sec" id="who" data-key="who"><div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Who we work with</p>
+      <h2>Hotels, holiday homes, venues and event teams across the UAE.</h2>
+    </div>
+    <div class="who">
+      <div data-who="hotel"><b>Hotels</b><span>Guest questions, requests and arrivals handled day and night.</span></div>
+      <div data-who="hotel"><b>Holiday homes</b><span>Enquiries, bookings and check-in details, without a round-the-clock inbox.</span></div>
+      <div data-who="events"><b>Venues</b><span>Booking enquiries, quotes and event details kept together.</span></div>
+      <div data-who="events"><b>Event teams</b><span>Call times, last-minute changes and post-event reports.</span></div>
+    </div>
+  </div></section>
+
+  <!-- Contact -->
+  <section class="sec alt" id="talk" data-key="talk"><div class="wrap talk">
+    <p class="eyebrow">Altiora AI is preparing to launch in the UAE</p>
+    <h2>Let's talk</h2>
+    <p class="mail">hello@altioraai.com</p>
+    <p class="note">Planned, not yet trading: we're talking to hotels, venues and event teams now.</p>
+  </div></section>
+</main>
+
+<footer><div class="wrap">Altiora AI · Preview of the home page redesign. Films are test versions; final versions are sharper.</div></footer>
+<p class="preview-note">Preview · not live</p>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = matchMedia('(max-width:900px)');
+  const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+
+  /* ---------- Greeting from the visitor's own clock ---------- */
+  const h = new Date().getHours();
+  document.getElementById('greet').textContent = h < 5 ? 'Good evening.' : h < 12 ? 'Good morning.' : h < 17 ? 'Good afternoon.' : 'Good evening.';
+
+  /* ---------- Frame-sequence films ---------- */
+  function film(canvas, dir, count, focusX) {
+    const ctx = canvas.getContext('2d');
+    const imgs = new Array(count);
+    let ready = 0;
+    const order = [];
+    for (let s of [8, 4, 2, 1]) for (let i = 0; i < count; i += s) if (!order.includes(i)) order.push(i);
+    order.forEach((i, n) => { const im = new Image(); im.decoding = 'async'; im.src = `${dir}/${String(i + 1).padStart(3, '0')}.webp?v=3`; im.onload = () => { ready++; if (n === 0) draw(last); }; imgs[i] = im; });
+    let last = 0;
+    function nearest(i) { for (let d = 0; d < count; d++) { for (const j of [i - d, i + d]) { const im = imgs[j]; if (im && im.complete && im.naturalWidth) return im; } } return null; }
+    function cover(im, alpha) {
+      const cw = canvas.width, ch = canvas.height, iw = im.naturalWidth, ih = im.naturalHeight;
+      const s = Math.max(cw / iw, ch / ih), w = iw * s, hh = ih * s;
+      const x = Math.min(0, Math.max(cw - w, (cw - w) * focusX)), y = (ch - hh) / 2;
+      ctx.globalAlpha = alpha; ctx.drawImage(im, x, y, w, hh);
+    }
+    function size() {
+      const r = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
+    }
+    function draw(p) {
+      last = p; const f = Math.max(0, Math.min(1, p)) * (count - 1), i = Math.floor(f), t = f - i;
+      const a = nearest(i), b = nearest(Math.min(count - 1, i + 1));
+      if (!a) return;
+      ctx.globalAlpha = 1; cover(a, 1); if (b && b !== a && t > 0.02) cover(b, t); ctx.globalAlpha = 1;
+    }
+    size(); addEventListener('resize', () => { size(); draw(last); });
+    return { draw };
+  }
+  const homeFilm = film(document.getElementById('homeCanvas'), 'hf', 161, 0.62);
+  const tessFilm = film(document.getElementById('tessCanvas'), 'tf', 161, 0.5);
+
+  /* ---------- Scroll progress ---------- */
+  const homeEl = document.getElementById('home'), tessEl = document.getElementById('tessera');
+  const beats = [...document.querySelectorAll('#home .beat')];
+  function prog(el) { const r = el.getBoundingClientRect(); const span = el.offsetHeight - innerHeight; return span > 0 ? Math.max(0, Math.min(1, -r.top / span)) : 0; }
+  function win(p, a, b, f = .05) { if (p < a || p > b) return 0; return Math.max(0, Math.min(1, (p - a) / f, (b - p) / f)); }
+  let hs = 0, ts = 0;
+  const tTemp = document.getElementById('tTemp'), tLights = document.getElementById('tLights'), tCurt = document.getElementById('tCurt'), tState = document.getElementById('tState');
+  const panel = document.querySelector('#tessera .panel'), tScrim = document.getElementById('tScrim'), tTitle = document.querySelector('#tessera .t-title');
+  const gold = document.getElementById('halfGold'), green = document.getElementById('halfGreen'), tEnd = document.getElementById('tEnd');
+  function frame() {
+    const hp = prog(homeEl), tp = prog(tessEl);
+    hs += (hp - hs) * (reduce ? 1 : .14); ts += (tp - ts) * (reduce ? 1 : .14);
+    homeFilm.draw(reduce ? .85 : hs); tessFilm.draw(reduce ? 1 : ts);
+    beats.forEach(b => { const o = reduce ? 1 : win(hs, +b.dataset.in, +b.dataset.out); b.style.opacity = o; b.style.transform = `translateY(${(1 - o) * 18}px)`; b.style.visibility = o < .01 ? 'hidden' : 'visible'; b.style.position = reduce ? 'relative' : ''; });
+    // Tessera room state follows the film
+    const k = reduce ? 1 : ts;
+    tTemp.textContent = Math.round(31 - 9 * Math.min(1, Math.max(0, (k - .05) / .5)));
+    tLights.textContent = k > .07 ? 'Warm, 40%' : 'Off';
+    tCurt.textContent = k > .62 ? 'Open' : k > .14 ? 'Opening' : 'Closed';
+    tState.textContent = k > .7 ? 'Ready' : 'Waking';
+    tState.style.color = k > .7 ? '#7FD3A5' : '';
+    const j = Math.max(0, Math.min(1, (k - .72) / .2));
+    gold.style.transform = `translateX(${-(1 - j) * 60}px)`; green.style.transform = `translateX(${(1 - j) * 60}px)`;
+    const endO = reduce ? 1 : Math.min(1, Math.max(0, (k - .68) / .12));
+    tEnd.style.opacity = endO;
+    tScrim.style.opacity = reduce ? 1 : (.2 + .8 * Math.min(1, Math.max(0, (k - .3) / .3)));
+    if (narrow.matches && !reduce) panel.style.opacity = String(1 - Math.min(1, Math.max(0, (k - .58) / .08)));
+    if (narrow.matches && !reduce) tTitle.style.opacity = String(1 - endO);
+    requestAnimationFrame(frame);
+  const navEl = document.querySelector('.nav'); const navSolid = () => navEl.classList.toggle('solid', scrollY > 12); addEventListener('scroll', navSolid, { passive: true }); navSolid();
+  }
+  requestAnimationFrame(frame);
+
+  /* ---------- Gold light that follows the pointer (desktop) ---------- */
+  const glow = document.getElementById('glow');
+  if (!reduce && matchMedia('(pointer:fine)').matches) homeEl.addEventListener('pointermove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+
+  /* ---------- Personalisation ---------- */
+  const PATHS = {
+    hotel: { chip: 'Hotels and venues', text: 'Showing what matters to hotel and venue teams first.', order: ['build','tessera','who','recall','talk'], lead: 'cardGuests', who: 'hotel',
+      title: 'For your guests first, then your team.', sub: 'Guests get answers day and night, in Arabic and English. Your team gets out of the inbox. A person approves anything that matters.' },
+    events: { chip: 'Event teams', text: 'Showing what matters to event teams first.', order: ['build','who','tessera','recall','talk'], lead: 'cardTeam', who: 'events',
+      title: 'For your crew, your timings and your changes.', sub: 'Call times, last-minute changes and post-event reports in one calm place, so nothing is retyped and nothing is missed.' },
+    me: { chip: 'Just me', text: 'Starting with Recall, the app we make for people.', order: ['recall','tessera','build','who','talk'], lead: null, who: null,
+      title: 'For your guests, and for your team.', sub: 'The business side of what we do: quiet systems for hotels, venues and event teams.' },
+    all: { chip: 'Everything', text: 'Showing everything.', order: ['build','tessera','recall','who','talk'], lead: null, who: null,
+      title: 'For your guests, and for your team.', sub: 'A narrow focus, on purpose. Each system does one job well, on the guest side of your business or on the team side.' }
+  };
+  const flow = document.getElementById('flow'), ribbon = document.getElementById('ribbon');
+  function apply(key, scroll) {
+    const P = PATHS[key]; if (!P) return;
+    P.order.forEach(k => flow.appendChild(document.querySelector(`[data-key="${k}"]`)));
+    document.querySelectorAll('.path').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.path === key)));
+    ['cardGuests','cardTeam'].forEach(id => { const c = document.getElementById(id), on = id === P.lead; c.classList.toggle('lead', on); c.querySelector('.forlabel').hidden = !on; });
+    document.querySelectorAll('[data-who]').forEach(d => d.classList.toggle('lead', d.dataset.who === P.who));
+    document.getElementById('buildTitle').textContent = P.title; document.getElementById('buildSub').textContent = P.sub;
+    document.getElementById('recallSub').textContent = key === 'me' ? 'Made for your own day, not for a business. A short session that adapts to you, then tells you to stop. No feed. No ads. No streak alarms.' : 'A daily app for memory and attention. A short session that adapts to you, then tells you to stop. No feed. No ads. No streak alarms.';
+    document.getElementById('ribbonChip').textContent = P.chip; document.getElementById('ribbonText').textContent = P.text;
+    ribbon.hidden = false; document.getElementById('navPersonal').hidden = false; if (window.__fitPhone) window.__fitPhone();
+    store.set('altiora-path', key);
+    if (scroll) { const first = document.querySelector(`[data-key="${P.order[0]}"]`); setTimeout(() => ribbon.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }), 60); }
+  }
+  document.querySelectorAll('[data-path]').forEach(b => b.addEventListener('click', () => apply(b.dataset.path, true)));
+  const toChooser = () => { const y = homeEl.offsetTop + (homeEl.offsetHeight - innerHeight) * .84; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); };
+  document.getElementById('ribbonChange').addEventListener('click', toChooser);
+  document.getElementById('navPersonal').addEventListener('click', toChooser);
+  const saved = store.get('altiora-path'); if (saved && PATHS[saved]) apply(saved, false);
+
+  /* ---------- Recall stage: 3D phone driven by scroll, then a playable mini session ---------- */
+  const rc = document.getElementById('recall'), p3d = document.getElementById('p3d'), glare = document.getElementById('glare');
+  const screenEl = document.getElementById('screen'), layers = [...screenEl.children];
+  const rcBeats = [...rc.querySelectorAll('.rc-beat')], dots = [...rc.querySelectorAll('.dots span')], tiles = [...rc.querySelectorAll('.tiles i')];
+  let playing = false, cur = '', rs = 0, mx = 0, my = 0, rcIn = false, still = 1, lastShift = 0;
+  function setScreen(s) {
+    if (s === cur) return; cur = s;
+    layers.forEach(l => {
+      const on = l.dataset.s === s; l.classList.toggle('on', on);
+      if (l.tagName === 'VIDEO') { if (on) { if (!l.src) l.src = l.dataset.src; l.currentTime = 0; l.play().catch(() => {}); } else l.pause(); }
+    });
+  }
+  function screenFor(p) { return p < .18 ? 'today' : p < .36 ? 'settle' : p < .47 ? 'lane' : p < .58 ? 'watch' : p < .74 ? 'words' : p < .88 ? 'done' : 'today'; }
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  // Recall's icon assembles from scattered tiles near the end of the scene
+  const rcMark = document.getElementById('rcMark'), rmTiles = [...rcMark.querySelectorAll('.tile')], rmBg = document.getElementById('rmBg');
+  const SCAT = rmTiles.map((_, i) => [Math.cos(i * 2.4) * (60 + i * 9), Math.sin(i * 1.7) * (50 + i * 7), (i % 2 ? 1 : -1) * (30 + i * 12)]);
+  function markFrame(k) {
+    const j = reduce ? 1 : ease(Math.max(0, Math.min(1, (k - .76) / .14)));
+    rcMark.style.opacity = reduce ? 1 : Math.min(1, Math.max(0, (k - .72) / .06));
+    rmBg.style.opacity = j; rmBg.style.transformOrigin = '50px 50px'; rmBg.style.transform = `scale(${.6 + .4 * j})`;
+    rmTiles.forEach((t, i) => { const [dx, dy, rot] = SCAT[i]; const q = 1 - j; t.style.transformBox = 'fill-box'; t.style.transformOrigin = 'center'; t.style.transform = `translate(${dx * q}px, ${dy * q}px) rotate(${rot * q}deg)`; });
+  }
+  function rcFrame(now) {
+    const p = prog(rc); rs += (p - rs) * (reduce ? 1 : .12);
+    const k = reduce ? 1 : rs;
+    // turn from the back (icon) to the screen, sway through the session, face you at the end
+    const turn = ease(Math.min(1, k / .17));
+    let ry = 180 - 196 * turn, rx = 4;
+    if (k > .17) { const m = Math.min(1, (k - .17) / .7); ry = -16 + 12 * Math.sin(m * Math.PI * 2.2); rx = 4 + 3 * Math.cos(m * Math.PI * 1.6); }
+    const fin = ease(Math.max(0, Math.min(1, (k - .86) / .08)));
+    ry = ry * (1 - fin); rx = rx * (1 - fin);
+    const t = now / 1000; still += ((playing ? 0 : 1) - still) * .08; const bob = reduce ? 0 : Math.sin(t * 1.3) * 6 * (1 - fin * .7) * still;
+    const tilt = still;
+    p3d.style.transform = `translateY(${bob}px) rotateX(${rx + my * 5 * tilt}deg) rotateY(${ry + mx * 7 * tilt}deg) scale(${1 + .06 * fin})`;
+    glare.style.backgroundPosition = `${50 + (ry + mx * 7) * 1.6}% 0`;
+    if (!playing) setScreen(screenFor(k));
+    markFrame(k);
+    rcBeats.forEach(b => { const o = reduce ? (b.id === 'rcLast' ? 1 : 0) : win(k, +b.dataset.in, +b.dataset.out, .035); b.style.opacity = o; b.style.transform = narrow.matches ? `translateY(${(1 - o) * 14}px)` : `translateY(calc(-50% + ${(1 - o) * 14 - (b.id === 'rcLast' ? lastShift : 0)}px))`; b.style.visibility = o < .01 ? 'hidden' : 'visible'; });
+    const d = k < .36 ? 0 : k < .58 ? 1 : k < .74 ? 2 : k < .88 ? 3 : 4;
+    dots.forEach((s, i) => s.classList.toggle('on', i === d && k > .17));
+    if (playing && k < .84) { playing = false; rc.classList.remove('playing'); fitPhone(); }
+    requestAnimationFrame(rcFrame);
+  const pZone = document.getElementById('pZone');
+  function fitPhone() {
+    if (!narrow.matches) {
+      pZone.style.cssText = ''; rcMark.style.top = '';
+      const last = document.getElementById('rcLast'), h = last.querySelector('.inner').offsetHeight, markTop = innerHeight - innerHeight * .09 - rcMark.querySelector('svg').getBoundingClientRect().height - 18;
+      lastShift = Math.max(0, Math.min(innerHeight / 2 + h / 2 - markTop, innerHeight / 2 - h / 2 - 80)); return;
+    }
+    lastShift = 0;
+    const beatH = Math.max(...rcBeats.map(b => b.querySelector('.inner').offsetHeight));
+    const rib = document.getElementById('ribbon'); const topY = 64 + (rib && !rib.hidden ? rib.offsetHeight : 0) + 12, bottomGap = 64 + 18;
+    const h = Math.max(110, Math.min(500, innerHeight - bottomGap - beatH - topY - 14));
+    const w = h / 2.164;
+    pZone.style.setProperty('--pw', w + 'px'); pZone.style.top = (topY + h / 2) + 'px'; rcMark.style.top = topY + 'px';
+  }
+  fitPhone(); addEventListener('resize', fitPhone); window.__fitPhone = fitPhone;
+  }
+  requestAnimationFrame(rcFrame);
+  if (!reduce && matchMedia('(pointer:fine)').matches) rc.addEventListener('pointermove', e => { const r = rc.querySelector('.sticky').getBoundingClientRect(); mx = (e.clientX - r.left) / r.width - .5; my = .5 - (e.clientY - r.top) / r.height; });
+  // the Recall icon's tiles light up behind the phone
+  new IntersectionObserver(es => es.forEach(e => rcIn = e.isIntersecting)).observe(rc);
+  if (!reduce) setInterval(() => { if (!rcIn) return; tiles.forEach(x => x.className = ''); const a = Math.floor(Math.random() * 9); let b = Math.floor(Math.random() * 9); if (b === a) b = (a + 4) % 9; tiles[a].className = 'lit-g'; tiles[b].className = 'lit-b'; }, 900);
+
+  /* the mini session: Settle, Watch, Words */
+  const gBody = document.getElementById('gBody'), gFoot = document.getElementById('gFoot'), gStep = document.getElementById('gStep'), gLabel = document.getElementById('gLabel');
+  const segs = [...document.querySelectorAll('.segs b')];
+  let timers = [], raf = 0, res = {};
+  const later = (f, ms) => timers.push(setTimeout(f, ms));
+  function clearAll() { timers.forEach(clearTimeout); timers = []; cancelAnimationFrame(raf); }
+  function seg(n) { segs.forEach((b, i) => b.style.width = i < n ? '100%' : '0'); }
+  function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  document.getElementById('rcPlay').addEventListener('click', () => {
+    playing = true; rc.classList.add('playing'); pZone.style.cssText = '';
+    const y = rc.offsetTop + (rc.offsetHeight - innerHeight) * .95; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    setScreen('game'); startSession();
+  });
+  function startSession() {
+    clearAll(); res = {}; seg(0); gLabel.textContent = 'Mini session'; gStep.textContent = '1 of 3';
+    // 1. Settle: one slow breath
+    gBody.innerHTML = `<h4 id="bText">Breathe in through your nose</h4><div class="breath"><i id="bDot"></i></div>`;
+    gFoot.innerHTML = `<button class="tbtn dark" id="gSkip">Skip</button>`;
+    document.getElementById('gSkip').onclick = watchStart;
+    const dot = document.getElementById('bDot'), txt = document.getElementById('bText');
+    later(() => dot.style.width = '92%', 60);
+    later(() => { txt.textContent = 'Long, slow breath out'; dot.style.transition = 'width 5s ease-in-out'; dot.style.width = '40%'; }, 4200);
+    later(watchStart, 9400);
+  }
+  function watchStart() {
+    clearAll(); seg(1); gStep.textContent = '2 of 3'; gLabel.textContent = 'Watch · tap when the counter starts'; res.watch = [];
+    gFoot.innerHTML = `<p class="small" id="wInfo">3 taps. Don't tap before it starts.</p>`;
+    trial();
+  }
+  function trial() {
+    if (res.watch.length === 3) return wordsStart();
+    gBody.innerHTML = `<button class="wbox" id="wBox">Wait…</button>`;
+    const box = document.getElementById('wBox'); let t0 = 0;
+    box.onclick = () => {
+      if (!t0) { clearAll(); box.textContent = 'Too soon'; later(trial, 900); return; }
+      cancelAnimationFrame(raf); const rt = Math.round(performance.now() - t0); res.watch.push(rt);
+      box.classList.remove('go'); box.textContent = `${rt} ms`; box.onclick = null; document.getElementById('wInfo').textContent = `${res.watch.length} of 3`;
+      later(trial, 900);
+    };
+    later(() => { t0 = performance.now(); box.classList.add('go'); const tick = () => { box.textContent = Math.round(performance.now() - t0); raf = requestAnimationFrame(tick); }; tick(); }, 1100 + Math.random() * 1700);
+  }
+  const POOL = ['harbour','lantern','violin','orchard','pebble','compass','meadow','teapot','falcon','ribbon','candle','island','marble','sail'];
+  function wordsStart() {
+    clearAll(); seg(2); gStep.textContent = '3 of 3'; gLabel.textContent = 'Words · memorise'; gFoot.innerHTML = '';
+    const pool = shuffle(POOL), seen = pool.slice(0, 4), extra = pool.slice(4, 8); let i = 0;
+    const showW = () => { if (i === 4) return pick(seen, extra); gBody.innerHTML = `<p class="small">${i + 1} of 4</p><div class="word">${seen[i]}</div>`; i++; later(showW, 1400); };
+    showW();
+  }
+  function pick(seen, extra) {
+    gLabel.textContent = 'Words · pick the 4 you saw'; const chosen = new Set();
+    gBody.innerHTML = `<p class="small" id="gCount">0 of 4 chosen</p><div class="grid8">${shuffle(seen.concat(extra)).map(w => `<button aria-pressed="false">${w}</button>`).join('')}</div>`;
+    gFoot.innerHTML = `<button class="tbtn" id="gCheck" disabled>Check my answers</button>`;
+    gBody.querySelectorAll('.grid8 button').forEach(b => b.onclick = () => {
+      const w = b.textContent; if (chosen.has(w)) chosen.delete(w); else if (chosen.size < 4) chosen.add(w);
+      b.setAttribute('aria-pressed', String(chosen.has(w)));
+      document.getElementById('gCount').textContent = `${chosen.size} of 4 chosen`; document.getElementById('gCheck').disabled = chosen.size !== 4;
+    });
+    document.getElementById('gCheck').onclick = () => { res.words = [...chosen].filter(w => seen.includes(w)).length; finish(); };
+  }
+  function finish() {
+    clearAll(); seg(3); gLabel.textContent = 'Session done'; gStep.textContent = '';
+    const avg = res.watch && res.watch.length ? Math.round(res.watch.reduce((a, b) => a + b, 0) / res.watch.length) : null;
+    gBody.innerHTML = `<div class="res"><div><span>Settle</span><b>Done</b></div><div><span>Watch, average</span><b>${avg ? avg + ' ms' : '–'}</b></div><div><span>Words</span><b>${res.words}/4</b></div></div><p class="done-line">That's it. Now put it down.</p><p class="small">The full app: about six minutes a day, and it adapts to you.</p>`;
+    gFoot.innerHTML = `<button class="tbtn dark" id="gAgain">Play again</button>`;
+    document.getElementById('gAgain').onclick = startSession;
+  }
+})();
+</script>
