@@ -125,7 +125,7 @@ Key: **[GEN]** = new Higgsfield image. **[BRAND]** = typeset brand slide. **[SCR
 
 ## Day 6 · Sun 29 Nov · Altiora Labs
 
-**Hold condition:** post only once the Labs fix is live on altioraai.com. Fixed on staging 23 Nov ("Live now · Free beta", join button opens https://altiora-recall.expo.app/); it goes live with the home redesign after Security approval, and the Website session will confirm. Link target once live: altioraai.com/#rx-recall (1-minute mini session).
+**Hold lifted 23 Nov:** the Labs fix is live on altioraai.com/labs ("Live now · Free beta"; the button opens https://altiora-recall.expo.app/). Link target: altioraai.com/#rx-recall (1-minute mini session).
 
 **Hook:** Altiora Labs: where we try new ideas first.
 
@@ -133,7 +133,7 @@ Key: **[GEN]** = new Higgsfield image. **[BRAND]** = typeset brand slide. **[SCR
 |---|---|---|---|
 | 1 | GEN | Altiora Labs · Where we try new ideas first. | A calm studio bench, one glass flask glowing softly gold, forest green tones |
 | 2 | GEN (Recall colours) | Recall · Six focused minutes a day, then your day back. | Early morning coffee, a phone face-down on a table, navy and gold light |
-| 3 | SCREEN | Live now · Free beta on web and Android. · A training app, not a medical product. | Real Recall screen in a phone frame, on navy |
+| 3 | SCREEN | Live now · Free beta on web and Android. · Free places in the first beta are limited. A training app, not a medical product. | Real Recall screen in a phone frame, on navy |
 | 4 | GEN (Recall colours) | No feed. No ads. No streak alarms. | A person walking out of a sunlit doorway, phone left face-down behind them |
 | 5 | GEN (Tessera colours) | Tessera · The room is ready before you reach the door. | A quiet hotel corridor, warm light spilling from a door opening ahead, gold and green |
 | 6 | BRAND | Recall: join the free beta. · Tessera: private preview. · altioraai.com | Forest background, Tessera token and Recall colours |
