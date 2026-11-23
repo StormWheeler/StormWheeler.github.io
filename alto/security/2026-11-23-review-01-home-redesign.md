@@ -53,3 +53,13 @@ Confirmed on staging:
 
 ## Final spot-check (commit 02c7355, staging), 23 Nov 2026
 The Labs note reads "Free places in the first beta are limited." **GO for altioraai.com** once the meta, OG and Twitter descriptions and the hidden `.hero-description` no longer say "designs and runs". They were still unchanged on staging at this check. No other blockers.
+
+## Post-publish check, live altioraai.com (commit 0fcb754), 23 Nov 2026
+**PASS.**
+- No "designs and runs" anywhere on home, Labs or the Cookie notice. The meta description and hero say "preparing to design and run".
+- The illustrative note, the Tessera "in private preview" line and the AI-imagery line are present.
+- Labs reads "Free places… are limited". The Cookie notice includes `altiora-path`.
+- No Calendly. Scripts load only from Webflow's CDN, Webflow's jQuery and Google's webfont loader.
+- /tessera returns 401 and the password page contains no protected content.
+
+Still open: H1 (public repo, owner's decision); the Review #2 items (About wording, Privacy notice: Google Fonts/Cloudflare + GDPR line, frame-bust, Code.gs `safe()`, spam filter).
