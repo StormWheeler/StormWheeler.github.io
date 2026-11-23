@@ -125,7 +125,7 @@ Key: **[GEN]** = new Higgsfield image. **[BRAND]** = typeset brand slide. **[SCR
 
 ## Day 6 · Sun 29 Nov · Altiora Labs
 
-**Hold condition:** post only once the live Labs page says Recall is live (it still says "Free beta soon") and its join button works; otherwise point to the direct app link.
+**Hold condition:** post only once the Labs fix is live on altioraai.com. Fixed on staging 23 Nov ("Live now · Free beta", join button opens https://altiora-recall.expo.app/); it goes live with the home redesign after Security approval, and the Website session will confirm. Link target once live: altioraai.com/#rx-recall (1-minute mini session).
 
 **Hook:** Altiora Labs: where we try new ideas first.
 
