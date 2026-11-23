@@ -29,3 +29,8 @@
 
 ## Still open from baseline
 H1: the public repo exposes the Tessera page and internal handovers. This is the owner's decision. The Website session should not add Tessera or Recall internals to the repo meanwhile.
+
+## Addendum: Labs Recall card (commit d5b48a8)
+**APPROVED WITH FIXES.** The chip "Live now · Free beta" and the app link (`target=_blank rel=noopener`) are fine, and the "training app, not a medical product" line and the not-for-sale footer stay.
+- **(Medium) Place count.** "100 free places in the first beta" doesn't match the actual cap of 105. And once the beta is full, a direct link breaks decisions 23 and 25 (nobody should be sent to a sign-up that turns them away). Fix: "Free places in the first beta are limited. A training app, not a medical product." Until the open/full beta check exists, the owner keeps an eye on numbers and switches the button back to the mailto when the beta is full.
+- **(Medium) Alto still out of date** (fix 6 above). The EN and AR Recall answers say "getting ready for a free beta… 100 places", list the old exercises (Sequence, N-back, Hold) and link "Ask to join the beta" by mailto. Update them to: live free beta on web and Android; Settle, Lane, Watch, Words; link "Join the free beta" to https://altiora-recall.expo.app/; keep "a training app, not a medical product".
