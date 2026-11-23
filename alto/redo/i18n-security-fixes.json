@@ -54,5 +54,12 @@
     "zh": "除了我们计划为企业搭建的系统，Altiora Labs 还打造自有产品，从酒店宾客体验到日常工具。每个产品都源于一个值得认真解决的真实问题。",
     "hi": "व्यवसायों के लिए हम जो सिस्टम बनाने की योजना बना रहे हैं, उनके साथ-साथ, Altiora Labs हमारे अपने उत्पाद बनाता है, होटल में मेहमानों के अनुभव से लेकर रोज़मर्रा के टूल तक। हर उत्पाद एक असली समस्या से शुरू होता है जिसे अच्छी तरह हल करना ज़रूरी है।",
     "fr": "En parallèle des systèmes que nous prévoyons de créer pour les entreprises, Altiora Labs conçoit ses propres produits, de l’expérience client à l’hôtel aux outils du quotidien. Chacun part d’un vrai problème qui mérite d’être bien résolu."
+  },
+  "Free places in the first beta are limited. A training app, not a medical product.": {
+    "ar": "المقاعد المجانية في النسخة التجريبية الأولى محدودة. تطبيق تدريب، وليس منتجًا طبيًا.",
+    "ru": "Бесплатных мест в первой бете ограниченное количество. Это приложение для тренировки, а не медицинский продукт.",
+    "zh": "首轮测试版的免费名额有限。这是一款训练应用，不是医疗产品。",
+    "hi": "पहले बीटा में मुफ़्त जगहें सीमित हैं। यह एक अभ्यास ऐप है, कोई चिकित्सा उत्पाद नहीं।",
+    "fr": "Les places gratuites de la première bêta sont limitées. Une application d’entraînement, pas un produit médical."
   }
 }
