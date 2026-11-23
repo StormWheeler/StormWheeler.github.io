@@ -50,3 +50,6 @@ Confirmed on staging:
 **Include in this publish (Medium):** the home page **meta description, Open Graph description and Twitter description** still say "Altiora AI designs and runs quiet AI systems…". These are what Google results and link previews show. Change them to "Altiora AI is preparing to design and run quiet AI systems for UAE hotels, holiday homes, venues and event teams…" (Page settings → SEO and Open Graph). The old hidden hero (`.hero-description`) still holds the same sentence in the HTML. Update it the same way or delete the hidden block.
 
 **Next pass (Medium):** About statement "Altiora AI designs and runs AI systems…" → "is preparing to design and run…"; "every client interaction" → "every interaction". Then the remaining Low items: Google Fonts/Cloudflare in the Privacy notice, frame-bust, Code.gs `safe()`, spam filter, GDPR line.
+
+## Final spot-check (commit 02c7355, staging), 23 Nov 2026
+The Labs note reads "Free places in the first beta are limited." **GO for altioraai.com** once the meta, OG and Twitter descriptions and the hidden `.hero-description` no longer say "designs and runs". They were still unchanged on staging at this check. No other blockers.
