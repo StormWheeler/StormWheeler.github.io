@@ -1,6 +1,6 @@
 # Altiora AI: 7-day social plan (carousels)
 
-Drafted 23 Nov 2026. Status: **waiting for the owner's approval. No credits spent.** Security first-pass fixes applied 23 Nov (alto/security/2026-11-23-ads-7day-first-pass.md on claude/security-reviews).
+Drafted 23 Nov 2026. **Rescheduled 24 Nov:** these seven posts now run Sun 6 to Sat 12 Dec 2026 (A01 to A07). The live schedule, statuses, post folders and guides are in the Google Sheet "Altiora AI social calendar" (Drive, Altiora AI > 09 Social Media). The day headings below keep the original order. Status: **waiting for the owner's approval. No credits spent.** Security first-pass fixes applied 23 Nov (alto/security/2026-11-23-ads-7day-first-pass.md on claude/security-reviews).
 
 ## Format for every post
 
