@@ -174,6 +174,8 @@ html[dir=rtl] .rx-game{direction:rtl}
   #rx-recall.rx-playing .rx-pzone{--pw:min(300px,70vw,calc((100svh - var(--safe-top) - var(--ribh) - 96px) / 2.164))!important;top:calc(50% + (var(--safe-top) + var(--ribh) - 44px) / 2)!important;margin-top:calc(var(--pw) * -1.082);transform:none!important}
   .rx-pzone{transform-origin:50% 0}
 }
+/* Narrow phones: only the current step keeps its label; the others show just their dot, so the row fits in every language */
+@media (max-width:440px) and (orientation:portrait){.rx-dots{gap:12px;padding:0 16px}.rx-dots span:not(.on){font-size:0;gap:0}}
 @media (max-width:900px) and (orientation:portrait) and (max-height:720px){.rx-rbeat .rx-note,.rx-facts{display:none}.rx-rbeat .rx-lede{font-size:14.5px}}
 /* Phones and tablets: the site menu hides while scrolling down, so the scenes fill the whole screen.
    Text keeps a safe zone at the top (--safe-top) so the menu never covers it when it slides back in. */
