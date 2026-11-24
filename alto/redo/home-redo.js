@@ -12,7 +12,9 @@
     'hf-m': ['6b03ad53bc1d9c6c342936ed_redo-hf-m-0', '6b03ad53353012da777ac605_redo-hf-m-1', '6b03ad53353012da777ac617_redo-hf-m-2', '6b03ad9ab36f13775fe4d446_redo-hf-m-3'],
     'tf-d': ['6b03ad9a3ef7575a2bd76061_redo-tf-d-0', '6b03ad9a52495f9b0913086e_redo-tf-d-1', '6b03ad9a1cf1a4a6ac18feff_redo-tf-d-2', '6b03ad9a52495f9b0913087c_redo-tf-d-3'],
     'tf-m': ['6b03ad9a3ef7575a2bd7609e_redo-tf-m-0', '6b03addd3ef7575a2bd77db7_redo-tf-m-1', '6b03addda1e0191048c5e40e_redo-tf-m-2', '6b03addd2c2c80a0f3da5ba0_redo-tf-m-3'],
-    rc: '6b04d15f7aefe51da5c1aa32_redo-rc-hq', poster: { home: '6b03addd353012da777afb13_redo-poster-home.jpg', tessera: '6b03addd353012da777afb26_redo-poster-tessera.jpg' }
+    rc: '6b04d15f7aefe51da5c1aa32_redo-rc-hq', poster: { home: '6b03addd353012da777afb13_redo-poster-home.jpg', tessera: '6b03addd353012da777afb26_redo-poster-tessera.jpg',
+      'home-p': '6b050d3fb47e1578e3dff820_redo-poster-home-p.jpg', 'home-x': '6b050d3f7a1bf6b0b5977fbf_redo-poster-home-x.jpg',
+      'tessera-p': '6b050d407a1bf6b0b5977ff3_redo-poster-tessera-p.jpg', 'tessera-x': '6b050d407a1bf6b0b597800e_redo-poster-tessera-x.jpg' }
   };
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   // Layout modes: narrow = phone/tablet held upright (stacked layout); seq = screens too small to show the
@@ -128,7 +130,14 @@
   $('rx-greet').textContent = T(h < 5 ? 'evening' : h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening');
 
   /* ---------- posters show at once; frames stream in behind them ---------- */
-  document.querySelectorAll('.rx-sticky[data-poster]').forEach(function (s) { s.style.backgroundImage = 'url(' + CDN + A.poster[s.getAttribute('data-poster')] + ')'; });
+  // the still shown while frames load matches the frame set: portrait crop on upright phones, full HD on sharp screens
+  function posters() {
+    document.querySelectorAll('.rx-sticky[data-poster]').forEach(function (s) {
+      var k = s.getAttribute('data-poster'), v = A.poster[k + '-' + tier] || A.poster[k];
+      s.style.backgroundImage = 'url(' + CDN + v + ')'; s.style.backgroundPosition = tier === 'p' ? '50% 50%' : '';
+    });
+  }
+  posters();
 
   function film(canvas, set, focusX, stage) {
     var ctx = canvas.getContext('2d'), N = 161, imgs = new Array(N), prev = null, last = -1, started = false, gen = 0;
@@ -171,7 +180,7 @@
   var tierTimer = 0;
   addEventListener('resize', function () {
     clearTimeout(tierTimer);
-    tierTimer = setTimeout(function () { var t = pickTier(); if (t === tier) return; tier = t; homeFilm.swap('hf-' + t, t === 'p' ? .5 : .62); if (tessFilm) tessFilm.swap('tf-' + t, .5); }, 350);
+    tierTimer = setTimeout(function () { var t = pickTier(); if (t === tier) return; tier = t; posters(); homeFilm.swap('hf-' + t, t === 'p' ? .5 : .62); if (tessFilm) tessFilm.swap('tf-' + t, .5); }, 350);
   });
 
   /* ---------- scroll progress helpers ---------- */
