@@ -24,3 +24,9 @@
 - Phones now download about 10 MB for the home film. That's not a legal issue. The Data Saver fallback is good.
 
 Still open: H1 (public repo, owner's decision); the pending items (About wording, Privacy: Google Fonts/Cloudflare + GDPR line, frame-bust, Code.gs `safe()`, spam filter).
+
+## Addendum: device-matched posters, script v3 (commit b2a7501), 24 Nov 2026
+**OK TO PUBLISH.**
+- **Script v3:** the hosted `home-redo-v3.js` is byte-identical to `dist/home-redo.min.js`. Its sha384 (rh8GQ++…) matches the integrity on staging, and staging references v3.
+- **Code change:** `posters()` only chooses between fixed asset names in the script (`A.poster[k+'-'+tier]`, falling back to the old poster) on our CDN. The page has no input to it. There are still no eval, cookie, beacon or XHR calls and no third-party hosts.
+- **The 4 new posters:** plain JFIF JPEGs with no EXIF or GPS metadata. They show a generic, unbranded room: no logos, no people, no Tessera detail.
