@@ -4,15 +4,29 @@
   if (window.__rxInit || !document.getElementById('rx-home')) return; window.__rxInit = 1;
   var CDN = 'https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/';
   var A = {
+    'hf-p': ['6b046d78d1b9f25439a8bfaa_redo-hf-p-0','6b046d78c3c83cc2c350ab7d_redo-hf-p-1','6b046d78eab8af91d10fa246_redo-hf-p-2','6b046d78eab8af91d10fa254_redo-hf-p-3'],
+    'tf-p': ['6b046d78ab7f1b8337af08e0_redo-tf-p-0','6b046d7874320ff2ffd0e6e3_redo-tf-p-1','6b046d78d3a23354f1469f72_redo-tf-p-2','6b046d78fe7a2240fcf6afb4_redo-tf-p-3'],
+    'hf-x': ['6b046d78f7c054abbebd886b_redo-hf-x-0','6b046d7874320ff2ffd0e6f1_redo-hf-x-1','6b046d7874320ff2ffd0e6ff_redo-hf-x-2','6b046d7974320ff2ffd0e70d_redo-hf-x-3'],
+    'tf-x': ['6b046d79cecbe22f9db05b9a_redo-tf-x-0','6b046d798397d6132e656248_redo-tf-x-1','6b046d798397d6132e656256_redo-tf-x-2','6b046d79df86a2755dfe83b2_redo-tf-x-3'],
     'hf-d': ['6b03ace2b04ed58a168a663e_redo-hf-d-0', '6b03ad5234dc36a9d9f6df34_redo-hf-d-1', '6b03ad5291fee58916a42412_redo-hf-d-2', '6b03ad53353012da777ac5d0_redo-hf-d-3'],
     'hf-m': ['6b03ad53bc1d9c6c342936ed_redo-hf-m-0', '6b03ad53353012da777ac605_redo-hf-m-1', '6b03ad53353012da777ac617_redo-hf-m-2', '6b03ad9ab36f13775fe4d446_redo-hf-m-3'],
     'tf-d': ['6b03ad9a3ef7575a2bd76061_redo-tf-d-0', '6b03ad9a52495f9b0913086e_redo-tf-d-1', '6b03ad9a1cf1a4a6ac18feff_redo-tf-d-2', '6b03ad9a52495f9b0913087c_redo-tf-d-3'],
     'tf-m': ['6b03ad9a3ef7575a2bd7609e_redo-tf-m-0', '6b03addd3ef7575a2bd77db7_redo-tf-m-1', '6b03addda1e0191048c5e40e_redo-tf-m-2', '6b03addd2c2c80a0f3da5ba0_redo-tf-m-3'],
-    rc: '6b03addd033f4b535ab5660a_redo-rc', poster: { home: '6b03addd353012da777afb13_redo-poster-home.jpg', tessera: '6b03addd353012da777afb26_redo-poster-tessera.jpg' }
+    rc: '6b04d15f7aefe51da5c1aa32_redo-rc-hq', poster: { home: '6b03addd353012da777afb13_redo-poster-home.jpg', tessera: '6b03addd353012da777afb26_redo-poster-tessera.jpg' }
   };
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var narrow = matchMedia('(max-width:900px)');
-  var small = innerWidth <= 900 || (navigator.connection && navigator.connection.saveData);
+  // Layout modes: narrow = phone/tablet held upright (stacked layout); seq = screens too small to show the
+  // Tessera title and end card together, so they take turns; everything else uses the side-by-side layout.
+  var narrow = matchMedia('(max-width:900px) and (orientation:portrait)');
+  var seq = matchMedia('(max-width:900px) and (orientation:portrait), (orientation:landscape) and (max-height:560px)');
+  // Frame-pack tier: m = data saver (light), p = phone upright (810x1080 crop from the 1080p master),
+  // x = sharp screens (1920x1080), d = standard screens (1280x720). Re-chosen when the phone is turned.
+  function pickTier() {
+    return (navigator.connection && navigator.connection.saveData) ? 'm'
+      : (innerWidth <= 900 && innerHeight >= .9 * innerWidth) ? 'p'
+      : (innerWidth * (devicePixelRatio || 1) > 1600) ? 'x' : 'd';
+  }
+  var tier = pickTier();
   var store = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
   var $ = function (id) { return document.getElementById(id); };
   var root = document.documentElement;
@@ -98,9 +112,12 @@
 
   /* ---------- layout: sit under the sticky site menu and the personal bar ---------- */
   var nav = document.querySelector('.navbar-4, .w-nav');
-  var NAVH = 0;
+  var NAVH = 0, ST = 0;
+  function SH(el) { var st = el && el.querySelector('.rx-sticky'); return st ? st.offsetHeight : innerHeight; }
+  function cssPx(v) { return parseFloat(getComputedStyle(root).getPropertyValue(v)) || 0; }
   function measure() {
     NAVH = nav ? nav.offsetHeight : 0; root.style.setProperty('--navh', NAVH + 'px');
+    var st0 = document.querySelector('#rx-home .rx-sticky'); ST = st0 ? (parseFloat(getComputedStyle(st0).top) || 0) : NAVH;
     var rb = $('rx-ribbon'); root.style.setProperty('--ribh', (rb && !rb.hidden ? rb.offsetHeight : 0) + 'px');
     if (window.__rxFit) window.__rxFit();
   }
@@ -114,9 +131,10 @@
   document.querySelectorAll('.rx-sticky[data-poster]').forEach(function (s) { s.style.backgroundImage = 'url(' + CDN + A.poster[s.getAttribute('data-poster')] + ')'; });
 
   function film(canvas, set, focusX, stage) {
-    var ctx = canvas.getContext('2d'), N = 161, imgs = new Array(N), last = -1, started = false;
-    function size() { var r = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2); canvas.width = Math.max(1, Math.round(r.width * dpr)); canvas.height = Math.max(1, Math.round(r.height * dpr)); last = -1; }
-    function nearest(i) { for (var d = 0; d < N; d++) { var a = imgs[i - d], b = imgs[i + d]; if (a) return a; if (b) return b; } return null; }
+    var ctx = canvas.getContext('2d'), N = 161, imgs = new Array(N), prev = null, last = -1, started = false, gen = 0;
+    function size() { var r = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 3); canvas.width = Math.max(1, Math.round(r.width * dpr)); canvas.height = Math.max(1, Math.round(r.height * dpr)); last = -1; }
+    function near(arr, i) { for (var d = 0; d < N; d++) { var a = arr[i - d], b = arr[i + d]; if (a) return a; if (b) return b; } return null; }
+    function nearest(i) { return near(imgs, i) || (prev ? near(prev, i) : null); }
     function cover(im, alpha) {
       var cw = canvas.width, ch = canvas.height, iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height;
       var s = Math.max(cw / iw, ch / ih), w = iw * s, hh = ih * s, x = Math.min(0, Math.max(cw - w, (cw - w) * focusX));
@@ -128,13 +146,15 @@
       var b = nearest(Math.min(N - 1, i + 1)); cover(a, 1); if (b && b !== a && t > .02) cover(b, t); ctx.globalAlpha = 1;
     }
     function load(k) {
-      if (k > 3) return;
+      if (k > 3) { prev = null; return; }
+      var g = gen;
       fetch(CDN + A[set][k] + '.json').then(function (r) { return r.json(); }).then(function (j) {
+        if (g !== gen) return;
         var keys = Object.keys(j.f), left = keys.length;
         keys.forEach(function (key) {
           var im = new Image(); im.decoding = 'async';
-          im.onload = function () { imgs[+key] = im; last = -1; if (--left === 0) load(k + 1); };
-          im.onerror = function () { if (--left === 0) load(k + 1); };
+          im.onload = function () { if (g !== gen) return; imgs[+key] = im; last = -1; if (--left === 0) load(k + 1); };
+          im.onerror = function () { if (g === gen && --left === 0) load(k + 1); };
           im.src = j.f[key];
         });
       }).catch(function () {});
@@ -142,14 +162,20 @@
     function start() { if (started) return; started = true; size(); load(0); }
     new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) start(); }); }, { rootMargin: '150% 0px' }).observe(stage);
     addEventListener('resize', function () { if (started) size(); });
-    return { draw: function (p) { if (started) draw(p); }, redraw: function () { last = -1; } };
+    function swap(newSet, newFocus) { if (newSet === set) return; set = newSet; focusX = newFocus; gen++; prev = imgs; imgs = new Array(N); last = -1; if (started) load(0); }
+    return { draw: function (p) { if (started) draw(p); }, redraw: function () { last = -1; }, swap: swap };
   }
   var homeEl = $('rx-home'), tessEl = $('rx-tessera'), rcEl = $('rx-recall');
-  var homeFilm = film($('rx-home-canvas'), small ? 'hf-m' : 'hf-d', .62, homeEl);
-  var tessFilm = tessEl ? film($('rx-tess-canvas'), small ? 'tf-m' : 'tf-d', .5, tessEl) : null;
+  var homeFilm = film($('rx-home-canvas'), 'hf-' + tier, tier === 'p' ? .5 : .62, homeEl);
+  var tessFilm = tessEl ? film($('rx-tess-canvas'), 'tf-' + tier, .5, tessEl) : null;
+  var tierTimer = 0;
+  addEventListener('resize', function () {
+    clearTimeout(tierTimer);
+    tierTimer = setTimeout(function () { var t = pickTier(); if (t === tier) return; tier = t; homeFilm.swap('hf-' + t, t === 'p' ? .5 : .62); if (tessFilm) tessFilm.swap('tf-' + t, .5); }, 350);
+  });
 
   /* ---------- scroll progress helpers ---------- */
-  function prog(el) { var r = el.getBoundingClientRect(), span = el.offsetHeight - (innerHeight - NAVH); return span > 0 ? Math.max(0, Math.min(1, (NAVH - r.top) / span)) : 0; }
+  function prog(el) { var r = el.getBoundingClientRect(), span = el.offsetHeight - SH(el); return span > 0 ? Math.max(0, Math.min(1, (ST - r.top) / span)) : 0; }
   function win(p, a, b, f) { f = f || .05; if (p < a || p > b) return 0; return Math.max(0, Math.min(1, (p - a) / f, (b - p) / f)); }
   function inView(el) { var r = el.getBoundingClientRect(); return r.bottom > -50 && r.top < innerHeight + 50; }
   var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
@@ -186,22 +212,61 @@
     }).catch(function () {});
   }
   if (rcEl) new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) loadRc(); }); }, { rootMargin: '150% 0px' }).observe(rcEl);
-  function fitPhone() {
-    if (!rcEl) return;
-    var ribh = parseFloat(getComputedStyle(root).getPropertyValue('--ribh')) || 0, navh = parseFloat(getComputedStyle(root).getPropertyValue('--navh')) || 0;
-    if (!narrow.matches) {
-      pZone.style.cssText = ''; rcMark.style.top = '';
-      var last = $('rx-rlast'), hh = last.querySelector('.rx-inner').offsetHeight, vh = innerHeight - navh;
-      var markTop = vh - vh * .09 - 96 - 18;
-      lastShift = Math.max(0, Math.min(vh / 2 + hh / 2 - markTop, vh / 2 - hh / 2 - 20)); return;
+  /* ---------- fit every scene to the screen it is on (no clipping, no overlaps) ---------- */
+  var kLast = 1, fitQ = 0;
+  function rlastIn() { var l = $('rx-rlast'); return l ? +l.getAttribute('data-in') : 1; }
+  function scaleTo(el, k, origin) { el.style.transformOrigin = origin; el.style.transform = k < .995 ? 'scale(' + k.toFixed(3) + ')' : ''; return k; }
+  function fitAll() {
+    if (reduce) return;
+    var safe = cssPx('--safe-top'), ribh = cssPx('--ribh'), side = root.dir === 'rtl' ? 'right' : 'left';
+    // home: bottom-anchored text must fit between the menu zone and its bottom offset
+    var hH = SH(homeEl);
+    beats.forEach(function (b) {
+      var inner = b.querySelector('.rx-inner'); if (!inner) return;
+      var avail = hH - safe - (parseFloat(getComputedStyle(b).bottom) || 0) - 14;
+      scaleTo(inner, Math.min(1, avail / inner.offsetHeight), side + ' bottom');
+    });
+    // Tessera: title block at the top, end card at the bottom
+    if (tessEl) {
+      var tH = SH(tessEl), top = $('rx-ttitle').closest('.rx-ttop'), endW = tEnd.querySelector('.rx-wrap');
+      var endB = parseFloat(getComputedStyle(tEnd).bottom) || 0, topY = parseFloat(getComputedStyle(top).top) || 0;
+      var kEnd = scaleTo(endW, Math.min(1, (tH - safe - ribh - endB - 14) / endW.offsetHeight), side + ' bottom');
+      var roomTop = tH - topY - 14 - (seq.matches ? 0 : endW.offsetHeight * kEnd + endB + 16);
+      scaleTo(top, Math.min(1, roomTop / top.offsetHeight), side + ' top');
     }
+    if (!rcEl) return;
+    var H = SH(rcEl), areaTop = safe + ribh + 12;
+    if (!narrow.matches) {
+      // side by side: beats centred in the free area; the last one rises to make room for the Recall mark
+      pZone.style.cssText = ''; rcMark.style.top = ''; kLast = 1;
+      var areaBot = H - 44, c = (areaTop + areaBot) / 2;
+      var markTop = H - (parseFloat(getComputedStyle(rcMark).bottom) || 0) - rcMark.offsetHeight;
+      rcBeats.forEach(function (b) {
+        var inner = b.querySelector('.rx-inner'), h0 = inner.offsetHeight;
+        if (b.id !== 'rx-rlast') { scaleTo(inner, Math.min(1, (areaBot - areaTop) / h0), side + ' center'); return; }
+        var k = scaleTo(inner, Math.min(1, (areaBot - areaTop) / h0, (markTop - 14 - areaTop) / h0), side + ' center');
+        var hh = h0 * k; lastShift = Math.max(0, c + hh / 2 - (markTop - 14));
+      });
+      return;
+    }
+    // phone held upright: the phone sits above the text; it is sized so it never touches any step's text,
+    // and shrinks smoothly (scaled from its top edge) only while the taller last step is on screen
     lastShift = 0; if (playing) { pZone.style.cssText = ''; return; }
-    var beatH = Math.max.apply(null, rcBeats.map(function (b) { return b.querySelector('.rx-inner').offsetHeight; }));
-    var topY = ribh + 12, vh2 = innerHeight - navh;
-    var ph = Math.max(110, Math.min(500, vh2 - 58 - 18 - beatH - topY - 14)), w = ph / 2.164;
-    pZone.style.setProperty('--pw', w + 'px'); pZone.style.top = (topY + ph / 2) + 'px'; rcMark.style.top = topY + 'px';
+    var dotsH = 58, minPh = 150, ph = 1e9, phLast = 1e9;
+    rcBeats.forEach(function (b) {
+      var inner = b.querySelector('.rx-inner'), h0 = inner.offsetHeight;
+      var k = scaleTo(inner, Math.min(1, (H - areaTop - dotsH - minPh - 30) / h0), side + ' bottom');
+      var room = H - dotsH - 18 - h0 * k - areaTop - 14;
+      if (b.id === 'rx-rlast') phLast = room; else ph = Math.min(ph, room);
+    });
+    ph = Math.max(minPh, Math.min(500, innerWidth * .66 * 2.164, ph));
+    kLast = Math.max(.35, Math.min(1, phLast / ph));
+    pZone.style.setProperty('--pw', (ph / 2.164) + 'px'); pZone.style.top = (areaTop + ph / 2) + 'px'; rcMark.style.top = areaTop + 'px';
   }
-  window.__rxFit = fitPhone; setTimeout(fitPhone, 50); addEventListener('load', fitPhone);
+  function fitSoon() { cancelAnimationFrame(fitQ); fitQ = requestAnimationFrame(fitAll); }
+  if (window.ResizeObserver) { var ro = new ResizeObserver(fitSoon); document.querySelectorAll('#rx-home .rx-inner, #rx-recall .rx-inner, .rx-ttop, #rx-tend .rx-wrap').forEach(function (e) { ro.observe(e); }); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitSoon);
+  window.__rxFit = fitAll; setTimeout(fitAll, 50); addEventListener('load', fitAll);
   function markFrame(k) {
     var j = reduce ? 1 : ease(Math.max(0, Math.min(1, (k - .76) / .14)));
     rcMark.style.opacity = reduce ? 1 : Math.min(1, Math.max(0, (k - .72) / .06));
@@ -225,8 +290,8 @@
       var jj = Math.max(0, Math.min(1, (k - .72) / .2));
       hg.style.transform = 'translateX(' + -(1 - jj) * 60 + 'px)'; hn.style.transform = 'translateX(' + (1 - jj) * 60 + 'px)';
       var endO = reduce ? 1 : Math.min(1, Math.max(0, (k - .68) / .12));
-      tEnd.style.opacity = endO; tScrim.style.opacity = reduce ? 1 : (.2 + .8 * Math.min(1, Math.max(0, (k - .3) / .3)));
-      if (narrow.matches && !reduce) { tPanel.style.opacity = 1 - Math.min(1, Math.max(0, (k - .58) / .08)); tTitle.style.opacity = 1 - endO; } else { tPanel.style.opacity = ''; tTitle.style.opacity = ''; }
+      tEnd.style.opacity = (seq.matches && !reduce) ? Math.min(1, Math.max(0, (k - .68) / .06)) : endO; /* phones: quick, clean reveal */ tScrim.style.opacity = reduce ? 1 : (.2 + .8 * Math.min(1, Math.max(0, (k - .3) / .3)));
+      if (seq.matches && !reduce) { tPanel.style.opacity = 1 - Math.min(1, Math.max(0, (k - .58) / .08)); tTitle.style.opacity = 1 - Math.min(1, Math.max(0, (k - .6) / .07)); /* title gone before end card starts at .68 */ } else { tPanel.style.opacity = ''; tTitle.style.opacity = ''; }
     }
     if (rcEl && inView(rcEl)) {
       var rp = prog(rcEl); rs += (rp - rs) * (reduce ? 1 : .12); var kk = reduce ? 1 : rs;
@@ -240,14 +305,17 @@
       glare.style.backgroundPosition = (50 + (ry + mx * 7) * 1.6) + '% 0';
       if (!playing) setScreen(screenFor(kk));
       markFrame(kk);
+      var oLast = 0;
       rcBeats.forEach(function (b) {
         var o = reduce ? (b.id === 'rx-rlast' ? 1 : 0) : win(kk, +b.getAttribute('data-in'), +b.getAttribute('data-out'), .035);
         b.style.opacity = o; b.style.visibility = o < .01 ? 'hidden' : 'visible';
         b.style.transform = narrow.matches ? 'translateY(' + (1 - o) * 14 + 'px)' : 'translateY(calc(-50% + ' + ((1 - o) * 14 - (b.id === 'rx-rlast' ? lastShift : 0)) + 'px))';
+        if (b.id === 'rx-rlast') oLast = o;
       });
+      if (narrow.matches && !playing) { var lin = rlastIn(), shr = Math.max(0, Math.min(1, (kk - (lin - .045)) / .04)), ps = 1 - (1 - kLast) * Math.max(shr, oLast); /* phone finishes shrinking just before the last step fades in */ pZone.style.transform = ps < .995 ? 'scale(' + ps.toFixed(3) + ')' : ''; }
       var d = kk < .36 ? 0 : kk < .58 ? 1 : kk < .74 ? 2 : kk < .88 ? 3 : 4;
       dots.forEach(function (s, i) { s.classList.toggle('on', i === d && kk > .17); });
-      if (playing && kk < .84) { playing = false; rcEl.classList.remove('rx-playing'); fitPhone(); }
+      if (playing && kk < .84) { playing = false; rcEl.classList.remove('rx-playing'); fitAll(); }
     }
     requestAnimationFrame(frame);
   }
@@ -289,11 +357,11 @@
     var sub = $('rx-rsub'); if (sub) sub.textContent = key === 'me' ? T('meSub') : (sub.getAttribute('data-rx-orig') || sub.textContent);
     $('rx-rtag').textContent = T(P.tag); $('rx-rtext').textContent = T(P.text); $('rx-rchange').textContent = T('Change');
     ribbon.hidden = false; measure(); store.set('altiora-path', key);
-    if (scroll) setTimeout(function () { var y = ribbon.getBoundingClientRect().top + scrollY - (parseFloat(getComputedStyle(root).getPropertyValue('--navh')) || 0); scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); }, 60);
+    if (scroll) setTimeout(function () { var y = ribbon.getBoundingClientRect().top + scrollY - ST; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); }, 60);
   }
   var sub0 = $('rx-rsub'); if (sub0) setTimeout(function () { sub0.setAttribute('data-rx-orig', sub0.textContent); }, 0);
   document.querySelectorAll('[data-path]').forEach(function (b) { b.addEventListener('click', function () { apply(b.getAttribute('data-path'), true); }); });
-  $('rx-rchange').addEventListener('click', function () { var navh = parseFloat(getComputedStyle(root).getPropertyValue('--navh')) || 0; var y = homeEl.getBoundingClientRect().top + scrollY - navh + (homeEl.offsetHeight - (innerHeight - navh)) * .84; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); });
+  $('rx-rchange').addEventListener('click', function () { var y = homeEl.getBoundingClientRect().top + scrollY - ST + (homeEl.offsetHeight - SH(homeEl)) * .84; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); });
   var saved = store.get('altiora-path'); if (saved && PATHS[saved]) apply(saved, false);
 
   /* ---------- Recall mini session: Settle, Watch, Words (runs in the browser only) ---------- */
@@ -308,8 +376,7 @@
   function btn(id, label, cls) { return '<button class="rx-tbtn' + (cls ? ' ' + cls : '') + '" id="' + id + '">' + esc(label) + '</button>'; }
   $('rx-play').addEventListener('click', function () {
     playing = true; rcEl.classList.add('rx-playing'); pZone.style.cssText = '';
-    var navh = parseFloat(getComputedStyle(root).getPropertyValue('--navh')) || 0;
-    var y = rcEl.getBoundingClientRect().top + scrollY - navh + (rcEl.offsetHeight - (innerHeight - navh)) * .95;
+    var y = rcEl.getBoundingClientRect().top + scrollY - ST + (rcEl.offsetHeight - SH(rcEl)) * .95;
     scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
     setScreen('game'); startSession();
   });

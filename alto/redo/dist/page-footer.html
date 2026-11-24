@@ -1,0 +1,14 @@
+<!-- Existing Webflow nav-close behavior (keep) -->
+<script>
+  document.querySelectorAll('.w-nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      const menuBtn = document.querySelector('.w-nav-button');
+      if (menuBtn && menuBtn.offsetParent !== null) {
+        menuBtn.click();
+      }
+    });
+  });
+</script>
+
+<!-- Altiora home redesign (Nov 2026); source: alto/redo/home-redo.js, built to alto/redo/dist/home-redo.min.js -->
+<script src="https://cdn.prod.website-files.com/68388043b4e79ad0df690cb6/6b04fbb3b7c69104e9167d4c_home-redo-v2.js" integrity="sha384-2ddcaetgHrWxpI1PvjglIgnEi4oWmhCn3UJtqShuoYETojmK4PYxRU0LifYWfx4J" crossorigin="anonymous"></script>

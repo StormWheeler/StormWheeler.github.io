@@ -2,7 +2,7 @@
 /* Altiora home redesign (Nov 2026): scroll-film stages, personalisation, Tessera and Recall scenes.
    Every class starts with rx- so nothing collides with the Webflow styles. */
 :root{--rx-ink:#0B1A13;--rx-forest:#0F2219;--rx-moss:#16301F;--rx-line:#24412F;--rx-text:#EEF0E8;--rx-muted:#A9B8AF;--rx-soft:#C9D3CC;--rx-gold:#D4AF37;--rx-gold2:#E3B65E;--rx-green:#3C9A6C;
-  --rx-display:"Archivo","Helvetica Neue",Arial,sans-serif;--rx-body:"Source Sans 3","Segoe UI",Arial,sans-serif;--rx-mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;--navh:102px;--ribh:0px}
+  --rx-display:"Archivo","Helvetica Neue",Arial,sans-serif;--rx-body:"Source Sans 3","Segoe UI",Arial,sans-serif;--rx-mono:"Geist Mono",ui-monospace,Menlo,Consolas,monospace;--navh:102px;--ribh:0px;--safe-top:0px;--navvis:0px}
 /* the old hero and the old Labs band are replaced by the new stages */
 .section-hero,.alband{display:none!important}
 
@@ -70,7 +70,7 @@ html[dir=rtl] #rx-home .rx-shade{background:linear-gradient(270deg,rgba(11,26,19
 #rx-tessera{height:290vh}
 #rx-tessera .rx-shade{background:linear-gradient(0deg,rgba(11,26,19,.92) 0%,rgba(11,26,19,0) 34%),linear-gradient(180deg,rgba(11,26,19,.7) 0%,rgba(11,26,19,0) 22%)}
 .rx-scrim{position:absolute;inset:0 0 auto 0;height:58%;pointer-events:none;opacity:.2;background:linear-gradient(180deg,rgba(11,26,19,.92) 0%,rgba(11,26,19,.78) 38%,rgba(11,26,19,.35) 70%,rgba(11,26,19,0) 100%)}
-.rx-ttop{position:absolute;top:calc(var(--ribh) + 26px);left:0;right:0}
+.rx-ttop{position:absolute;top:calc(var(--safe-top) + var(--ribh) + 26px);left:0;right:0}
 .rx-ttop .rx-wrap{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap}
 .rx-ttitle{display:grid;gap:10px;max-width:520px;text-shadow:0 2px 22px rgba(6,14,10,.55),0 1px 3px rgba(6,14,10,.5)}
 .rx-ttitle h2{font-size:clamp(28px,3.6vw,44px)!important;line-height:1.1!important}
@@ -94,7 +94,7 @@ html[dir=rtl] #rx-home .rx-shade{background:linear-gradient(270deg,rgba(11,26,19
 .rx-tiles i{border-radius:18%;background:rgba(238,240,232,.04);border:1px solid rgba(238,240,232,.05);transition:background .5s,box-shadow .5s}
 .rx-tiles i.g{background:rgba(227,182,94,.55);box-shadow:0 0 60px rgba(227,182,94,.35)}
 .rx-tiles i.b{background:rgba(142,190,226,.45);box-shadow:0 0 60px rgba(142,190,226,.3)}
-.rx-rbeat{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);will-change:opacity,transform;pointer-events:none}
+.rx-rbeat{position:absolute;left:0;right:0;top:calc(50% + (var(--safe-top) + var(--ribh) - 44px) / 2);transform:translateY(-50%);will-change:opacity,transform;pointer-events:none}
 .rx-rbeat .rx-inner{max-width:min(520px,44vw);display:grid;gap:16px;pointer-events:auto}
 .rx-rbeat h2{font-size:clamp(34px,4.4vw,58px)!important;line-height:1.02!important}
 .rx-rbeat h2 em{font-style:normal;color:var(--rx-gold2)}
@@ -115,7 +115,7 @@ html[dir=rtl] #rx-home .rx-shade{background:linear-gradient(270deg,rgba(11,26,19
 .rx-dots span::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 .rx-dots span.on{opacity:1;color:var(--rx-text)}
 /* 3D phone */
-.rx-pzone{position:absolute;top:50%;inset-inline-end:clamp(16px,12vw,220px);width:var(--pw);height:calc(var(--pw) * 2.164);margin-top:calc(var(--pw) * -1.082);perspective:1600px;--pw:min(300px,34vh)}
+.rx-pzone{position:absolute;top:calc(50% + (var(--safe-top) + var(--ribh) - 44px) / 2);inset-inline-end:clamp(16px,12vw,220px);width:var(--pw);height:calc(var(--pw) * 2.164);margin-top:calc(var(--pw) * -1.082);perspective:1600px;--pw:min(300px,calc((100svh - var(--navh) - var(--ribh) - 104px) / 2.164))}
 .rx-p3d{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
 .rx-face{position:absolute;inset:0;border-radius:calc(var(--pw) * .16);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .rx-front{transform:translateZ(7px);padding:calc(var(--pw) * .035);background:linear-gradient(145deg,#26352c,#0a120d);box-shadow:0 0 0 1px rgba(227,182,94,.4)}
@@ -160,7 +160,7 @@ html[dir=rtl] .rx-game{direction:rtl}
 .rx-mark svg{width:96px;height:96px;flex:none;overflow:visible;filter:drop-shadow(0 18px 36px rgba(0,0,0,.45))}
 .rx-mark b{display:block;font:600 22px var(--rx-display);color:var(--rx-text)}
 .rx-mark span{display:block;font-size:14.5px;color:var(--rx-muted)}
-@media (max-width:900px){
+@media (max-width:900px) and (orientation:portrait){
   .rx-pzone{--pw:min(168px,19vh);inset-inline-end:50%;margin-inline-end:calc(var(--pw) * -.5)}
   .rx-rbeat{top:auto;bottom:calc(58px + env(safe-area-inset-bottom,0px));transform:none}
   .rx-rbeat .rx-inner{max-width:none;gap:10px}
@@ -168,11 +168,66 @@ html[dir=rtl] .rx-game{direction:rtl}
   .rx-rbeat .rx-lede{font-size:15.5px}
   .rx-tiles{width:86vw;inset-inline-end:7vw;top:34%;opacity:.35}
   .rx-dots{gap:10px;font-size:10px}
-  .rx-mark{bottom:auto;top:calc(var(--ribh) + 12px)}.rx-mark .rx-wrap{justify-content:flex-end}.rx-mark svg{width:46px;height:46px}.rx-mark .rx-lbl{display:none}
+  .rx-mark{bottom:auto;top:calc(var(--safe-top) + var(--ribh) + 12px)}.rx-mark .rx-wrap{justify-content:flex-end}.rx-mark svg{width:46px;height:46px}.rx-mark .rx-lbl{display:none}
   #rx-recall.rx-playing .rx-rbeat{opacity:0!important;visibility:hidden!important}
-  #rx-recall.rx-playing .rx-pzone{--pw:min(300px,70vw,36vh);top:47%;margin-top:calc(var(--pw) * -1.082)}
+  #rx-recall.rx-playing .rx-mark{opacity:0!important}
+  #rx-recall.rx-playing .rx-pzone{--pw:min(300px,70vw,calc((100svh - var(--safe-top) - var(--ribh) - 96px) / 2.164))!important;top:calc(50% + (var(--safe-top) + var(--ribh) - 44px) / 2)!important;margin-top:calc(var(--pw) * -1.082);transform:none!important}
+  .rx-pzone{transform-origin:50% 0}
 }
-@media (max-width:900px) and (max-height:720px){.rx-rbeat .rx-note,.rx-facts{display:none}.rx-rbeat .rx-lede{font-size:14.5px}}
+@media (max-width:900px) and (orientation:portrait) and (max-height:720px){.rx-rbeat .rx-note,.rx-facts{display:none}.rx-rbeat .rx-lede{font-size:14.5px}}
+/* Phones and tablets: the site menu hides while scrolling down, so the scenes fill the whole screen.
+   Text keeps a safe zone at the top (--safe-top) so the menu never covers it when it slides back in. */
+@media (max-width:991px),(max-height:560px){
+  :root{--safe-top:var(--navh)}
+  .rx-sticky{top:0;height:100vh;height:100svh}
+  .rx-ribbon{top:0;transform:translateY(var(--navvis));transition:transform .32s ease}
+}
+/* Short landscape screens (phones on their side): side-by-side layout, compact type */
+@media (orientation:landscape) and (max-height:560px){
+  #rx-home .rx-shade,html[dir=rtl] #rx-home .rx-shade{background:linear-gradient(90deg,rgba(11,26,19,.9) 0%,rgba(11,26,19,.62) 46%,rgba(11,26,19,0) 74%),linear-gradient(0deg,rgba(11,26,19,.9) 0%,rgba(11,26,19,0) 34%)}
+  html[dir=rtl] #rx-home .rx-shade{background:linear-gradient(270deg,rgba(11,26,19,.9) 0%,rgba(11,26,19,.62) 46%,rgba(11,26,19,0) 74%),linear-gradient(0deg,rgba(11,26,19,.9) 0%,rgba(11,26,19,0) 34%)}
+  .rx-beat{bottom:max(14px,5vh)}
+  .rx-beat .rx-inner{gap:8px;max-width:min(620px,66vw)}
+  .rx-h1{font-size:clamp(22px,8.2vh,40px)!important}
+  .rx-greet{font-size:15px}.rx-eyebrow,.rx-k{font-size:11px}
+  .rx-lede{font-size:14px;line-height:1.4}
+  .rx-chip{font-size:12.5px;padding:3px 12px 3px 5px}
+  .rx-cue{display:none}
+  .rx-ticks{gap:6px;margin-top:0}
+  .rx-tick{padding:6px 12px;font-size:14px;line-height:1.35;grid-template-columns:50px 1fr;gap:10px}
+  .rx-tick b{font-size:12.5px}
+  .rx-h2{font-size:clamp(20px,7vh,32px)!important}
+  .rx-paths{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:none}
+  .rx-path{padding:10px 12px;gap:3px}.rx-path strong{font-size:15px}.rx-path span{font-size:12.5px;line-height:1.3}
+  .rx-ttop{top:calc(var(--safe-top) + var(--ribh) + 10px)}
+  .rx-ttitle{gap:6px;max-width:58vw}.rx-ttitle h2{font-size:clamp(20px,6.6vh,30px)!important}
+  .rx-panel{padding:8px 12px;gap:4px;min-width:0}.rx-temp{font-size:30px}.rx-temp small{font-size:14px}.rx-panel .rx-prow{font-size:11px;gap:12px}
+  .rx-tend{bottom:max(12px,5vh)}.rx-tend .rx-wrap{gap:14px}.rx-token{width:56px;height:56px}
+  .rx-tcopy{gap:6px}.rx-tcopy h3{font-size:clamp(18px,6.4vh,26px)!important}.rx-tcopy .rx-lede{display:none}
+  .rx-pzone{inset-inline-end:clamp(16px,8vw,120px);--pw:calc((100svh - var(--safe-top) - var(--ribh) - 24px) / 2.164);top:calc(50% + (var(--safe-top) + var(--ribh)) / 2)}
+  .rx-rbeat .rx-inner{max-width:min(520px,54vw);gap:8px}
+  .rx-rbeat h2{font-size:clamp(22px,8vh,34px)!important}.rx-rbeat h3{font-size:clamp(20px,7vh,28px)!important}
+  .rx-rbeat .rx-lede{font-size:14px}.rx-rbeat .rx-note,.rx-facts{display:none}
+  .rx-live{padding:4px 10px;font-size:11px}
+  .rx-btn{padding:9px 16px;font-size:14.5px}
+  .rx-dots{bottom:8px;gap:12px;font-size:10px;justify-content:flex-start;padding-inline-start:max(20px,env(safe-area-inset-left,0px))}
+  .rx-mark{bottom:max(34px,9vh)}.rx-mark svg{width:52px;height:52px}.rx-mark b{font-size:16px}.rx-mark span{font-size:12px}.rx-mark .rx-wrap{gap:12px}
+  .rx-tiles{width:min(70vh,420px)}
+  /* the mini session gets a full-height panel instead of a tiny phone */
+  #rx-recall.rx-playing .rx-rbeat{opacity:0!important;visibility:hidden!important}
+  #rx-recall.rx-playing .rx-mark{opacity:0!important}
+  #rx-recall.rx-playing .rx-pzone{--pw:150px;width:min(440px,62vw);height:calc(100svh - var(--safe-top) - var(--ribh) - 40px);top:calc(var(--safe-top) + var(--ribh) + 8px);margin-top:0;inset-inline-end:50%;margin-inline-end:calc(min(440px,62vw) / -2)}
+  #rx-recall.rx-playing .rx-front::before,#rx-recall.rx-playing .rx-edge,#rx-recall.rx-playing .rx-pshadow{display:none}
+  #rx-recall.rx-playing .rx-screen>*{top:0;height:100%}
+  .rx-game{padding:10px 14px 12px;gap:8px;font-size:14px}
+  .rx-gbody{gap:8px}.rx-gbody h4{font-size:17px!important}
+  .rx-breath{width:auto;height:min(150px,30vh)}
+  .rx-wbox{aspect-ratio:auto;height:min(150px,30vh);font-size:26px}
+  .rx-word{aspect-ratio:auto;height:min(120px,26vh);font-size:24px}
+  .rx-grid8 button{padding:5px 9px;font-size:13px}
+  .rx-res div{padding:6px 10px;font-size:13px}.rx-doneline{font-size:16px}
+  .rx-tbtn{padding:9px}
+}
 @media (prefers-reduced-motion:reduce){
   #rx-home,#rx-tessera,#rx-recall{height:auto}
   .rx-sticky{position:relative;top:0;height:auto;min-height:calc(100svh - var(--navh))}

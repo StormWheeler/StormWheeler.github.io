@@ -50,3 +50,19 @@
 .ac-header .ac-nav a:last-child{border-bottom:0;color:#D4AF37}
 }
 </style>
+
+<!-- Phones and tablets: slimmer menu bar that slides away while scrolling down and returns on scroll up (script: registered site script "AltioraNav", source alto/site-nav.js) -->
+<style>
+@media (max-width:991px),(max-height:560px){
+.navbar-4,.ac-header{transition:transform .32s ease}
+html.alt-nav-up .navbar-4,html.alt-nav-up .ac-header{transform:translateY(-100%)}
+.navbar-4 .container-6{padding-top:8px;padding-bottom:8px}
+.navbar-4 .image-6,.ac-header .image-6{height:40px;width:auto}
+.ac-header{padding-top:8px!important;padding-bottom:8px!important}
+}
+@media (orientation:landscape) and (max-height:560px){
+.navbar-4 .image-6,.ac-header .image-6{height:34px}
+.navbar-4 .menu-button{padding-top:6px;padding-bottom:6px}
+}
+@media (prefers-reduced-motion:reduce){.navbar-4,.ac-header{transition:none}}
+</style>

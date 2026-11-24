@@ -191,8 +191,15 @@ async function scrollThrough(p) {
   const home = liveHtml('/'), labs = liveHtml('/labs');
   const footer = rd('footer-code.html') + '\n\n<!-- Altiora language switch -->\n<script>\n' + rd('i18n.js').trimEnd() + '\n</script>';
   [['site head code', home, rd('head-code.html')], ['site footer code', home, footer],
-   ['home guest animation', home, rd('home/guest-embed.html')], ['home redesign styles', home, rd('redo/dist/page-head.html')], ['home redesign script', home, '<script>' + rd('redo/dist/home-redo.min.js') + '</script>'], ['home scroll film', home, rd('redo/dist/hero-embed.html')], ['home Tessera teaser', home, rd('redo/dist/tessera-embed.html')], ['home Recall section', home, rd('redo/dist/recall-embed.html')], ['home team animation', home, rd('home/team-embed.html')], ['home Labs band', home, rd('home/labs-band-embed.html')], ['Labs page', labs, rd('labs/labs-embed.html')]]
+   ['home guest animation', home, rd('home/guest-embed.html')], ['home redesign styles', home, rd('redo/dist/page-head.html')], ['home redesign script', home, rd('redo/dist/page-footer.html').match(/<script src=[^]*?<\/script>/)[0]], ['home scroll film', home, rd('redo/dist/hero-embed.html')], ['home Tessera teaser', home, rd('redo/dist/tessera-embed.html')], ['home Recall section', home, rd('redo/dist/recall-embed.html')], ['home team animation', home, rd('home/team-embed.html')], ['home Labs band', home, rd('home/labs-band-embed.html')], ['Labs page', labs, rd('labs/labs-embed.html')]]
     .forEach(([name, live, local]) => { if (!live.includes(local.trim())) bad.push(`${name}: live site differs from the repository copy`); });
+  // files the home page and every page load from the Webflow CDN must be byte-identical to the repository builds
+  const cdn = u => { try { return execFileSync('curl', ['-s', '--max-time', '30', u]).toString(); } catch (e) { return ''; } };
+  const navSrc = (home.match(/<script[^>]+src="([^"]*altioranav[^"]*)"/) || [])[1];
+  [['home redesign stylesheet file', (rd('redo/dist/page-head.html').match(/href="([^"]+)"/) || [])[1], rd('redo/dist/home-redo.min.css')],
+   ['home redesign script file', (rd('redo/dist/page-footer.html').match(/<script src="([^"]+)"/) || [])[1], rd('redo/dist/home-redo.min.js')],
+   ['site menu script (AltioraNav)', navSrc, rd('site-nav.min.js')]]
+    .forEach(([name, url, local]) => { if (!url) bad.push(`${name}: not referenced on the live page`); else if (cdn(url).trim() !== local.trim()) bad.push(`${name}: hosted file differs from the repository copy`); });
   const expected = { '/tessera': 401, '/this-page-does-not-exist': 404 };
   let n = 0;
   const lines = [];
