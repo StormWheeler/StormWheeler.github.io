@@ -30,3 +30,16 @@ Still open: H1 (public repo, owner's decision); the pending items (About wording
 - **Script v3:** the hosted `home-redo-v3.js` is byte-identical to `dist/home-redo.min.js`. Its sha384 (rh8GQ++…) matches the integrity on staging, and staging references v3.
 - **Code change:** `posters()` only chooses between fixed asset names in the script (`A.poster[k+'-'+tier]`, falling back to the old poster) on our CDN. The page has no input to it. There are still no eval, cookie, beacon or XHR calls and no third-party hosts.
 - **The 4 new posters:** plain JFIF JPEGs with no EXIF or GPS metadata. They show a generic, unbranded room: no logos, no people, no Tessera detail.
+
+## Post-publish check, live altioraai.com (cb8615d + b2a7501), 24 Nov 2026
+**PASS.**
+- Live loads home CSS v2 and JS v3 with the reviewed SRI hashes, plus AltioraNav 1.0.0.
+- Scripts come only from Webflow's CDN, Webflow's jQuery and Google's webfont loader. No Calendly.
+- No "designs and runs"; the pre-licence wording is intact.
+- /tessera returns 401.
+
+## Follow-up: narrow-phone step labels, CSS v3 (commit d875736)
+**OK TO PUBLISH.**
+- The change is a single CSS media rule (≤440px portrait: non-current step labels set to `font-size:0`). No JS, text or asset changes.
+- The hosted `home-redo-v3.css` is byte-identical to dist, its sha384 (ygXU…) matches the integrity attribute, and it contains no `url()` or `@import`.
+- The step-dots row is already `aria-hidden`, so hiding the labels doesn't affect screen readers.
