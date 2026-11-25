@@ -23,3 +23,13 @@
 | Happy New Year image | OK | No identifiable landmark fireworks (e.g. Burj Khalifa) or third-party logos. Use a generic skyline or abstract light. |
 
 Standing rules for all of them: pre-licence wording; no "book", "quote", "sign up" or pricing; AI-image disclosure; fictional people; organic posting only until licensed.
+
+## Update, 25 Nov 2026: owner decision on AI disclosure + Eid post final words
+**Owner decision (relayed by Ads):** no label on the image itself. AI imagery is disclosed in the caption, plus Instagram's AI info label.
+**View: acceptable.** No UAE rule I'm aware of requires the label on the image itself. The aim is that a viewer isn't misled, and a visible caption line plus the platform label achieves that. Conditions:
+1. **The disclosure must be visible without tapping "more".** Put it in the first two lines of long captions, not at the end. (The Eid caption is short enough as written.)
+2. **LinkedIn has no equivalent of the Instagram AI toggle**, so on LinkedIn the caption line is the only disclosure. Keep it in every LinkedIn post that uses AI imagery, including PDF carousels.
+3. **Photorealistic people:** always use the "people shown are fictional" wording, not just "AI-generated".
+4. **Revisit an on-image label** if an image is used as a paid ad, a story or a reel cover (where captions are hidden), or if an image is likely to be shared on its own.
+
+**Eid Al Etihad, LinkedIn, 2 Dec: PASS.** No flag, emblem, landmark, link or CTA. "Altiora AI" as the sign-off replaces "from all of us" (resolved). The caption disclosure is visible. The hashtags are fine.
